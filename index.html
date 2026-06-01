@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gotika Farm Dashboard</title>
+  <title>Gotiqa Farm Dashboard</title>
   <style>
     * {
       margin: 0;
@@ -14,13 +14,13 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #3b6a35 0%, #8a5f28 100%);
       min-height: 100vh;
       transition: all 0.3s ease;
     }
 
     body.logged-in {
-      background-color: #f0f2f5;
+      background-color: #efe8d6;
     }
 
     /* MODALS */
@@ -126,7 +126,7 @@
     }
 
     .form-toggle a {
-      color: #667eea;
+      color: #3b6a35;
       cursor: pointer;
       font-weight: 600;
       text-decoration: none;
@@ -134,7 +134,7 @@
     }
 
     .form-toggle a:hover {
-      color: #764ba2;
+      color: #8a5f28;
     }
 
     .form-group {
@@ -161,13 +161,13 @@
 
     .form-group input:focus {
       outline: none;
-      border-color: #667eea;
+      border-color: #3b6a35;
     }
 
     .btn-login {
       width: 100%;
       padding: 12px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #3b6a35 0%, #8a5f28 100%);
       color: white;
       border: none;
       border-radius: 8px;
@@ -179,7 +179,7 @@
 
     .btn-login:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+      box-shadow: 0 10px 20px rgba(59, 106, 53, 0.3);
     }
 
     .btn-login:active {
@@ -190,11 +190,11 @@
     .dashboard-container {
       display: block;
       min-height: 100vh;
-      background-color: #f0f2f5;
+      background-color: #efe8d6;
     }
 
     .auth-bar {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #3b6a35 0%, #8a5f28 100%);
       padding: 15px 30px;
       display: flex;
       justify-content: space-between;
@@ -234,21 +234,21 @@
 
     .auth-btn:hover {
       background: white;
-      color: #667eea;
+      color: #3b6a35;
     }
 
     .auth-btn-primary {
       background: white;
-      color: #667eea;
+      color: #3b6a35;
       border-color: white;
     }
 
     .auth-btn-primary:hover {
-      background: #f0f2f5;
+      background: #efe8d6;
     }
 
     .header-top {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #3b6a35 0%, #8a5f28 100%);
       color: white;
       padding: 20px 30px;
       display: flex;
@@ -298,7 +298,7 @@
 
     .logout-btn:hover {
       background: white;
-      color: #667eea;
+      color: #3b6a35;
     }
 
     .main-content {
@@ -366,7 +366,7 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
-      border-bottom: 2px solid #f0f2f5;
+      border-bottom: 2px solid #efe8d6;
       padding-bottom: 15px;
     }
 
@@ -376,7 +376,7 @@
     }
 
     .refresh-btn {
-      background: #667eea;
+      background: #3b6a35;
       color: white;
       border: none;
       padding: 8px 16px;
@@ -387,7 +387,7 @@
     }
 
     .refresh-btn:hover {
-      background: #764ba2;
+      background: #8a5f28;
       transform: rotate(180deg);
     }
 
@@ -405,7 +405,7 @@
     .weather-current .temp {
       font-size: 60px;
       font-weight: 700;
-      color: #667eea;
+      color: #3b6a35;
       margin: 20px 0;
     }
 
@@ -427,7 +427,7 @@
     }
 
     .weather-detail-item {
-      background: #f8f9fa;
+      background: #f4eed8;
       padding: 15px;
       border-radius: 8px;
       text-align: center;
@@ -451,11 +451,11 @@
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       gap: 15px;
       padding-top: 15px;
-      border-top: 2px solid #f0f2f5;
+      border-top: 2px solid #efe8d6;
     }
 
     .forecast-item {
-      background: #f8f9fa;
+      background: #f4eed8;
       padding: 15px;
       border-radius: 8px;
       text-align: center;
@@ -501,7 +501,7 @@
     }
 
     nav a {
-      color: #667eea;
+      color: #3b6a35;
       text-decoration: none;
       font-weight: 600;
       font-size: 14px;
@@ -510,9 +510,9 @@
     }
 
     nav a:hover {
-      color: #764ba2;
+      color: #8a5f28;
       padding-bottom: 5px;
-      border-bottom: 2px solid #764ba2;
+      border-bottom: 2px solid #8a5f28;
     }
 
     section {
@@ -541,7 +541,7 @@
     }
 
     table th {
-      background: #f8f9fa;
+      background: #f4eed8;
       color: #333;
       padding: 15px;
       text-align: left;
@@ -552,17 +552,17 @@
 
     table td {
       padding: 15px;
-      border-bottom: 1px solid #f0f2f5;
+      border-bottom: 1px solid #efe8d6;
       color: #666;
       font-size: 13px;
     }
 
     table tr:hover {
-      background: #f8f9fa;
+      background: #f4eed8;
     }
 
     .btn {
-      background: #667eea;
+      background: #3b6a35;
       color: white;
       padding: 10px 20px;
       border: none;
@@ -574,9 +574,9 @@
     }
 
     .btn:hover {
-      background: #764ba2;
+      background: #8a5f28;
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+      box-shadow: 0 4px 12px rgba(59, 106, 53, 0.3);
     }
 
     footer {
@@ -584,7 +584,7 @@
       padding: 20px;
       background: white;
       color: #999;
-      border-top: 1px solid #f0f2f5;
+      border-top: 1px solid #efe8d6;
       font-size: 13px;
     }
 
@@ -610,101 +610,172 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
+
+    /* SOCIAL LOGIN STYLES */
+    .social-divider {
+      display: flex;
+      align-items: center;
+      margin: 20px 0 15px 0;
+      color: #999;
+      font-size: 12px;
+    }
+
+    .social-divider::before,
+    .social-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e0e0e0;
+    }
+
+    .social-divider::before {
+      margin-right: 10px;
+    }
+
+    .social-divider::after {
+      margin-left: 10px;
+    }
+
+    .social-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .social-btn {
+      padding: 10px;
+      border: 1.5px solid #e0e0e0;
+      background: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+    }
+
+    .social-btn:hover {
+      border-color: #3b6a35;
+      background: #f9f9f9;
+      transform: translateY(-2px);
+    }
+
+    .social-btn.google {
+      color: #4285F4;
+    }
+
+    .social-btn.apple {
+      color: #000;
+    }
+
+    .social-btn.facebook {
+      color: #1877F2;
+    }
   </style>
 </head>
 
-<body>
 
+<body>
   <!-- LOGIN MODAL -->
   <div class="modal" id="loginModal">
     <div class="modal-content">
       <button class="close-btn" onclick="closeLoginModal()">✕</button>
       <div class="logo">🐐</div>
       <h1>Welcome Back</h1>
-      <p>Login to manage your farm</p>
-
+      <p>
+        Login to manage your farm</p>
+      <div class="social-buttons">
+        <button type="button" class="social-btn google" onclick="loginWithGoogle()" title="Login with Google">G</button>
+        <button type="button" class="social-btn apple" onclick="loginWithApple()" title="Login with Apple">🍎</button>
+        <button type="button" class="social-btn facebook" onclick="loginWithFacebook()"
+          title="Login with Facebook">f</button>
+      </div>
+      <div class="social-divider">OR</div>
       <form onsubmit="handleLogin(event)">
         <div class="form-group">
           <label for="login-username">Username</label>
           <input type="text" id="login-username" placeholder="Enter your username" required>
         </div>
-
         <div class="form-group">
           <label for="login-password">Password</label>
           <input type="password" id="login-password" placeholder="Enter your password" required>
         </div>
-
         <button type="submit" class="btn-login">Login</button>
       </form>
-
-      <div class="form-toggle">
-        Don't have an account? <a onclick="switchToSignup()">Sign Up</a>
+      <div class="form-toggle">Don't have an account? <a onclick="switchToSignup()">Sign Up</a>
       </div>
     </div>
   </div>
-
   <!-- SIGNUP MODAL -->
   <div class="modal" id="signupModal">
     <div class="modal-content">
+
       <button class="close-btn" onclick="closeSignupModal()">✕</button>
       <div class="logo">🐐</div>
-      <h1>Create Account</h1>
-      <p>Join Gotika Farm community</p>
-
+      <h1>Create
+        Account</h1>
+      <p>Join Gotiqa Farm community</p>
+      <div class="social-buttons">
+        <button type="button" class="social-btn google" onclick="signupWithGoogle()"
+          title="Sign up with Google">G</button>
+        <button type="button" class="social-btn apple" onclick="signupWithApple()"
+          title="Sign up with Apple">🍎</button>
+        <button type="button" class="social-btn facebook" onclick="signupWithFacebook()"
+          title="Sign up with Facebook">f</button>
+      </div>
+      <div class="social-divider">
+        OR</div>
       <form onsubmit="handleSignup(event)">
         <div class="form-group">
           <label for="signup-email">Email</label>
           <input type="email" id="signup-email" placeholder="Enter your email" required>
         </div>
-
         <div class="form-group">
           <label for="signup-username">Username</label>
           <input type="text" id="signup-username" placeholder="Create a username" required>
         </div>
-
         <div class="form-group">
+
           <label for="signup-password">Password</label>
           <input type="password" id="signup-password" placeholder="Create a password" required>
         </div>
-
         <div class="form-group">
           <label for="signup-confirm">Confirm Password</label>
           <input type="password" id="signup-confirm" placeholder="Confirm password" required>
         </div>
-
-        <button type="submit" class="btn-login">Create Account</button>
+        <button type="submit" class="btn-login">Create
+          Account</button>
       </form>
-
-      <div class="form-toggle">
-        Already have an account? <a onclick="switchToLogin()">Login</a>
+      <div class="form-toggle">Already have an account? <a onclick="switchToLogin()">Login</a>
       </div>
     </div>
   </div>
-
   <!-- DASHBOARD SECTION -->
   <div class="dashboard-container" id="dashboardContainer">
     <!-- AUTH BAR (shows when not logged in) -->
     <div class="auth-bar" id="authBar">
-      <div class="auth-bar-title">
-        🐐 Gotika Farm - Explore our farm
-      </div>
+      <div class="auth-bar-title">🐐 Gotiqa Farm - Explore our farm </div>
       <div class="auth-buttons">
         <button class="auth-btn" onclick="openLoginModal()">Login</button>
         <button class="auth-btn auth-btn-primary" onclick="openSignupModal()">Sign Up</button>
       </div>
     </div>
-
     <div class="header-top">
       <h1 onclick="window.location.href='home.html'" style="cursor: pointer;">🐐 Gotiqa Farm</h1>
+
       <div class="user-section">
         <div class="user-info">
-          <div class="username" id="displayUsername"></div>
+          <div class="username" id="displayUsername">
+          </div>
           <div class="status">✓ Online</div>
         </div>
         <button class="logout-btn" onclick="handleLogout()">Logout</button>
+
       </div>
     </div>
-
     <nav>
       <div class="dashboard-nav">
         <a onclick="showSection('dashboard')">📊 Dashboard</a>
@@ -722,7 +793,6 @@
         <a href="contact.html" style="color: #666;">📧 Contact</a>
       </div>
     </nav>
-
     <div class="main-content">
 
       <!-- DASHBOARD OVERVIEW -->
@@ -731,52 +801,53 @@
         <div class="dashboard-grid">
           <div class="card">
             <div class="card-icon">🐐</div>
-            <div class="card-title">Total Herd</div>
+            <div class="card-title">Total
+              Herd</div>
             <div class="card-value">127</div>
             <div class="card-detail">+12 this month</div>
           </div>
-
           <div class="card">
             <div class="card-icon">💰</div>
             <div class="card-title">Monthly Revenue</div>
-            <div class="card-value">$4,250</div>
+            <div class="card-value">KSh 540,
+              000</div>
             <div class="card-detail">From sales & milk</div>
           </div>
-
           <div class="card">
             <div class="card-icon">🩺</div>
             <div class="card-title">Vaccinated</div>
             <div class="card-value">98%</div>
+
             <div class="card-detail">All animals healthy</div>
           </div>
-
           <div class="card">
-            <div class="card-icon">👥</div>
+            <div class="card-icon">👥
+            </div>
             <div class="card-title">Farm Staff</div>
             <div class="card-value">4</div>
-            <div class="card-detail">2 full-time workers</div>
+            <div class="card-detail">
+              2 full-time workers</div>
           </div>
         </div>
       </section>
-
       <!-- WEATHER SECTION -->
       <section id="weather">
+
         <div class="weather-section">
           <div class="weather-header">
             <h2>🌤️ Farm Weather & Conditions</h2>
             <button class="refresh-btn" onclick="refreshWeather()">🔄 Refresh</button>
           </div>
-
           <div class="weather-main">
+
             <div class="weather-current">
               <div class="condition">Partly Cloudy</div>
               <div class="temp">24°C</div>
-              <div class="location">Gotika Farm Area</div>
-            </div>
 
-            <div class="weather-details">
+              <div class="location">Gotiqa Farm Area</div>
               <div class="weather-detail-item">
-                <div class="label">Humidity</div>
+                <div class="label">
+                  Humidity</div>
                 <div class="value">65%</div>
               </div>
               <div class="weather-detail-item">
@@ -786,14 +857,17 @@
               <div class="weather-detail-item">
                 <div class="label">Pressure</div>
                 <div class="value">1013 mb</div>
+
               </div>
               <div class="weather-detail-item">
                 <div class="label">UV Index</div>
                 <div class="value">5</div>
+
               </div>
               <div class="weather-detail-item">
                 <div class="label">Visibility</div>
-                <div class="value">10 km</div>
+                <div class="value">10 km
+                </div>
               </div>
               <div class="weather-detail-item">
                 <div class="label">Dew Point</div>
@@ -801,18 +875,21 @@
               </div>
             </div>
           </div>
-
-          <h3 style="color: #333; margin-bottom: 15px;">📅 7-Day Forecast</h3>
+          <h3 style="color: #333; margin-bottom: 15px;">📅
+            7-Day Forecast</h3>
           <div class="forecast">
             <div class="forecast-item">
               <div class="day">Monday</div>
+
               <div class="icon">☀️</div>
               <div class="temp-range">22°C - 28°C</div>
             </div>
             <div class="forecast-item">
+
               <div class="day">Tuesday</div>
               <div class="icon">⛅</div>
               <div class="temp-range">20°C - 26°C</div>
+
             </div>
             <div class="forecast-item">
               <div class="day">Wednesday</div>
@@ -820,14 +897,16 @@
               <div class="temp-range">18°C - 23°C</div>
             </div>
             <div class="forecast-item">
-              <div class="day">Thursday</div>
+              <div class="day">Thursday
+              </div>
               <div class="icon">☀️</div>
               <div class="temp-range">21°C - 27°C</div>
             </div>
             <div class="forecast-item">
               <div class="day">Friday</div>
               <div class="icon">⛅</div>
-              <div class="temp-range">23°C - 29°C</div>
+              <div class="temp-range">
+                23°C - 29°C</div>
             </div>
             <div class="forecast-item">
               <div class="day">Saturday</div>
@@ -835,17 +914,19 @@
               <div class="temp-range">24°C - 30°C</div>
             </div>
             <div class="forecast-item">
+
               <div class="day">Sunday</div>
               <div class="icon">⛅</div>
               <div class="temp-range">22°C - 28°C</div>
+
             </div>
           </div>
         </div>
       </section>
-
       <!-- HERD RECORDS -->
       <section id="herd">
         <h2>🐐 Herd Records</h2>
+
         <table>
           <tr>
             <th>Goat ID</th>
@@ -855,6 +936,7 @@
             <th>Status</th>
           </tr>
           <tr>
+
             <td>G001</td>
             <td>2 yrs</td>
             <td>Boer</td>
@@ -863,6 +945,7 @@
           </tr>
           <tr>
             <td>G002</td>
+
             <td>1 yr</td>
             <td>Local</td>
             <td>30 kg</td>
@@ -870,7 +953,8 @@
           </tr>
           <tr>
             <td>G003</td>
-            <td>6 months</td>
+            <td>6 months
+            </td>
             <td>Alpine</td>
             <td>22 kg</td>
             <td>Healthy</td>
@@ -884,6 +968,7 @@
         <table>
           <tr>
             <th>Goat ID</th>
+
             <th>Vaccination</th>
             <th>Date</th>
             <th>Notes</th>
@@ -891,6 +976,7 @@
           <tr>
             <td>G001</td>
             <td>FMD Vaccine</td>
+
             <td>May 2026</td>
             <td>Healthy</td>
           </tr>
@@ -898,20 +984,22 @@
             <td>G002</td>
             <td>Deworming</td>
             <td>April 2026</td>
+
             <td>Follow-up needed</td>
           </tr>
         </table>
       </section>
-
       <!-- ACTIVITY LOG -->
       <section id="activity">
-        <h2>📅 Farm Activity Log</h2>
+        <h2>
+          📅 Farm Activity Log</h2>
         <table>
           <tr>
             <th>Date</th>
             <th>Activity</th>
             <th>Staff</th>
             <th>Notes</th>
+
           </tr>
           <tr>
             <td>25/05/2026</td>
@@ -920,7 +1008,8 @@
             <td>Normal routine</td>
           </tr>
           <tr>
-            <td>25/05/2026</td>
+            <td>
+              25/05/2026</td>
             <td>Visitor</td>
             <td>Roy</td>
             <td>Attachment student</td>
@@ -932,10 +1021,14 @@
       <section id="media">
         <h2>📱 Media & Social</h2>
         <p>Follow our farm activities on TikTok:</p>
-        <p><strong>@gotikafarm</strong></p>
+
+        <p>
+          <strong>@gotiqafarm</strong>
+        </p>
         <p style="margin-top: 20px;">🎥 Sample content ideas:</p>
         <ul>
-          <li>Goat feeding time</li>
+          <li>
+            Goat feeding time</li>
           <li>Kids playing</li>
           <li>Farm expansion updates</li>
         </ul>
@@ -944,7 +1037,8 @@
       <!-- SALES -->
       <section id="sales">
         <h2>💰 Sales & Pricing</h2>
-        <p>Available goats and livestock for sale:</p>
+        <p>Available goats and livestock for sale:
+        </p>
         <table>
           <tr>
             <th>Product</th>
@@ -953,37 +1047,41 @@
             <th>Status</th>
           </tr>
           <tr>
+
             <td>Breeding Goats</td>
             <td>5</td>
-            <td>$150-200</td>
+            <td>KSh 22, 000 - 29, 000</td>
             <td>Available</td>
           </tr>
           <tr>
-            <td>Goat Kids</td>
+            <td>
+              Goat Kids</td>
             <td>12</td>
-            <td>$80-120</td>
+            <td>KSh 11, 000 - 17, 000</td>
             <td>Available</td>
           </tr>
           <tr>
-            <td>Goat Meat</td>
+            <td>Goat
+              Meat</td>
             <td>Bulk</td>
-            <td>$5/kg</td>
+            <td>KSh 700/kg</td>
             <td>Available</td>
           </tr>
         </table>
-        <p style="margin-top: 20px;"><button class="btn" onclick="alert('Contact form would open here')">📞 Request
-            Quote</button></p>
+        <p style="margin-top: 20px;">
+          <button class="btn" onclick="alert('Contact form would open here')">📞 Request
+            Quote</button>
+        </p>
       </section>
-
     </div>
-
     <footer>
-      <p>© 2026 Gotika Farm | Smart Goat Farming & Management System</p>
+      <p>© 2026 Gotiqa Farm | Smart Goat Farming & Management
+        System</p>
     </footer>
   </div>
 
-  <script>
-    // Modal Functions
+  <script> // Modal Functions
+
     function openLoginModal() {
       document.getElementById('loginModal').classList.add('show');
     }
@@ -998,6 +1096,73 @@
 
     function closeSignupModal() {
       document.getElementById('signupModal').classList.remove('show');
+    }
+
+    // SOCIAL LOGIN FUNCTIONS
+    function loginWithGoogle() {
+      // Simulate Google Login - in production, use Firebase or Google OAuth
+      const mockGoogleUser = 'Google_User_' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('currentUser', mockGoogleUser);
+      localStorage.setItem('authProvider', 'google');
+      document.getElementById('displayUsername').textContent = '👤 ' + mockGoogleUser;
+      updateAuthBar();
+      closeLoginModal();
+      alert('Logged in with Google! (Demo Mode)');
+    }
+
+    function loginWithApple() {
+      // Simulate Apple Login - in production, use Firebase or Apple OAuth
+      const mockAppleUser = 'Apple_User_' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('currentUser', mockAppleUser);
+      localStorage.setItem('authProvider', 'apple');
+      document.getElementById('displayUsername').textContent = '👤 ' + mockAppleUser;
+      updateAuthBar();
+      closeLoginModal();
+      alert('Logged in with Apple! (Demo Mode)');
+    }
+
+    function loginWithFacebook() {
+      // Simulate Facebook Login - in production, use Firebase or Facebook OAuth
+      const mockFacebookUser = 'Facebook_User_' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('currentUser', mockFacebookUser);
+      localStorage.setItem('authProvider', 'facebook');
+      document.getElementById('displayUsername').textContent = '👤 ' + mockFacebookUser;
+      updateAuthBar();
+      closeLoginModal();
+      alert('Logged in with Facebook! (Demo Mode)');
+    }
+
+    function signupWithGoogle() {
+      // Simulate Google Signup - in production, use Firebase
+      const mockGoogleUser = 'Google_NewUser_' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('currentUser', mockGoogleUser);
+      localStorage.setItem('authProvider', 'google');
+      document.getElementById('displayUsername').textContent = '👤 ' + mockGoogleUser;
+      updateAuthBar();
+      closeSignupModal();
+      alert('Account created with Google! Welcome to Gotiqa Farm!');
+    }
+
+    function signupWithApple() {
+      // Simulate Apple Signup - in production, use Firebase
+      const mockAppleUser = 'Apple_NewUser_' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('currentUser', mockAppleUser);
+      localStorage.setItem('authProvider', 'apple');
+      document.getElementById('displayUsername').textContent = '👤 ' + mockAppleUser;
+      updateAuthBar();
+      closeSignupModal();
+      alert('Account created with Apple! Welcome to Gotiqa Farm!');
+    }
+
+    function signupWithFacebook() {
+      // Simulate Facebook Signup - in production, use Firebase
+      const mockFacebookUser = 'Facebook_NewUser_' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('currentUser', mockFacebookUser);
+      localStorage.setItem('authProvider', 'facebook');
+      document.getElementById('displayUsername').textContent = '👤 ' + mockFacebookUser;
+      updateAuthBar();
+      closeSignupModal();
+      alert('Account created with Facebook! Welcome to Gotiqa Farm!');
     }
 
     function switchToSignup() {
@@ -1018,6 +1183,7 @@
       if (event.target === loginModal) {
         closeLoginModal();
       }
+
       if (event.target === signupModal) {
         closeSignupModal();
       }
@@ -1036,7 +1202,9 @@
         closeLoginModal();
         document.getElementById('login-username').value = '';
         document.getElementById('login-password').value = '';
-      } else {
+      }
+
+      else {
         alert('Please enter both username and password');
       }
     }
@@ -1064,8 +1232,10 @@
         document.getElementById('signup-username').value = '';
         document.getElementById('signup-password').value = '';
         document.getElementById('signup-confirm').value = '';
-        alert('Account created successfully! Welcome to Gotika Farm!');
-      } else {
+        alert('Account created successfully! Welcome to Gotiqa Farm!');
+      }
+
+      else {
         alert('Please fill in all fields');
       }
     }
@@ -1091,7 +1261,9 @@
         headerTop.style.display = 'flex';
         userSection.style.display = 'flex';
         logoutBtn.style.display = 'block';
-      } else {
+      }
+
+      else {
         // User is not logged in
         authBar.classList.remove('hidden');
         headerTop.style.display = 'none';
@@ -1107,6 +1279,7 @@
       sections.forEach(section => section.classList.remove('show'));
 
       const targetSection = document.getElementById(sectionId);
+
       if (targetSection) {
         targetSection.classList.add('show');
       }
@@ -1114,8 +1287,17 @@
 
     // Refresh Weather
     function refreshWeather() {
-      const conditions = ['Sunny ☀️', 'Cloudy ⛅', 'Rainy 🌧️', 'Partly Cloudy ⛅'];
-      const temps = [18, 20, 22, 24, 26, 28, 30];
+      const conditions = ['Sunny ☀️',
+        'Cloudy ⛅',
+        'Rainy 🌧️',
+        'Partly Cloudy ⛅'];
+      const temps = [18,
+        20,
+        22,
+        24,
+        26,
+        28,
+        30];
       const randomCondition = conditions[Math.floor(Math.random() * conditions.length)];
       const randomTemp = temps[Math.floor(Math.random() * temps.length)];
 
@@ -1131,8 +1313,8 @@
     // Check if user is logged in on page load
     window.addEventListener('load', function () {
       updateAuthBar();
+    });
   </script>
-
 </body>
 
 </html>

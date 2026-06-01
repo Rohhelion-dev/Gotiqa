@@ -19,7 +19,7 @@
         }
 
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #3b6a35 0%, #8a5f28 100%);
             color: white;
             padding: 15px 30px;
             position: sticky;
@@ -64,7 +64,7 @@
 
         .nav-button {
             background: white;
-            color: #667eea;
+            color: #3b6a35;
             padding: 8px 20px;
             border: none;
             border-radius: 6px;
@@ -74,12 +74,12 @@
         }
 
         .nav-button:hover {
-            background: #f0f2f5;
+            background: #efe8d6;
             transform: translateY(-2px);
         }
 
         .page-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #3b6a35 0%, #8a5f28 100%);
             color: white;
             padding: 60px 30px;
             text-align: center;
@@ -117,9 +117,9 @@
 
         .tab-btn {
             padding: 10px 25px;
-            border: 2px solid #667eea;
+            border: 2px solid #3b6a35;
             background: white;
-            color: #667eea;
+            color: #3b6a35;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
@@ -127,12 +127,12 @@
         }
 
         .tab-btn.active {
-            background: #667eea;
+            background: #3b6a35;
             color: white;
         }
 
         .tab-btn:hover {
-            background: #667eea;
+            background: #3b6a35;
             color: white;
         }
 
@@ -159,7 +159,7 @@
         }
 
         .product-image {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #3b6a35 0%, #8a5f28 100%);
             height: 220px;
             display: flex;
             align-items: center;
@@ -189,7 +189,7 @@
         }
 
         .product-specs {
-            background: #f8f9fa;
+            background: #f4eed8;
             padding: 12px;
             border-radius: 6px;
             margin-bottom: 15px;
@@ -206,11 +206,11 @@
         .product-price {
             font-size: 24px;
             font-weight: 700;
-            color: #667eea;
+            color: #3b6a35;
         }
 
         .product-btn {
-            background: #667eea;
+            background: #3b6a35;
             color: white;
             border: none;
             padding: 8px 16px;
@@ -221,7 +221,7 @@
         }
 
         .product-btn:hover {
-            background: #764ba2;
+            background: #8a5f28;
             transform: translateY(-2px);
         }
 
@@ -229,12 +229,12 @@
             margin-top: 60px;
             margin-bottom: 40px;
             padding-bottom: 20px;
-            border-bottom: 2px solid #667eea;
+            border-bottom: 2px solid #3b6a35;
         }
 
         .category-header h3 {
             font-size: 28px;
-            color: #667eea;
+            color: #3b6a35;
             margin-bottom: 10px;
         }
 
@@ -243,7 +243,7 @@
         }
 
         footer {
-            background: #2c3e50;
+            background: #3d3a2d;
             color: white;
             padding: 50px 30px;
             margin-top: 80px;
@@ -298,6 +298,131 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            position: relative;
+            animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.92);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+            padding: 4px;
+        }
+
+        .modal-close:hover {
+            color: #3b6a35;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 12px;
+            color: #3b6a35;
+            font-size: 26px;
+        }
+
+        .modal-content p {
+            margin-bottom: 24px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #3b6a35;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #3b6a35 0%, #8a5f28 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 106, 53, 0.3);
+        }
     </style>
 </head>
 
@@ -338,8 +463,8 @@
                     <div class="product-desc">High-quality female goats ready for breeding program</div>
                     <div class="product-specs">Age: 2-4 years | Weight: 45-55kg | Breed: Boer Mix</div>
                     <div class="product-footer">
-                        <div class="product-price">$200</div>
-                        <button class="product-btn" onclick="alert('Contact form would open')">Inquire</button>
+                        <div class="product-price">KSh 29,000</div>
+                        <button class="product-btn" onclick="openInquiryModal()">Inquire</button>
                     </div>
                 </div>
             </div>
@@ -351,8 +476,8 @@
                     <div class="product-desc">Strong male goats ideal for expanding breeding stock</div>
                     <div class="product-specs">Age: 2-5 years | Weight: 55-70kg | Breed: Boer Mix</div>
                     <div class="product-footer">
-                        <div class="product-price">$250</div>
-                        <button class="product-btn" onclick="alert('Contact form would open')">Inquire</button>
+                        <div class="product-price">KSh 36,000</div>
+                        <button class="product-btn" onclick="openInquiryModal()">Inquire</button>
                     </div>
                 </div>
             </div>
@@ -364,8 +489,8 @@
                     <div class="product-desc">Young healthy kids ready for raising and fattening</div>
                     <div class="product-specs">Age: 3-6 months | Weight: 20-30kg | Mixed breeds</div>
                     <div class="product-footer">
-                        <div class="product-price">$120</div>
-                        <button class="product-btn" onclick="alert('Contact form would open')">Inquire</button>
+                        <div class="product-price">KSh 17,500</div>
+                        <button class="product-btn" onclick="openInquiryModal()">Inquire</button>
                     </div>
                 </div>
             </div>
@@ -377,8 +502,8 @@
                     <div class="product-desc">Very young kids for early training and bonding</div>
                     <div class="product-specs">Age: 1-3 months | Weight: 10-20kg | Mixed breeds</div>
                     <div class="product-footer">
-                        <div class="product-price">$80</div>
-                        <button class="product-btn" onclick="alert('Contact form would open')">Inquire</button>
+                        <div class="product-price">KSh 11,500</div>
+                        <button class="product-btn" onclick="openInquiryModal()">Inquire</button>
                     </div>
                 </div>
             </div>
@@ -397,8 +522,8 @@
                     <div class="product-desc">Premium cuts, freshly processed daily</div>
                     <div class="product-specs">Sold per kilogram | Chilled | Free delivery over 10kg</div>
                     <div class="product-footer">
-                        <div class="product-price">$5/kg</div>
-                        <button class="product-btn" onclick="alert('Contact form would open')">Order</button>
+                        <div class="product-price">KSh 700/kg</div>
+                        <button class="product-btn" onclick="openInquiryModal()">Order</button>
                     </div>
                 </div>
             </div>
@@ -410,8 +535,8 @@
                     <div class="product-desc">25kg bulk package - wholesale pricing</div>
                     <div class="product-specs">Minimum: 25kg | Vacuum sealed | Delivery included</div>
                     <div class="product-footer">
-                        <div class="product-price">$110</div>
-                        <button class="product-btn" onclick="alert('Contact form would open')">Order</button>
+                        <div class="product-price">KSh 16,000</div>
+                        <button class="product-btn" onclick="openInquiryModal()">Order</button>
                     </div>
                 </div>
             </div>
@@ -423,8 +548,8 @@
                     <div class="product-desc">Selected premium cuts and specialty items</div>
                     <div class="product-specs">Ribs, Shanks, Steaks | Premium quality | Pre-ordered</div>
                     <div class="product-footer">
-                        <div class="product-price">$7/kg</div>
-                        <button class="product-btn" onclick="alert('Contact form would open')">Order</button>
+                        <div class="product-price">KSh 1,150</div>
+                        <button class="product-btn" onclick="openInquiryModal()">Order</button>
                     </div>
                 </div>
             </div>
@@ -443,8 +568,8 @@
                     <div class="product-desc">Pure, fresh goat milk delivered weekly</div>
                     <div class="product-specs">1 liter | Pasteurized | Weekly delivery</div>
                     <div class="product-footer">
-                        <div class="product-price">$3/L</div>
-                        <button class="product-btn" onclick="alert('Contact form would open')">Order</button>
+                        <div class="product-price">KSh 420/L</div>
+                        <button class="product-btn" onclick="openInquiryModal()">Order</button>
                     </div>
                 </div>
             </div>
@@ -456,8 +581,8 @@
                     <div class="product-desc">Artisan goat cheese made fresh daily</div>
                     <div class="product-specs">200g pack | Soft cheese | Limited supply</div>
                     <div class="product-footer">
-                        <div class="product-price">$8</div>
-                        <button class="product-btn" onclick="alert('Contact form would open')">Order</button>
+                        <div class="product-price">KSh 1,150</div>
+                        <button class="product-btn" onclick="openInquiryModal()">Order</button>
                     </div>
                 </div>
             </div>
@@ -469,8 +594,8 @@
                     <div class="product-desc">Monthly milk subscription with 10% discount</div>
                     <div class="product-specs">4 liters/week | Monthly delivery | Cancel anytime</div>
                     <div class="product-footer">
-                        <div class="product-price">$48/mo</div>
-                        <button class="product-btn" onclick="alert('Contact form would open')">Subscribe</button>
+                        <div class="product-price">KSh 6,900/mo</div>
+                        <button class="product-btn" onclick="openInquiryModal()">Subscribe</button>
                     </div>
                 </div>
             </div>
@@ -489,8 +614,8 @@
                     <div class="product-desc">Goat farming training and workshops</div>
                     <div class="product-specs">2-day intensive | Up to 10 people | Certificate</div>
                     <div class="product-footer">
-                        <div class="product-price">$150</div>
-                        <button class="product-btn" onclick="alert('Contact form would open')">Enroll</button>
+                        <div class="product-price">KSh 22,000</div>
+                        <button class="product-btn" onclick="openInquiryModal()">Enroll</button>
                     </div>
                 </div>
             </div>
@@ -502,8 +627,8 @@
                     <div class="product-desc">Expert advice on starting your goat farm</div>
                     <div class="product-specs">1-hour session | Virtual or on-site | Follow-up included</div>
                     <div class="product-footer">
-                        <div class="product-price">$50/hr</div>
-                        <button class="product-btn" onclick="alert('Contact form would open')">Book</button>
+                        <div class="product-price">KSh 7,000/hr</div>
+                        <button class="product-btn" onclick="openInquiryModal()">Book</button>
                     </div>
                 </div>
             </div>
@@ -515,8 +640,8 @@
                     <div class="product-desc">Complete setup guidance for new farmers</div>
                     <div class="product-specs">Infrastructure design | Sourcing | 3-month support</div>
                     <div class="product-footer">
-                        <div class="product-price">$500</div>
-                        <button class="product-btn" onclick="alert('Contact form would open')">Inquire</button>
+                        <div class="product-price">KSh 72,000</div>
+                        <button class="product-btn" onclick="openInquiryModal()">Inquire</button>
                     </div>
                 </div>
             </div>
@@ -539,7 +664,7 @@
             <div class="footer-section">
                 <h4>Contact</h4>
                 <p>📞 +254 XXX XXX XXX</p>
-                <p>📧 info@gotiqa.farm</p>
+                <p>📧 kirorei04@gmail.com</p>
                 <p>📍 Gotiqa Region</p>
             </div>
             <div class="footer-section">
@@ -553,6 +678,54 @@
             <p>&copy; 2026 Gotiqa Farm. All rights reserved. | Smart Agriculture Solutions</p>
         </div>
     </footer>
+
+    <div class="modal" id="inquiryModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeInquiryModal()">✕</button>
+            <h2>Product Inquiry</h2>
+            <p>Send us your inquiry and we'll respond quickly with details and pricing.</p>
+            <form onsubmit="handleInquiryForm(event)" method="POST" action="https://formsubmit.co/kirorei04@gmail.com">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="New Product Inquiry from Gotiqa Farm">
+                <div class="form-group">
+                    <label for="inquiry-name">Full Name *</label>
+                    <input type="text" id="inquiry-name" name="name" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="inquiry-email">Email Address *</label>
+                    <input type="email" id="inquiry-email" name="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="inquiry-phone">Phone Number</label>
+                    <input type="tel" id="inquiry-phone" name="phone" placeholder="0722143483">
+                </div>
+                <div class="form-group">
+                    <label for="inquiry-message">Your Inquiry *</label>
+                    <textarea id="inquiry-message" name="message"
+                        placeholder="Tell us which product you're interested in..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Inquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openInquiryModal() {
+            document.getElementById('inquiryModal').classList.add('show');
+        }
+
+        function closeInquiryModal() {
+            document.getElementById('inquiryModal').classList.remove('show');
+        }
+
+        function handleInquiryForm(event) {
+            event.preventDefault();
+            setTimeout(() => {
+                closeInquiryModal();
+                document.getElementById('inquiryModal').querySelector('form').reset();
+            }, 500);
+        }
+    </script>
 
 </body>
 
