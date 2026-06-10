@@ -1,0 +1,512 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gotiqa - Livestock Management Dashboard</title>
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/brand.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1 class="dashboard-brand">
+                <img src="assets/img/gotiqa-ram-head.svg" alt="" aria-hidden="true">
+                <span>Gotiqa - Livestock Management System</span>
+            </h1>
+            <p>Comprehensive animal health, production, and breeding management</p>
+        </header>
+
+        <div class="nav-tabs">
+            <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+            <button class="tab-btn" data-tab="animals">Animals</button>
+            <button class="tab-btn" data-tab="health">Health Records</button>
+            <button class="tab-btn" data-tab="production">Production</button>
+            <button class="tab-btn" data-tab="breeding">Breeding</button>
+            <button class="tab-btn" data-tab="feeding">Feeding</button>
+            <button class="tab-btn" data-tab="logs">Activity Logs</button>
+        </div>
+
+        <div class="content">
+            <!-- Dashboard Tab -->
+            <div class="tab-content active" id="dashboard">
+                <h2>Dashboard Overview</h2>
+                <div class="stats-grid" id="statsGrid">
+                    <div class="loading">Loading statistics...</div>
+                </div>
+            </div>
+
+            <!-- Animals Tab -->
+            <div class="tab-content" id="animals">
+                <h2>Animal Management</h2>
+                <div id="animalMessage" class="message"></div>
+
+                <div style="margin-bottom: 30px;">
+                    <h3>Add New Animal</h3>
+                    <form id="animalForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Tag Number *</label>
+                                <input type="text" id="tagNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" id="animalName">
+                            </div>
+                            <div class="form-group">
+                                <label>Species *</label>
+                                <select id="species" required>
+                                    <option value="">Select species</option>
+                                    <option value="Cow">Cow</option>
+                                    <option value="Goat">Goat</option>
+                                    <option value="Sheep">Sheep</option>
+                                    <option value="Pig">Pig</option>
+                                    <option value="Chicken">Chicken</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Breed</label>
+                                <input type="text" id="breed">
+                            </div>
+                            <div class="form-group">
+                                <label>Age (months)</label>
+                                <input type="number" id="age" step="0.5">
+                            </div>
+                            <div class="form-group">
+                                <label>Gender *</label>
+                                <select id="gender" required>
+                                    <option value="">Select gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Weight (kg)</label>
+                            <input type="number" id="weight" step="0.1">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Notes</label>
+                            <textarea id="animalNotes"></textarea>
+                        </div>
+
+                        <button type="submit">Add Animal</button>
+                    </form>
+                </div>
+
+                <h3>All Animals</h3>
+                <div class="table-container">
+                    <table id="animalsTable">
+                        <thead>
+                            <tr>
+                                <th>Tag Number</th>
+                                <th>Name</th>
+                                <th>Species</th>
+                                <th>Breed</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Weight</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="animalsList">
+                            <tr>
+                                <td colspan="8" class="loading">Loading animals...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Health Records Tab -->
+            <div class="tab-content" id="health">
+                <h2>Health Records Management</h2>
+                <div id="healthMessage" class="message"></div>
+
+                <div style="margin-bottom: 30px;">
+                    <h3>Add Health Record</h3>
+                    <form id="healthForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Animal *</label>
+                                <select id="healthAnimalId" required>
+                                    <option value="">Select animal</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Health Status *</label>
+                                <select id="healthStatus" required>
+                                    <option value="">Select status</option>
+                                    <option value="Healthy">Healthy</option>
+                                    <option value="Sick">Sick</option>
+                                    <option value="Injured">Injured</option>
+                                    <option value="Recovering">Recovering</option>
+                                    <option value="Treated">Treated</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Temperature (Â°C)</label>
+                                <input type="number" id="temperature" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label>Weight (kg)</label>
+                                <input type="number" id="healthWeight" step="0.1">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Diagnosis</label>
+                            <textarea id="diagnosis"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Treatment</label>
+                            <textarea id="treatment"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Veterinarian Notes</label>
+                            <textarea id="vetNotes"></textarea>
+                        </div>
+
+                        <button type="submit">Add Health Record</button>
+                    </form>
+                </div>
+
+                <h3>Recent Health Records</h3>
+                <div class="table-container">
+                    <table id="healthTable">
+                        <thead>
+                            <tr>
+                                <th>Animal Tag</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Temperature</th>
+                                <th>Weight</th>
+                                <th>Diagnosis</th>
+                            </tr>
+                        </thead>
+                        <tbody id="healthList">
+                            <tr>
+                                <td colspan="6" class="loading">Loading health records...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Production Tab -->
+            <div class="tab-content" id="production">
+                <h2>Production Records Management</h2>
+                <div id="productionMessage" class="message"></div>
+
+                <div style="margin-bottom: 30px;">
+                    <h3>Add Production Record</h3>
+                    <form id="productionForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Animal *</label>
+                                <select id="productionAnimalId" required>
+                                    <option value="">Select animal</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Production Type *</label>
+                                <select id="productionType" required>
+                                    <option value="">Select type</option>
+                                    <option value="Milk">Milk</option>
+                                    <option value="Eggs">Eggs</option>
+                                    <option value="Meat">Meat</option>
+                                    <option value="Wool">Wool</option>
+                                    <option value="Leather">Leather</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Quantity *</label>
+                                <input type="number" id="quantity" step="0.1" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Unit *</label>
+                                <select id="unit" required>
+                                    <option value="">Select unit</option>
+                                    <option value="kg">kg</option>
+                                    <option value="liters">liters</option>
+                                    <option value="pieces">pieces</option>
+                                    <option value="meters">meters</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Quality Grade</label>
+                                <select id="qualityGrade">
+                                    <option value="">Select grade</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Notes</label>
+                            <textarea id="productionNotes"></textarea>
+                        </div>
+
+                        <button type="submit">Add Production Record</button>
+                    </form>
+                </div>
+
+                <h3>Production Records</h3>
+                <div class="table-container">
+                    <table id="productionTable">
+                        <thead>
+                            <tr>
+                                <th>Animal Tag</th>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productionList">
+                            <tr>
+                                <td colspan="6" class="loading">Loading production records...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Breeding Tab -->
+            <div class="tab-content" id="breeding">
+                <h2>Breeding Records Management</h2>
+                <div id="breedingMessage" class="message"></div>
+
+                <div style="margin-bottom: 30px;">
+                    <h3>Add Breeding Record</h3>
+                    <form id="breedingForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Animal *</label>
+                                <select id="breedingAnimalId" required>
+                                    <option value="">Select animal</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Date of Breeding *</label>
+                                <input type="datetime-local" id="dateOfBreeding" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Partner Tag Number</label>
+                                <input type="text" id="partnerTag">
+                            </div>
+                            <div class="form-group">
+                                <label>Expected Delivery Date</label>
+                                <input type="datetime-local" id="expectedDelivery">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Offspring Count</label>
+                                <input type="number" id="offspringCount" min="0">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Offspring Health</label>
+                            <textarea id="offspringHealth"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Notes</label>
+                            <textarea id="breedingNotes"></textarea>
+                        </div>
+
+                        <button type="submit">Add Breeding Record</button>
+                    </form>
+                </div>
+
+                <h3>Breeding Records</h3>
+                <div class="table-container">
+                    <table id="breedingTable">
+                        <thead>
+                            <tr>
+                                <th>Animal Tag</th>
+                                <th>Breeding Date</th>
+                                <th>Partner</th>
+                                <th>Expected Delivery</th>
+                                <th>Offspring Count</th>
+                            </tr>
+                        </thead>
+                        <tbody id="breedingList">
+                            <tr>
+                                <td colspan="5" class="loading">Loading breeding records...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Feeding Tab -->
+            <div class="tab-content" id="feeding">
+                <h2>Feeding Records Management</h2>
+                <div id="feedingMessage" class="message"></div>
+
+                <div style="margin-bottom: 30px;">
+                    <h3>Add Feeding Record</h3>
+                    <form id="feedingForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Animal *</label>
+                                <select id="feedingAnimalId" required>
+                                    <option value="">Select animal</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Feed Type *</label>
+                                <input type="text" id="feedType" placeholder="e.g., Hay, Grain, Pasture" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Quantity *</label>
+                                <input type="number" id="feedQuantity" step="0.1" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Unit *</label>
+                                <select id="feedUnit" required>
+                                    <option value="">Select unit</option>
+                                    <option value="kg">kg</option>
+                                    <option value="liters">liters</option>
+                                    <option value="bales">bales</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Cost</label>
+                                <input type="number" id="feedCost" step="0.01">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Notes</label>
+                            <textarea id="feedingNotes"></textarea>
+                        </div>
+
+                        <button type="submit">Add Feeding Record</button>
+                    </form>
+                </div>
+
+                <h3>Feeding Records</h3>
+                <div class="table-container">
+                    <table id="feedingTable">
+                        <thead>
+                            <tr>
+                                <th>Animal Tag</th>
+                                <th>Date</th>
+                                <th>Feed Type</th>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                                <th>Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody id="feedingList">
+                            <tr>
+                                <td colspan="6" class="loading">Loading feeding records...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Logs Tab -->
+            <div class="tab-content" id="logs">
+                <h2>Activity Logs</h2>
+                <div id="logMessage" class="message"></div>
+
+                <div style="margin-bottom: 30px;">
+                    <h3>Add User Log</h3>
+                    <form id="logForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Action *</label>
+                                <input type="text" id="logAction" placeholder="e.g., Checked morning herd" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Type</label>
+                                <select id="logActionType">
+                                    <option value="Note">Note</option>
+                                    <option value="Create">Create</option>
+                                    <option value="Update">Update</option>
+                                    <option value="Delete">Delete</option>
+                                    <option value="View">View</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Entity</label>
+                                <select id="logEntityType">
+                                    <option value="General">General</option>
+                                    <option value="Animal">Animal</option>
+                                    <option value="HealthRecord">Health Record</option>
+                                    <option value="ProductionRecord">Production Record</option>
+                                    <option value="BreedingRecord">Breeding Record</option>
+                                    <option value="FeedingRecord">Feeding Record</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Details</label>
+                            <textarea id="logDetails" placeholder="Any side notes, observations, or follow-up tasks"></textarea>
+                        </div>
+
+                        <button type="submit">Add Log</button>
+                    </form>
+                </div>
+
+                <div class="table-container">
+                    <table id="logsTable">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Action</th>
+                                <th>Type</th>
+                                <th>Entity</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logsList">
+                            <tr>
+                                <td colspan="5" class="loading">Loading logs...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+</body>
+
+</html>
+

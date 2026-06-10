@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Gotiqa Farm</title>
+    <link rel="stylesheet" href="assets/css/contact.css">
+    <link rel="stylesheet" href="assets/css/brand.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <a class="logo brand-logo" href="home.html" aria-label="Gotiqa Farm home">
+                <img src="assets/img/gotiqa-ram-head.svg" alt="" aria-hidden="true">
+                <div class="logo-text">
+                    <div class="logo-title">Gotiqa Farm</div>
+                    <div class="logo-subtitle">Smart Goat Agriculture</div>
+                </div>
+            </a>
+            <nav>
+                <a href="home.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="products.html">Products</a>
+                <a href="blog.html">News</a>
+                <a href="contact.html">Contact</a>
+                <button class="nav-button" onclick="window.location.href='index.html'">Dashboard</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <h1>Get in Touch</h1>
+        <p>We'd love to hear from you. Let's connect!</p>
+        <button class="nav-button inquiry-btn" onclick="openInquiryModal()">Open Inquiry Form</button>
+    </div>
+
+    <section class="section">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Contact Information</h2>
+
+                <div class="contact-item">
+                    <div class="contact-item-title">ðŸ“ž Phone</div>
+                    <div class="contact-item-content">
+                        <p><a href="tel:0722143483">0722143483</a></p>
+                        <p><a href="tel:0111771886">0111771886</a></p>
+                        <p><small>Available 8:00 AM - 6:00 PM daily</small></p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-title">ðŸ“§ Email</div>
+                    <div class="contact-item-content">
+                        <p><a href="mailto:kirorei04@gmail.com">kirorei04@gmail.com</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-title">Location</div>
+                    <div class="contact-item-content">
+                        <p>Gotiqa Farm </p>
+                        <p><a href="https://maps.google.com/?q=-1.288139,37.009917" target="_blank"
+                                rel="noopener">1Â°17'17.3&quot;S 37Â°00'35.7&quot;E</a></p>
+                        <p>Kenya</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-title">â° Business Hours</div>
+                    <div class="contact-item-content">
+                        <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                        <p>Saturday: 8:00 AM - 1:00 PM</p>
+                        <p>Sunday: Closed</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-title">Follow Us</div>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/gotiqafarm" target="_blank" rel="noopener" class="social-link" aria-label="Gotiqa Farm on Facebook">
+                            <img src="assets/img/social-facebook.svg" alt="" aria-hidden="true">
+                        </a>
+                        <a href="https://www.instagram.com/gotiqafarm/" target="_blank" rel="noopener" class="social-link" aria-label="Gotiqa Farm on Instagram">
+                            <img src="assets/img/social-instagram.svg" alt="" aria-hidden="true">
+                        </a>
+                        <a href="https://www.tiktok.com/@gotiqafarm" target="_blank" rel="noopener" class="social-link" aria-label="Gotiqa Farm on TikTok">
+                            <img src="assets/img/social-tiktok.svg" alt="" aria-hidden="true">
+                        </a>
+                        <a href="https://wa.me/254722143483" target="_blank" rel="noopener" class="social-link" aria-label="Chat with Gotiqa Farm on WhatsApp">
+                            <img src="assets/img/social-whatsapp.svg" alt="" aria-hidden="true">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h2>Send Us a Message</h2>
+                <div class="success-message" id="successMessage">
+                    âœ“ Thank you for your message! We'll get back to you soon.
+                </div>
+                <form onsubmit="handleContactForm(event)" method="POST"
+                    action="https://formsubmit.co/kirorei04@gmail.com">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="New Contact from Gotiqa Farm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+254 7XX XXX XXX">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="product_inquiry">Product Inquiry</option>
+                            <option value="farm_training">Farm Training</option>
+                            <option value="consulting">Consulting Services</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="partnership">Partnership</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" placeholder="Tell us more about your inquiry..."
+                            required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="map-section">
+            <h2>Visit Our Farm</h2>
+            <div class="map-placeholder">
+                <a class="map-link" href="https://maps.google.com/?q=-1.288139,37.009917" target="_blank"
+                    rel="noopener">Open Gotiqa Farm in Google Maps</a>
+            </div>
+            <p style="margin-top: 20px; color: #666;">We welcome visitors! Please call ahead to schedule a farm tour.
+            </p>
+        </div>
+
+        <div class="modal" id="inquiryModal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeInquiryModal()">âœ•</button>
+                <h2>Inquiry Form</h2>
+                <p>Send us a detailed request and we will respond quickly with availability and pricing.</p>
+                <form onsubmit="handleInquiryForm(event)" method="POST"
+                    action="https://formsubmit.co/kirorei04@gmail.com">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="New Inquiry from Gotiqa Farm">
+                    <div class="form-group">
+                        <label for="inquiry-name">Full Name *</label>
+                        <input type="text" id="inquiry-name" name="name" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-email">Email Address *</label>
+                        <input type="email" id="inquiry-email" name="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-phone">Phone Number</label>
+                        <input type="tel" id="inquiry-phone" name="phone" placeholder="0722143483">
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-subject">Inquiry Type *</label>
+                        <select id="inquiry-subject" name="inquiry_type" required>
+                            <option value="">Select a subject</option>
+                            <option value="Product Inquiry">Product Inquiry</option>
+                            <option value="Farm Visit">Farm Visit</option>
+                            <option value="Consulting Services">Consulting Services</option>
+                            <option value="Training Request">Training Request</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-message">Message *</label>
+                        <textarea id="inquiry-message" name="message" placeholder="Tell us more about your inquiry..."
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-brand">
+                    <img src="assets/img/gotiqa-ram-head.svg" alt="" aria-hidden="true">
+                    <h4>Gotiqa Farm</h4>
+                </div>
+                <p>Premium goat farming and agricultural solutions for sustainable growth.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="home.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="products.html">Products</a>
+                <a href="blog.html">News & Blog</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>ðŸ“ž <a href="tel:0722143483">0722143483</a></p>
+                <p>ðŸ“ž <a href="tel:0111771886">0111771886</a></p>
+                <p>ðŸ“§ <a href="mailto:kirorei04@gmail.com">kirorei04@gmail.com</a></p>
+                <p><a href="https://maps.google.com/?q=-1.288139,37.009917" target="_blank" rel="noopener">1Â°17'17.3"S
+                        37Â°00'35.7"E</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a class="social-icon" href="https://www.facebook.com/gotiqafarm" target="_blank" rel="noopener" aria-label="Gotiqa Farm on Facebook">
+                        <img src="assets/img/social-facebook.svg" alt="" aria-hidden="true">
+                    </a>
+                    <a class="social-icon" href="https://www.instagram.com/gotiqafarm/" target="_blank" rel="noopener" aria-label="Gotiqa Farm on Instagram">
+                        <img src="assets/img/social-instagram.svg" alt="" aria-hidden="true">
+                    </a>
+                    <a class="social-icon" href="https://www.tiktok.com/@gotiqafarm" target="_blank" rel="noopener" aria-label="Gotiqa Farm on TikTok">
+                        <img src="assets/img/social-tiktok.svg" alt="" aria-hidden="true">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Gotiqa Farm. All rights reserved. | Smart Agriculture Solutions</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/contact.js"></script>
+
+</body>
+
+</html>

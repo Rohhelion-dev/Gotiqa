@@ -1,0 +1,436 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gotiqa Farm Dashboard</title>
+  <link rel="stylesheet" href="assets/css/index.css">
+  <link rel="stylesheet" href="assets/css/brand.css">
+</head>
+
+
+<body>
+  <!-- LOGIN MODAL -->
+  <div class="modal" id="loginModal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeLoginModal()">âœ•</button>
+      <img class="modal-logo" src="assets/img/gotiqa-ram-head.svg" alt="Gotiqa Farm">
+      <h1>Welcome Back</h1>
+      <p>
+        Login to manage your farm</p>
+      <div class="social-buttons">
+        <button type="button" class="social-btn google" onclick="loginWithGoogle()" title="Login with Google">
+          <img src="assets/img/social-google.svg" alt="" aria-hidden="true">
+        </button>
+        <button type="button" class="social-btn apple" onclick="loginWithApple()" title="Login with Apple">
+          <img src="assets/img/social-apple.svg" alt="" aria-hidden="true">
+        </button>
+        <button type="button" class="social-btn facebook" onclick="loginWithFacebook()"
+          title="Login with Facebook">
+          <img src="assets/img/social-facebook.svg" alt="" aria-hidden="true">
+        </button>
+      </div>
+      <div class="social-divider">OR</div>
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="login-username">Username</label>
+          <input type="text" id="login-username" placeholder="Enter your username" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="Enter your password" required>
+        </div>
+        <button type="submit" class="btn-login">Login</button>
+      </form>
+      <div class="form-toggle">Don't have an account? <a onclick="switchToSignup()">Sign Up</a>
+      </div>
+    </div>
+  </div>
+  <!-- SIGNUP MODAL -->
+  <div class="modal" id="signupModal">
+    <div class="modal-content">
+
+      <button class="close-btn" onclick="closeSignupModal()">âœ•</button>
+      <img class="modal-logo" src="assets/img/gotiqa-ram-head.svg" alt="Gotiqa Farm">
+      <h1>Create
+        Account</h1>
+      <p>Join Gotiqa Farm community</p>
+      <div class="social-buttons">
+        <button type="button" class="social-btn google" onclick="signupWithGoogle()"
+          title="Sign up with Google">
+          <img src="assets/img/social-google.svg" alt="" aria-hidden="true">
+        </button>
+        <button type="button" class="social-btn apple" onclick="signupWithApple()"
+          title="Sign up with Apple">
+          <img src="assets/img/social-apple.svg" alt="" aria-hidden="true">
+        </button>
+        <button type="button" class="social-btn facebook" onclick="signupWithFacebook()"
+          title="Sign up with Facebook">
+          <img src="assets/img/social-facebook.svg" alt="" aria-hidden="true">
+        </button>
+      </div>
+      <div class="social-divider">
+        OR</div>
+      <form onsubmit="handleSignup(event)">
+        <div class="form-group">
+          <label for="signup-email">Email</label>
+          <input type="email" id="signup-email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="signup-username">Username</label>
+          <input type="text" id="signup-username" placeholder="Create a username" required>
+        </div>
+        <div class="form-group">
+
+          <label for="signup-password">Password</label>
+          <input type="password" id="signup-password" placeholder="Create a password" required>
+        </div>
+        <div class="form-group">
+          <label for="signup-confirm">Confirm Password</label>
+          <input type="password" id="signup-confirm" placeholder="Confirm password" required>
+        </div>
+        <button type="submit" class="btn-login">Create
+          Account</button>
+      </form>
+      <div class="form-toggle">Already have an account? <a onclick="switchToLogin()">Login</a>
+      </div>
+    </div>
+  </div>
+  <!-- DASHBOARD SECTION -->
+  <div class="dashboard-container" id="dashboardContainer">
+    <!-- AUTH BAR (shows when not logged in) -->
+    <div class="auth-bar" id="authBar">
+      <div class="auth-bar-title">
+        <img src="assets/img/gotiqa-ram-head.svg" alt="" aria-hidden="true">
+        <span>Gotiqa Farm - Explore our farm</span>
+      </div>
+      <div class="auth-buttons">
+        <button class="auth-btn" onclick="openLoginModal()">Login</button>
+        <button class="auth-btn auth-btn-primary" onclick="openSignupModal()">Sign Up</button>
+      </div>
+    </div>
+    <div class="header-top">
+      <h1 class="brand-logo dashboard-title" onclick="window.location.href='home.html'" style="cursor: pointer;">
+        <img src="assets/img/gotiqa-ram-head.svg" alt="" aria-hidden="true">
+        <span>Gotiqa Farm</span>
+      </h1>
+
+      <div class="user-section">
+        <div class="user-info">
+          <div class="username" id="displayUsername">
+          </div>
+          <div class="status">âœ“ Online</div>
+        </div>
+        <button class="logout-btn" onclick="handleLogout()">Logout</button>
+
+      </div>
+    </div>
+    <nav>
+      <div class="dashboard-nav">
+        <a onclick="showSection('dashboard')">ðŸ“Š Dashboard</a>
+        <a onclick="showSection('herd')">ðŸ Herd Records</a>
+        <a onclick="showSection('health')">ðŸ©º Health</a>
+        <a onclick="showSection('activity')">ðŸ“… Activity</a>
+        <a onclick="showSection('weather')">ðŸŒ¤ï¸ Weather</a>
+        <a onclick="showSection('sales')">ðŸ’° Sales</a>
+        <a onclick="showSection('media')">ðŸ“± Media</a>
+      </div>
+      <div class="page-nav">
+        <a href="home.html" style="color: #666;">ðŸ  Website</a>
+        <a href="about.html" style="color: #666;">â„¹ï¸ About</a>
+        <a href="products.html" style="color: #666;">ðŸ“¦ Products</a>
+        <a href="contact.html" style="color: #666;">ðŸ“§ Contact</a>
+      </div>
+    </nav>
+    <div class="main-content">
+
+      <!-- DASHBOARD OVERVIEW -->
+      <section id="dashboard" class="show">
+        <h2>ðŸ“Š Dashboard Overview</h2>
+        <div class="dashboard-grid">
+          <div class="card">
+            <div class="card-icon">ðŸ</div>
+            <div class="card-title">Total
+              Herd</div>
+            <div class="card-value">127</div>
+            <div class="card-detail">+12 this month</div>
+          </div>
+          <div class="card">
+            <div class="card-icon">ðŸ’°</div>
+            <div class="card-title">Monthly Revenue</div>
+            <div class="card-value">KSh 540,
+              000</div>
+            <div class="card-detail">From sales & milk</div>
+          </div>
+          <div class="card">
+            <div class="card-icon">ðŸ©º</div>
+            <div class="card-title">Vaccinated</div>
+            <div class="card-value">98%</div>
+
+            <div class="card-detail">All animals healthy</div>
+          </div>
+          <div class="card">
+            <div class="card-icon">ðŸ‘¥
+            </div>
+            <div class="card-title">Farm Staff</div>
+            <div class="card-value">4</div>
+            <div class="card-detail">
+              2 full-time workers</div>
+          </div>
+        </div>
+      </section>
+      <!-- WEATHER SECTION -->
+      <section id="weather">
+
+        <div class="weather-section">
+          <div class="weather-header">
+            <h2>ðŸŒ¤ï¸ Farm Weather & Conditions</h2>
+            <button class="refresh-btn" onclick="refreshWeather()">ðŸ”„ Refresh</button>
+          </div>
+          <div class="weather-main">
+
+            <div class="weather-current">
+              <div class="condition">Partly Cloudy</div>
+              <div class="temp">24Â°C</div>
+
+              <div class="location">Gotiqa Farm Area</div>
+              <div class="weather-detail-item">
+                <div class="label">
+                  Humidity</div>
+                <div class="value">65%</div>
+              </div>
+              <div class="weather-detail-item">
+                <div class="label">Wind Speed</div>
+                <div class="value">12 km/h</div>
+              </div>
+              <div class="weather-detail-item">
+                <div class="label">Pressure</div>
+                <div class="value">1013 mb</div>
+
+              </div>
+              <div class="weather-detail-item">
+                <div class="label">UV Index</div>
+                <div class="value">5</div>
+
+              </div>
+              <div class="weather-detail-item">
+                <div class="label">Visibility</div>
+                <div class="value">10 km
+                </div>
+              </div>
+              <div class="weather-detail-item">
+                <div class="label">Dew Point</div>
+                <div class="value">16Â°C</div>
+              </div>
+            </div>
+          </div>
+          <h3 style="color: #333; margin-bottom: 15px;">ðŸ“…
+            7-Day Forecast</h3>
+          <div class="forecast">
+            <div class="forecast-item">
+              <div class="day">Monday</div>
+
+              <div class="icon">â˜€ï¸</div>
+              <div class="temp-range">22Â°C - 28Â°C</div>
+            </div>
+            <div class="forecast-item">
+
+              <div class="day">Tuesday</div>
+              <div class="icon">â›…</div>
+              <div class="temp-range">20Â°C - 26Â°C</div>
+
+            </div>
+            <div class="forecast-item">
+              <div class="day">Wednesday</div>
+              <div class="icon">ðŸŒ§ï¸</div>
+              <div class="temp-range">18Â°C - 23Â°C</div>
+            </div>
+            <div class="forecast-item">
+              <div class="day">Thursday
+              </div>
+              <div class="icon">â˜€ï¸</div>
+              <div class="temp-range">21Â°C - 27Â°C</div>
+            </div>
+            <div class="forecast-item">
+              <div class="day">Friday</div>
+              <div class="icon">â›…</div>
+              <div class="temp-range">
+                23Â°C - 29Â°C</div>
+            </div>
+            <div class="forecast-item">
+              <div class="day">Saturday</div>
+              <div class="icon">â˜€ï¸</div>
+              <div class="temp-range">24Â°C - 30Â°C</div>
+            </div>
+            <div class="forecast-item">
+
+              <div class="day">Sunday</div>
+              <div class="icon">â›…</div>
+              <div class="temp-range">22Â°C - 28Â°C</div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- HERD RECORDS -->
+      <section id="herd">
+        <h2>ðŸ Herd Records</h2>
+
+        <table>
+          <tr>
+            <th>Goat ID</th>
+            <th>Age</th>
+            <th>Breed</th>
+            <th>Weight</th>
+            <th>Status</th>
+          </tr>
+          <tr>
+
+            <td>G001</td>
+            <td>2 yrs</td>
+            <td>Boer</td>
+            <td>45 kg</td>
+            <td>Healthy</td>
+          </tr>
+          <tr>
+            <td>G002</td>
+
+            <td>1 yr</td>
+            <td>Local</td>
+            <td>30 kg</td>
+            <td>Vaccinated</td>
+          </tr>
+          <tr>
+            <td>G003</td>
+            <td>6 months
+            </td>
+            <td>Alpine</td>
+            <td>22 kg</td>
+            <td>Healthy</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- HEALTH SECTION -->
+      <section id="health">
+        <h2>ðŸ©º Veterinary Records</h2>
+        <table>
+          <tr>
+            <th>Goat ID</th>
+
+            <th>Vaccination</th>
+            <th>Date</th>
+            <th>Notes</th>
+          </tr>
+          <tr>
+            <td>G001</td>
+            <td>FMD Vaccine</td>
+
+            <td>May 2026</td>
+            <td>Healthy</td>
+          </tr>
+          <tr>
+            <td>G002</td>
+            <td>Deworming</td>
+            <td>April 2026</td>
+
+            <td>Follow-up needed</td>
+          </tr>
+        </table>
+      </section>
+      <!-- ACTIVITY LOG -->
+      <section id="activity">
+        <h2>
+          ðŸ“… Farm Activity Log</h2>
+        <table>
+          <tr>
+            <th>Date</th>
+            <th>Activity</th>
+            <th>Staff</th>
+            <th>Notes</th>
+
+          </tr>
+          <tr>
+            <td>25/05/2026</td>
+            <td>Feeding</td>
+            <td>John</td>
+            <td>Normal routine</td>
+          </tr>
+          <tr>
+            <td>
+              25/05/2026</td>
+            <td>Visitor</td>
+            <td>Roy</td>
+            <td>Attachment student</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- MEDIA -->
+      <section id="media">
+        <h2>ðŸ“± Media & Social</h2>
+        <p>Follow our farm activities on TikTok:</p>
+
+        <p>
+          <strong>@gotiqafarm</strong>
+        </p>
+        <p style="margin-top: 20px;">ðŸŽ¥ Sample content ideas:</p>
+        <ul>
+          <li>
+            Goat feeding time</li>
+          <li>Kids playing</li>
+          <li>Farm expansion updates</li>
+        </ul>
+      </section>
+
+      <!-- SALES -->
+      <section id="sales">
+        <h2>ðŸ’° Sales & Pricing</h2>
+        <p>Available goats and livestock for sale:
+        </p>
+        <table>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price per Unit</th>
+            <th>Status</th>
+          </tr>
+          <tr>
+
+            <td>Breeding Goats</td>
+            <td>5</td>
+            <td>KSh 22, 000 - 29, 000</td>
+            <td>Available</td>
+          </tr>
+          <tr>
+            <td>
+              Goat Kids</td>
+            <td>12</td>
+            <td>KSh 11, 000 - 17, 000</td>
+            <td>Available</td>
+          </tr>
+          <tr>
+            <td>Goat
+              Meat</td>
+            <td>Bulk</td>
+            <td>KSh 700/kg</td>
+            <td>Available</td>
+          </tr>
+        </table>
+        <p style="margin-top: 20px;">
+          <button class="btn" onclick="alert('Contact form would open here')">ðŸ“ž Request
+            Quote</button>
+        </p>
+      </section>
+    </div>
+    <footer>
+      <p>Â© 2026 Gotiqa Farm | Smart Goat Farming & Management
+        System</p>
+    </footer>
+  </div>
+
+  <script src="assets/js/index.js"></script>
+</body>
+
+</html>

@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_DIR = os.path.join(os.path.dirname(BASE_DIR), 'frontend')
 
 app = Flask(__name__)
 CORS(app)
@@ -498,6 +499,62 @@ def get_stats():
         'total_breeding_records': total_breeding_records,
         'total_feeding_records': total_feeding_records
     }), 200
+
+
+@app.route('/api/dashboard', methods=['GET'])
+def get_dashboard():
+    """Get the frontend dashboard payload in one request."""
+    stats_response, status_code = get_stats()
+    stats = stats_response.get_json()
+    recent_animals = Animal.query.order_by(Animal.date_acquired.desc()).limit(5).all()
+    recent_logs = UserLog.query.order_by(UserLog.timestamp.desc()).limit(5).all()
+
+    return jsonify({
+        'stats': stats,
+        'recent_animals': [animal.to_dict() for animal in recent_animals],
+        'recent_logs': [log.to_dict() for log in recent_logs]
+    }), status_code
+
+
+# ============ FRONTEND ROUTES ============
+
+@app.route('/', methods=['GET'])
+def serve_home():
+    """Serve the static frontend from the Flask backend."""
+    return send_from_directory(FRONTEND_DIR, 'index.html')
+
+
+@app.route('/assets/<path:filename>', methods=['GET'])
+def serve_frontend_asset(filename):
+    return send_from_directory(os.path.join(FRONTEND_DIR, 'assets'), filename)
+
+
+@app.route('/dashboard', methods=['GET'])
+def serve_dashboard():
+    return send_from_directory(FRONTEND_DIR, 'dashboard.html')
+
+
+@app.route('/<path:filename>', methods=['GET'])
+def serve_frontend_file(filename):
+    pages = {
+        'index': 'index.html',
+        'home': 'home.html',
+        'about': 'about.html',
+        'blog': 'blog.html',
+        'contact': 'contact.html',
+        'products': 'products.html',
+        'dashboard': 'dashboard.html',
+        'index.html': 'index.html',
+        'home.html': 'home.html',
+        'about.html': 'about.html',
+        'blog.html': 'blog.html',
+        'contact.html': 'contact.html',
+        'products.html': 'products.html',
+        'dashboard.html': 'dashboard.html'
+    }
+    if filename in pages:
+        return send_from_directory(FRONTEND_DIR, pages[filename])
+    return jsonify({'error': 'Resource not found'}), 404
 
 
 # ============ ERROR HANDLERS ============
