@@ -1,16 +1,19 @@
-# React + Vite
+# Gotiqa Smart Farm
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Gotiqa is an integrated **Eco-Agritech Platform** designed to modernize goat husbandry through precise data logging, atmospheric tracking, and sustainable farm management.
 
-Currently, two official plugins are available:
+## 🚀 Features
+* **Herd Management**: Track structural metrics for individual livestock, including weights, breeds, and growth markers.
+* **Veterinary Logging**: Maintain clinical record paths, medical treatment histories, and vaccination schedules.
+* **Atmospheric Tracking**: Real-time synchronization with local weather patterns, humidity, and barometric pressure.
+* **Market Transparency**: Transparent pricing and quoting system for meat and breeding livestock.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠 Tech Stack
+This project is built using modern web development standards:
+* **Frontend**: React (Vite)
+* **Styling**: Tailwind CSS (v4)
+* **Build Tool**: Vite
+* **Deployment**: GitHub Pages
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+*New features coming soon, stay tuned.*
