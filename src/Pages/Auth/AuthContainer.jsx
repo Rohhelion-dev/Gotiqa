@@ -1,38 +1,64 @@
 import React, { useState } from 'react';
-// Assuming you will create these two components next
-import LoginForm from './LoginForm'; 
-import SignUpForm from './SignUpForm';
 
-export default function AuthContainer() {
-  const [isLogin, setIsLogin] = useState(true);
+export default function AuthContainer({ setUser, onSuccess }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+  
+    if (email === 'farmer@gotiqa.com' && password === 'password') {
+      setUser({ email, role: 'admin' });
+      onSuccess();
+    } else {
+      setError('Invalid credentials.');
+    }
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f8f9fa] p-4">
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-xl border border-gray-100 p-8 space-y-6">
+    <div className="flex justify-center items-center py-20 px-4">
+      <div className="bg-white p-10 rounded-2xl shadow-lg w-full max-w-md border border-gray-100">
         
-        {/* Toggle Header */}
-        <div className="text-center space-y-2">
-          <h2 className="text-2xl font-black text-[#1e3f20]">
-            {isLogin ? 'Welcome Back to Gotiqa' : 'Join the Gotiqa Community'}
-          </h2>
-          <p className="text-sm text-gray-500">
-            {isLogin ? 'Enter your credentials to access the farm dashboard.' : 'Register to manage your livestock and farm data.'}
-          </p>
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-slate-800 mb-2">Welcome Back to Gotiqa</h2>
+          <p className="text-slate-500">Enter your credentials to access the farm dashboard.</p>
         </div>
 
-        {/* Dynamic Form Rendering */}
-        <div className="py-2">
-          {isLogin ? <LoginForm /> : <SignUpForm />}
-        </div>
+        {error && <p className="text-red-500 mb-4 text-center text-sm">{error}</p>}
 
-        {/* Toggle Switch */}
-        <div className="text-center pt-4 border-t border-gray-50">
+        <form onSubmit={handleLogin}>
+          <div className="mb-5">
+            <label className="block text-sm font-semibold text-slate-700 mb-2">Email</label>
+            <input 
+              type="email" 
+              placeholder="farmer@gotiqa.com"
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1b4332] outline-none transition"
+            />
+          </div>
+          
+          <div className="mb-8">
+            <label className="block text-sm font-semibold text-slate-700 mb-2">Password</label>
+            <input 
+              type="password" 
+              placeholder="••••••••"
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1b4332] outline-none transition"
+            />
+          </div>
+          
           <button 
-            onClick={() => setIsLogin(!isLogin)}
-            className="text-sm text-[#2d6a4f] font-bold hover:underline"
+            type="submit" 
+            className="w-full text-white py-3 rounded-lg font-bold hover:opacity-90 transition duration-200"
+            style={{ backgroundColor: '#1b4332' }}
           >
-            {isLogin ? "Don't have an account? Sign Up" : 'Already have an account? Login'}
+            Login
           </button>
+        </form>
+
+        <div className="mt-6 text-center text-sm">
+          <p className="text-slate-600">Don't have an account? <span className="font-bold text-[#1b4332] cursor-pointer">Sign Up</span></p>
         </div>
       </div>
     </div>

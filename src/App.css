@@ -1,4 +1,8 @@
 /* src/App.css */
+:root {
+  --bg-dark: #f4f7f5; /* Your specific background color */
+  --accent-primary: #2d6a4f; /* Your specific brand green */
+}
 .counter {
   @apply text-[16px] p-[5px_10px] rounded-[5px] text-[#2d6a4f] bg-[#d8f3dc] border-2 border-transparent transition-all duration-300 mb-[24px];
 }
