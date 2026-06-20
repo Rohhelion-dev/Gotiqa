@@ -43,7 +43,7 @@ export default function SalesMedia() {
 
         <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-xl border border-pink-100 text-center">
           <p className="text-xs font-semibold text-gray-400 tracking-wider uppercase mb-1">Official TikTok Handle</p>
-          <a href="https://tiktok.com/@gotiqafarm" target="_blank" rel="noreferrer" className="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 hover:scale-105 inline-block transition-transform">
+          <a href="https://tiktok.com/@gotiqafarm" target="_blank" rel="noopener noreferrer" className="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 hover:scale-105 inline-block transition-transform">
             @gotiqafarm
           </a>
         </div>

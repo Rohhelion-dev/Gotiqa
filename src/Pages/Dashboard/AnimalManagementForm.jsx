@@ -11,8 +11,7 @@ const AnimalManagementForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Admin submitted animal data:', formData);
-    // Add API integration here
+    // TODO: Replace with actual API integration
   };
 
   return (

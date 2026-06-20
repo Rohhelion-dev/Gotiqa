@@ -9,7 +9,6 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form Submitted:', formData);
     alert('Thank you! Your inquiry has been received.');
   };
 

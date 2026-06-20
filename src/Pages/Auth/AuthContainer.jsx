@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+const DEMO_EMAIL = import.meta.env.VITE_DEMO_EMAIL || '';
+const DEMO_PASS = import.meta.env.VITE_DEMO_PASS || '';
+
 export default function AuthContainer({ setUser, onSuccess }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -7,8 +10,13 @@ export default function AuthContainer({ setUser, onSuccess }) {
 
   const handleLogin = (e) => {
     e.preventDefault();
-  
-    if (email === 'farmer@gotiqa.com' && password === 'password') {
+
+    if (!email || !password) {
+      setError('Please enter both email and password.');
+      return;
+    }
+
+    if (DEMO_EMAIL && DEMO_PASS && email === DEMO_EMAIL && password === DEMO_PASS) {
       setUser({ email, role: 'admin' });
       onSuccess();
     } else {
@@ -32,7 +40,7 @@ export default function AuthContainer({ setUser, onSuccess }) {
             <label className="block text-sm font-semibold text-slate-700 mb-2">Email</label>
             <input 
               type="email" 
-              placeholder="farmer@gotiqa.com"
+              placeholder="you@example.com"
               onChange={(e) => setEmail(e.target.value)}
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1b4332] outline-none transition"
             />
