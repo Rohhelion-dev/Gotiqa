@@ -1,5 +1,3 @@
-import React from 'react';
-
 const alerts = [
   { animal: 'Goat #402', task: 'Vaccination', status: 'overdue', date: '2026-06-15' },
   { animal: 'Goat #115', task: 'Vet Checkup', status: 'due', date: '2026-06-20' },
@@ -11,6 +9,8 @@ const statusStyles = {
   due: 'bg-orange-100 text-orange-700 border-orange-200',
   healthy: 'bg-green-100 text-green-700 border-green-200',
 };
+
+const DEFAULT_STATUS_STYLE = 'bg-gray-100 text-gray-700 border-gray-200';
 
 export default function HealthAlerts() {
   return (
@@ -32,7 +32,7 @@ export default function HealthAlerts() {
                 <td className="py-4 font-semibold">{alert.animal}</td>
                 <td className="py-4">{alert.task}</td>
                 <td className="py-4">
-                  <span className={`px-3 py-1 rounded-full text-xs font-bold border ${statusStyles[alert.status]}`}>
+                  <span className={`px-3 py-1 rounded-full text-xs font-bold border ${statusStyles[alert.status] || DEFAULT_STATUS_STYLE}`}>
                     {alert.status.toUpperCase()}
                   </span>
                 </td>

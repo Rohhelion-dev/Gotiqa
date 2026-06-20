@@ -1,18 +1,39 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function AuthContainer({ setUser, onSuccess }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    if (error) setError('');
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    if (error) setError('');
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
-  
-    if (email === 'farmer@gotiqa.com' && password === 'password') {
-      setUser({ email, role: 'admin' });
-      onSuccess();
-    } else {
-      setError('Invalid credentials.');
+
+    if (!email.trim() || !password.trim()) {
+      setError('Please enter both email and password.');
+      return;
+    }
+
+    try {
+      if (email === 'farmer@gotiqa.com' && password === 'password') {
+        setUser({ email, role: 'admin' });
+        onSuccess();
+      } else {
+        setError('Invalid credentials. Please check your email and password.');
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'An unexpected error occurred during login.';
+      setError(message);
+      console.error('[AuthContainer] Login failed:', err);
     }
   };
 
@@ -33,7 +54,8 @@ export default function AuthContainer({ setUser, onSuccess }) {
             <input 
               type="email" 
               placeholder="farmer@gotiqa.com"
-              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              onChange={handleEmailChange}
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1b4332] outline-none transition"
             />
           </div>
@@ -43,7 +65,8 @@ export default function AuthContainer({ setUser, onSuccess }) {
             <input 
               type="password" 
               placeholder="••••••••"
-              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              onChange={handlePasswordChange}
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1b4332] outline-none transition"
             />
           </div>
