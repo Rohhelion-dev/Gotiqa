@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { FormField } from '../../components/Shared';
+
+const fieldClass = 'w-full p-2 border rounded mt-1';
 
 const AnimalManagementForm = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +15,6 @@ const AnimalManagementForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Admin submitted animal data:', formData);
-    // Add API integration here
   };
 
   return (
@@ -20,51 +22,38 @@ const AnimalManagementForm = () => {
       <h2 className="text-xl font-semibold mb-6">Animal Management</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
-        <div>
-          <label className="block text-sm font-medium">Tag Number *</label>
-          <input name="tagNumber" required onChange={handleChange} className="w-full p-2 border rounded mt-1" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Name</label>
-          <input name="name" onChange={handleChange} className="w-full p-2 border rounded mt-1" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Species *</label>
-          <select name="species" required onChange={handleChange} className="w-full p-2 border rounded mt-1">
-            <option value="">Select species</option>
-            <option value="goat">Goat</option>
-          </select>
-        </div>
+        <FormField label="Tag Number *" name="tagNumber" required onChange={handleChange} inputClassName={fieldClass} />
+        <FormField label="Name" name="name" onChange={handleChange} inputClassName={fieldClass} />
+        <FormField
+          label="Species *"
+          name="species"
+          required
+          onChange={handleChange}
+          inputClassName={fieldClass}
+          options={[{ value: 'goat', label: 'Goat' }]}
+          placeholder="Select species"
+        />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
-        <div>
-          <label className="block text-sm font-medium">Breed</label>
-          <input name="breed" onChange={handleChange} className="w-full p-2 border rounded mt-1" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Age (months)</label>
-          <input name="age" type="number" onChange={handleChange} className="w-full p-2 border rounded mt-1" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Gender *</label>
-          <select name="gender" required onChange={handleChange} className="w-full p-2 border rounded mt-1">
-            <option value="">Select gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-        </div>
+        <FormField label="Breed" name="breed" onChange={handleChange} inputClassName={fieldClass} />
+        <FormField label="Age (months)" name="age" type="number" onChange={handleChange} inputClassName={fieldClass} />
+        <FormField
+          label="Gender *"
+          name="gender"
+          required
+          onChange={handleChange}
+          inputClassName={fieldClass}
+          options={[
+            { value: 'male', label: 'Male' },
+            { value: 'female', label: 'Female' },
+          ]}
+          placeholder="Select gender"
+        />
       </div>
 
-      <div className="mb-4">
-        <label className="block text-sm font-medium">Weight (kg)</label>
-        <input name="weight" type="number" onChange={handleChange} className="w-full p-2 border rounded mt-1" />
-      </div>
-
-      <div className="mb-6">
-        <label className="block text-sm font-medium">Notes</label>
-        <textarea name="notes" onChange={handleChange} className="w-full p-2 border rounded mt-1 h-24" />
-      </div>
+      <FormField label="Weight (kg)" name="weight" type="number" onChange={handleChange} inputClassName={fieldClass} className="mb-4" />
+      <FormField label="Notes" name="notes" type="textarea" onChange={handleChange} inputClassName={`${fieldClass} h-24`} className="mb-6" />
 
       <button type="submit" className="px-6 py-2 bg-indigo-700 text-white rounded hover:bg-indigo-800">
         Add Animal

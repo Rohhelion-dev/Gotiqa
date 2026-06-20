@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { FormField } from '../../components/Shared';
+
+const authInputClass = 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1b4332] outline-none transition';
 
 export default function AuthContainer({ setUser, onSuccess }) {
   const [email, setEmail] = useState('');
@@ -28,25 +31,24 @@ export default function AuthContainer({ setUser, onSuccess }) {
         {error && <p className="text-red-500 mb-4 text-center text-sm">{error}</p>}
 
         <form onSubmit={handleLogin}>
-          <div className="mb-5">
-            <label className="block text-sm font-semibold text-slate-700 mb-2">Email</label>
-            <input 
-              type="email" 
-              placeholder="farmer@gotiqa.com"
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1b4332] outline-none transition"
-            />
-          </div>
-          
-          <div className="mb-8">
-            <label className="block text-sm font-semibold text-slate-700 mb-2">Password</label>
-            <input 
-              type="password" 
-              placeholder="••••••••"
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1b4332] outline-none transition"
-            />
-          </div>
+          <FormField
+            label="Email"
+            name="email"
+            type="email"
+            placeholder="farmer@gotiqa.com"
+            onChange={(e) => setEmail(e.target.value)}
+            inputClassName={authInputClass}
+            className="mb-5"
+          />
+          <FormField
+            label="Password"
+            name="password"
+            type="password"
+            placeholder="••••••••"
+            onChange={(e) => setPassword(e.target.value)}
+            inputClassName={authInputClass}
+            className="mb-8"
+          />
           
           <button 
             type="submit" 

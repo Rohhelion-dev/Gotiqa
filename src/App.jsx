@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Home from './pages/Website/Home';
-import About from './pages/Website/About';
-import Products from './pages/Website/Products';
-import Contact from './pages/Website/Contact';
-import AuthContainer from './pages/Auth/AuthContainer';
-import Operations from './pages/Dashboard/Operations';
-import AnimalManagementForm from './pages/Dashboard/AnimalManagementForm';
-import HealthAlerts from './pages/Dashboard/HealthAlerts';
+import Home from './Pages/Website/Home';
+import About from './Pages/Website/About';
+import Products from './Pages/Website/Products';
+import Contact from './Pages/Website/Contact';
+import AuthContainer from './Pages/Auth/AuthContainer';
+import Operations from './Pages/Dashboard/Operations';
+import AnimalManagementForm from './Pages/Dashboard/AnimalManagementForm';
+import HealthAlerts from './Pages/Dashboard/HealthAlerts';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('home');
