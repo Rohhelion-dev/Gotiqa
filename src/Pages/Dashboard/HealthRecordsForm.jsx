@@ -24,71 +24,117 @@ const HealthRecordsForm = () => {
   };
 
   return (
-    <div>
-      <h2>Health Records</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="p-6 bg-white rounded-lg shadow-sm border border-gray-200"
+    >
+      <h2 className="text-xl font-semibold mb-6">
+        Health Records
+      </h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          name="animal"
-          placeholder="Animal ID"
-          value={formData.animal}
-          onChange={handleChange}
-        />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+        <div>
+          <label className="block text-sm font-medium">
+            Animal *
+          </label>
+          <input
+            name="animal"
+            value={formData.animal}
+            onChange={handleChange}
+            className="w-full p-2 border rounded mt-1"
+          />
+        </div>
 
-        <select
-          name="healthStatus"
-          value={formData.healthStatus}
-          onChange={handleChange}
-        >
-          <option value="">Select Status</option>
-          <option value="healthy">Healthy</option>
-          <option value="sick">Sick</option>
-          <option value="injured">Injured</option>
-          <option value="recovering">Recovering</option>
-        </select>
+        <div>
+          <label className="block text-sm font-medium">
+            Health Status *
+          </label>
+          <select
+            name="healthStatus"
+            value={formData.healthStatus}
+            onChange={handleChange}
+            className="w-full p-2 border rounded mt-1"
+          >
+            <option value="">Select Status</option>
+            <option value="healthy">Healthy</option>
+            <option value="sick">Sick</option>
+            <option value="injured">Injured</option>
+            <option value="recovering">Recovering</option>
+          </select>
+        </div>
+      </div>
 
-        <input
-          type="number"
-          name="temperature"
-          placeholder="Temperature"
-          value={formData.temperature}
-          onChange={handleChange}
-        />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+        <div>
+          <label className="block text-sm font-medium">
+            Temperature (°C)
+          </label>
+          <input
+            type="number"
+            name="temperature"
+            value={formData.temperature}
+            onChange={handleChange}
+            className="w-full p-2 border rounded mt-1"
+          />
+        </div>
 
-        <input
-          type="number"
-          name="weight"
-          placeholder="Weight"
-          value={formData.weight}
-          onChange={handleChange}
-        />
+        <div>
+          <label className="block text-sm font-medium">
+            Weight (kg)
+          </label>
+          <input
+            type="number"
+            name="weight"
+            value={formData.weight}
+            onChange={handleChange}
+            className="w-full p-2 border rounded mt-1"
+          />
+        </div>
+      </div>
 
+      <div className="mb-4">
+        <label className="block text-sm font-medium">
+          Diagnosis
+        </label>
         <textarea
           name="diagnosis"
-          placeholder="Diagnosis"
           value={formData.diagnosis}
           onChange={handleChange}
+          className="w-full p-2 border rounded mt-1 h-24"
         />
+      </div>
 
+      <div className="mb-4">
+        <label className="block text-sm font-medium">
+          Treatment
+        </label>
         <textarea
           name="treatment"
-          placeholder="Treatment"
           value={formData.treatment}
           onChange={handleChange}
+          className="w-full p-2 border rounded mt-1 h-24"
         />
+      </div>
 
+      <div className="mb-6">
+        <label className="block text-sm font-medium">
+          Veterinarian Notes
+        </label>
         <textarea
           name="vetNotes"
-          placeholder="Veterinarian Notes"
           value={formData.vetNotes}
           onChange={handleChange}
+          className="w-full p-2 border rounded mt-1 h-24"
         />
+      </div>
 
-        <button type="submit">
-          Add Health Record
-        </button>
-      </form>
-    </div>
+      <button
+        type="submit"
+        className="px-6 py-2 bg-indigo-700 text-white rounded hover:bg-indigo-800"
+      >
+        Add Health Record
+      </button>
+    </form>
   );
 };
 

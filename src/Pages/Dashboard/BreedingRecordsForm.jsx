@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 
 const BreedingRecordsForm = () => {
   const [formData, setFormData] = useState({
-    animal: '',
-    dateOfBreeding: '',
-    partnerTag: '',
-    expectedDelivery: '',
+    animalTag: '',
+    breedingDate: '',
+    matingType: '',
+    sireTag: '',
+    expectedKiddingDate: '',
     offspringCount: '',
     offspringHealth: '',
     notes: '',
@@ -21,68 +22,144 @@ const BreedingRecordsForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Admin submitted breeding record:', formData);
+
+    // Future API integration goes here
   };
 
   return (
-    <div>
-      <h2>Breeding Records</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="p-6 bg-white rounded-lg shadow-sm border border-gray-200"
+    >
+      <h2 className="text-xl font-semibold mb-6">
+        Breeding Records
+      </h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          name="animal"
-          placeholder="Animal ID"
-          value={formData.animal}
-          onChange={handleChange}
-        />
+      {/* First Row */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+        <div>
+          <label className="block text-sm font-medium">
+            Animal Tag Number *
+          </label>
+          <input
+            name="animalTag"
+            required
+            value={formData.animalTag}
+            onChange={handleChange}
+            className="w-full p-2 border rounded mt-1"
+            placeholder="e.g GTQ-001"
+          />
+        </div>
 
-        <input
-          type="datetime-local"
-          name="dateOfBreeding"
-          value={formData.dateOfBreeding}
-          onChange={handleChange}
-        />
+        <div>
+          <label className="block text-sm font-medium">
+            Breeding Date *
+          </label>
+          <input
+            type="date"
+            name="breedingDate"
+            required
+            value={formData.breedingDate}
+            onChange={handleChange}
+            className="w-full p-2 border rounded mt-1"
+          />
+        </div>
 
-        <input
-          name="partnerTag"
-          placeholder="Partner Tag"
-          value={formData.partnerTag}
-          onChange={handleChange}
-        />
+        <div>
+          <label className="block text-sm font-medium">
+            Mating Type
+          </label>
+          <select
+            name="matingType"
+            value={formData.matingType}
+            onChange={handleChange}
+            className="w-full p-2 border rounded mt-1"
+          >
+            <option value="">Select Type</option>
+            <option value="natural">Natural Mating</option>
+            <option value="artificial">Artificial Insemination</option>
+          </select>
+        </div>
+      </div>
 
-        <input
-          type="datetime-local"
-          name="expectedDelivery"
-          value={formData.expectedDelivery}
-          onChange={handleChange}
-        />
+      {/* Second Row */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+        <div>
+          <label className="block text-sm font-medium">
+            Sire Tag Number
+          </label>
+          <input
+            name="sireTag"
+            value={formData.sireTag}
+            onChange={handleChange}
+            className="w-full p-2 border rounded mt-1"
+            placeholder="e.g GTQ-S001"
+          />
+        </div>
 
-        <input
-          type="number"
-          name="offspringCount"
-          placeholder="Offspring Count"
-          value={formData.offspringCount}
-          onChange={handleChange}
-        />
+        <div>
+          <label className="block text-sm font-medium">
+            Expected Kidding Date
+          </label>
+          <input
+            type="date"
+            name="expectedKiddingDate"
+            value={formData.expectedKiddingDate}
+            onChange={handleChange}
+            className="w-full p-2 border rounded mt-1"
+          />
+        </div>
 
+        <div>
+          <label className="block text-sm font-medium">
+            Number of Kids Born
+          </label>
+          <input
+            type="number"
+            name="offspringCount"
+            value={formData.offspringCount}
+            onChange={handleChange}
+            className="w-full p-2 border rounded mt-1"
+            min="0"
+          />
+        </div>
+      </div>
+
+      {/* Health Section */}
+      <div className="mb-4">
+        <label className="block text-sm font-medium">
+          Offspring Health Status
+        </label>
         <textarea
           name="offspringHealth"
-          placeholder="Offspring Health"
           value={formData.offspringHealth}
           onChange={handleChange}
+          className="w-full p-2 border rounded mt-1 h-24"
+          placeholder="Describe health condition of offspring..."
         />
+      </div>
 
+      {/* Notes Section */}
+      <div className="mb-6">
+        <label className="block text-sm font-medium">
+          Additional Notes
+        </label>
         <textarea
           name="notes"
-          placeholder="Notes"
           value={formData.notes}
           onChange={handleChange}
+          className="w-full p-2 border rounded mt-1 h-24"
+          placeholder="Any breeding observations or remarks..."
         />
+      </div>
 
-        <button type="submit">
-          Add Breeding Record
-        </button>
-      </form>
-    </div>
+      <button
+        type="submit"
+        className="px-6 py-2 bg-indigo-700 text-white rounded hover:bg-indigo-800 transition-colors"
+      >
+        Add Breeding Record
+      </button>
+    </form>
   );
 };
 
