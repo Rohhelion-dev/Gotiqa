@@ -7,28 +7,24 @@ router.post("/", (req, res) => {
   const {
     action,
     type,
-    entity,
     details
   } = req.body;
 
-  const sql = `
+  const insertSql = `
     INSERT INTO activity_logs
     (
-      action,
-      type,
-      entity,
-      details
+      activity_type,
+      description,
+      activity_date
     )
-    VALUES (?, ?, ?, ?)
+    VALUES (?, ?, NOW())
   `;
 
   db.query(
-    sql,
+    insertSql,
     [
-      action,
       type,
-      entity,
-      details
+      `${action} - ${details}`
     ],
     (err, result) => {
 

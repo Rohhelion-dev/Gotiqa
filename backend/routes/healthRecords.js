@@ -4,6 +4,8 @@ const db = require("../db");
 
 router.post("/", (req, res) => {
 
+  console.log("REQUEST BODY:", req.body);
+
   const {
     animal,
     healthStatus,
@@ -14,43 +16,70 @@ router.post("/", (req, res) => {
     vetNotes
   } = req.body;
 
-  const sql = `
-    INSERT INTO health_records
-    (
-      animal_tag,
-      health_status,
-      temperature,
-      weight,
-      diagnosis,
-      treatment,
-      vet_notes
-    )
-    VALUES (?, ?, ?, ?, ?, ?, ?)
-  `;
+  const findAnimalSql =
+    "SELECT id FROM animals WHERE tag_number = ?";
 
-  db.query(
-    sql,
-    [
-      animal,
-      healthStatus,
-      temperature,
-      weight,
-      diagnosis,
-      treatment,
-      vetNotes
-    ],
-    (err, result) => {
+  db.query(findAnimalSql, [animal], (err, animalResult) => {
 
-      if (err) {
-        return res.status(500).json(err);
-      }
+    if (err) {
+      console.error("FIND ANIMAL ERROR:", err);
+      return res.status(500).json(err);
+    }
 
-      res.json({
-        success: true,
-        id: result.insertId
+    console.log("ANIMAL RESULT:", animalResult);
+
+    if (animalResult.length === 0) {
+      return res.status(404).json({
+        error: "Animal not found"
       });
     }
-  );
+
+    const animalId = animalResult[0].id;
+
+    const insertSql = `
+      INSERT INTO health_records
+      (
+        animal_id,
+        diagnosis,
+        treatment,
+        veterinarian,
+        record_date,
+        notes,
+        health_status,
+        temperature,
+        weight,
+        vet_notes
+      )
+      VALUES (?, ?, ?, ?, CURDATE(), ?, ?, ?, ?, ?)
+    `;
+
+    db.query(
+      insertSql,
+      [
+        animalId,
+        diagnosis,
+        treatment,
+        "Gotiqa Vet",
+        vetNotes,
+        healthStatus,
+        temperature || null,
+        weight || null,
+        vetNotes
+      ],
+      (err, result) => {
+
+        if (err) {
+          console.error("INSERT ERROR:", err);
+          return res.status(500).json(err);
+        }
+
+        res.json({
+          success: true,
+          id: result.insertId
+        });
+      }
+    );
+  });
 });
 
 module.exports = router;

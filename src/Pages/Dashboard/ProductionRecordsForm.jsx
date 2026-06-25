@@ -18,9 +18,35 @@ const ProductionRecordsForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Admin submitted production record:', formData);
+
+    try {
+
+      const response = await axios.post(
+        "http://localhost:5000/production-records",
+        formData
+      );
+
+      console.log(response.data);
+
+      alert("Production record saved successfully!");
+
+      setFormData({
+        animal: '',
+        productionType: '',
+        quantity: '',
+        unit: '',
+        qualityGrade: '',
+        notes: '',
+      });
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert("Failed to save production record");
+    }
   };
 
   return (
@@ -33,12 +59,14 @@ const ProductionRecordsForm = () => {
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+
         <input
           name="animal"
-          placeholder="Animal"
+          placeholder="Animal Tag Number"
           value={formData.animal}
           onChange={handleChange}
           className="w-full p-2 border rounded"
+          required
         />
 
         <select
@@ -46,6 +74,7 @@ const ProductionRecordsForm = () => {
           value={formData.productionType}
           onChange={handleChange}
           className="w-full p-2 border rounded"
+          required
         >
           <option value="">Production Type</option>
           <option value="milk">Milk</option>
@@ -61,10 +90,12 @@ const ProductionRecordsForm = () => {
           value={formData.quantity}
           onChange={handleChange}
           className="w-full p-2 border rounded"
+          required
         />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+
         <input
           name="unit"
           placeholder="Unit"

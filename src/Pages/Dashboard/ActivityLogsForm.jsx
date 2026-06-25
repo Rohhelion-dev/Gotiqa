@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from "axios";
 
 const ActivityLogsForm = () => {
+
   const [formData, setFormData] = useState({
     action: '',
     type: 'Note',
@@ -16,9 +17,33 @@ const ActivityLogsForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Admin submitted activity log:', formData);
+
+    try {
+
+      const response = await axios.post(
+        "http://localhost:5000/activity-logs",
+        formData
+      );
+
+      console.log(response.data);
+
+      alert("Activity log saved successfully!");
+
+      setFormData({
+        action: '',
+        type: 'Note',
+        entity: 'General',
+        details: '',
+      });
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert("Failed to save activity log");
+    }
   };
 
   return (
@@ -31,12 +56,14 @@ const ActivityLogsForm = () => {
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+
         <input
           name="action"
           placeholder="Action"
           value={formData.action}
           onChange={handleChange}
           className="w-full p-2 border rounded"
+          required
         />
 
         <select

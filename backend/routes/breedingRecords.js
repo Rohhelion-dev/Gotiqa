@@ -3,6 +3,8 @@ const router = express.Router();
 const db = require("../db");
 
 router.post("/", (req, res) => {
+  console.log("BREEDING ROUTE HIT");
+  console.log("BODY RECEIVED:", req.body);
 
   const {
     animalTag,
@@ -12,48 +14,80 @@ router.post("/", (req, res) => {
     expectedKiddingDate,
     offspringCount,
     offspringHealth,
-    notes
+    notes,
   } = req.body;
 
-  const sql = `
-    INSERT INTO breeding_records
-    (
-      animal_tag,
-      breeding_date,
-      mating_type,
-      sire_tag,
-      expected_kidding_date,
-      offspring_count,
-      offspring_health,
-      notes
-    )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-  `;
+  if (!animalTag) {
+    return res.status(400).json({
+      error: "Animal tag is required",
+    });
+  }
 
-  db.query(
-    sql,
-    [
-      animalTag,
-      breedingDate,
-      matingType,
-      sireTag,
-      expectedKiddingDate,
-      offspringCount,
-      offspringHealth,
-      notes
-    ],
-    (err, result) => {
+  const findAnimalSql =
+    "SELECT id FROM animals WHERE tag_number = ?";
 
-      if (err) {
-        return res.status(500).json(err);
-      }
-
-      res.json({
-        success: true,
-        id: result.insertId
+  db.query(findAnimalSql, [animalTag.trim()], (err, animalResult) => {
+    if (err) {
+      console.error("ANIMAL LOOKUP ERROR:", err);
+      return res.status(500).json({
+        error: "Database error during animal lookup",
       });
     }
-  );
+
+    if (animalResult.length === 0) {
+      return res.status(404).json({
+        error: "Animal not found",
+      });
+    }
+
+    const animalId = animalResult[0].id;
+
+    const insertSql = `
+      INSERT INTO breeding_records (
+        animal_id,
+        partner_tag,
+        breeding_date,
+        expected_delivery,
+        offspring_count,
+        offspring_health,
+        notes,
+        mating_type
+      )
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+
+    db.query(
+      insertSql,
+      [
+        animalId,
+        sireTag || null,
+        breedingDate || null,
+        expectedKiddingDate || null,
+        offspringCount || null,
+        offspringHealth || null,
+        notes || null,
+        matingType || null,
+      ],
+      (err, result) => {
+        if (err) {
+          console.error("BREEDING INSERT ERROR:", err);
+          return res.status(500).json({
+            error: "Failed to save breeding record",
+          });
+        }
+
+        console.log(
+          "BREEDING RECORD SAVED:",
+          result.insertId
+        );
+
+        res.status(201).json({
+          success: true,
+          id: result.insertId,
+        });
+      }
+    );
+  });
 });
 
 module.exports = router;

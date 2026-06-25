@@ -5,46 +5,62 @@ const db = require("../db");
 router.post("/", (req, res) => {
 
   const {
-    animalTag,
+    animal,
     productionType,
     quantity,
-    recordDate,
     notes
   } = req.body;
 
-  const sql = `
-    INSERT INTO production_records
-    (
-      animal_tag,
-      production_type,
-      quantity,
-      record_date,
-      notes
-    )
-    VALUES (?, ?, ?, ?, ?)
-  `;
+  const findAnimalSql =
+    "SELECT id FROM animals WHERE TRIM(tag_number) = TRIM(?)";
 
-  db.query(
-    sql,
-    [
-      animalTag,
-      productionType,
-      quantity,
-      recordDate,
-      notes
-    ],
-    (err, result) => {
+  db.query(findAnimalSql, [animal], (err, animalResult) => {
 
-      if (err) {
-        return res.status(500).json(err);
-      }
+    if (err) {
+      return res.status(500).json(err);
+    }
 
-      res.json({
-        success: true,
-        id: result.insertId
+    if (animalResult.length === 0) {
+      return res.status(404).json({
+        error: "Animal not found"
       });
     }
-  );
+
+    const animalId = animalResult[0].id;
+
+    const insertSql = `
+      INSERT INTO production_records
+      (
+        animal_id,
+        production_type,
+        quantity,
+        production_date,
+        notes
+      )
+      VALUES (?, ?, ?, CURDATE(), ?)
+    `;
+
+    db.query(
+      insertSql,
+      [
+        animalId,
+        productionType,
+        quantity,
+        notes
+      ],
+      (err, result) => {
+
+        if (err) {
+          return res.status(500).json(err);
+        }
+
+        res.json({
+          success: true,
+          id: result.insertId
+        });
+      }
+    );
+  });
 });
 
 module.exports = router;
