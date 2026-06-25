@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-
 import Home from './pages/Website/Home';
 import About from './pages/Website/About';
 import Products from './pages/Website/Products';
 import Contact from './pages/Website/Contact';
-
 import AuthContainer from './pages/Auth/AuthContainer';
-
 import Operations from './pages/Dashboard/Operations';
 import HealthAlerts from './pages/Dashboard/HealthAlerts';
-
 import AnimalManagementForm from './pages/Dashboard/AnimalManagementForm';
 import HealthRecordsForm from './pages/Dashboard/HealthRecordsForm';
 import ProductionRecordsForm from './pages/Dashboard/ProductionRecordsForm';

@@ -14,3 +14,111 @@
 .counter:focus-visible {
   @apply outline-2 outline-[#2d6a4f] outline-offset-2;
 }
+
+/* --- Base Navbar Mobile Styles (Default for Phones) --- */
+.nav-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.nav-link {
+  padding: 0.5rem 1rem;
+  color: #334155;
+  font-weight: 500;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #1b4332;
+}
+
+.nav-action-btn {
+  width: 100%;
+  text-align: center;
+}
+
+/* --- Navbar Tablet & Desktop Breakpoint (768px and up) --- */
+@media (min-width: 768px) {
+  .nav-container {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+  }
+
+  .nav-links {
+    flex-direction: row;
+    width: auto;
+    gap: 1.5rem;
+  }
+
+  .nav-action-btn {
+    width: auto;
+  }
+}
+/* --- Base Mobile Styles (Default for Phone Screens) --- */
+.responsive-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.hero-btn {
+  width: 100%;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* --- Tablet Breakpoint (768px and up) --- */
+@media (min-width: 768px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+    justify-content: center;
+    max-width: none;
+  }
+
+  .hero-btn {
+    width: auto;
+  }
+}
+
+/* --- Laptop & Desktop Breakpoint (1024px and up) --- */
+@media (min-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

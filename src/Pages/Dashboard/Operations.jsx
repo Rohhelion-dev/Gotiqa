@@ -5,7 +5,9 @@ export default function Operations() {
     <div className="space-y-8">
       <h2 className="text-2xl font-bold text-slate-800">Farm Operations Overview</h2>
       
-      <div className="grid md:grid-cols-3 gap-6">
+      {/* Handled by standard media queries */}
+      <div className="responsive-grid">
+        
         {/* Employees Section */}
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
           <h3 className="font-bold mb-4 text-slate-700">Personnel & Staff</h3>
