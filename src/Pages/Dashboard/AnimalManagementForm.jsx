@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const AnimalManagementForm = () => {
+
   const [formData, setFormData] = useState({
     tagNumber: '',
     name: '',
@@ -43,153 +44,188 @@ const AnimalManagementForm = () => {
         weight: '',
         notes: '',
       });
+
     } catch (error) {
       console.error('Error saving animal:', error);
-
       alert('Failed to save animal record.');
     }
   };
 
   return (
+
     <form
       onSubmit={handleSubmit}
-      className="p-6 bg-white rounded-lg shadow-sm border border-gray-200"
+      className="bg-white/80 backdrop-blur-xl rounded-2xl border border-slate-200 shadow-sm p-6"
     >
-      <h2 className="text-xl font-semibold mb-6">
-        Animal Management
-      </h2>
 
-      {/* First Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+      {/* HEADER */}
+      <div className="mb-6">
+        <h2 className="text-lg font-semibold text-slate-900">
+          Animal Management
+        </h2>
+        <p className="text-sm text-slate-500 mt-1">
+          Register and manage livestock records
+        </p>
+      </div>
+
+      {/* FIRST ROW */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+
+        {/* TAG NUMBER */}
         <div>
-          <label className="block text-sm font-medium">
+          <label className="text-xs text-slate-500 mb-1 block">
             Tag Number *
           </label>
+
           <input
             name="tagNumber"
             value={formData.tagNumber}
             required
             onChange={handleChange}
-            className="w-full p-2 border rounded mt-1"
             placeholder="GTQ-001"
+            className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-emerald-500 outline-none transition"
           />
         </div>
 
+        {/* NAME */}
         <div>
-          <label className="block text-sm font-medium">
+          <label className="text-xs text-slate-500 mb-1 block">
             Name
           </label>
+
           <input
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full p-2 border rounded mt-1"
             placeholder="Bella"
+            className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-emerald-500 outline-none transition"
           />
         </div>
 
+        {/* SPECIES */}
         <div>
-          <label className="block text-sm font-medium">
+          <label className="text-xs text-slate-500 mb-1 block">
             Species *
           </label>
+
           <select
             name="species"
             value={formData.species}
             required
             onChange={handleChange}
-            className="w-full p-2 border rounded mt-1"
+            className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-emerald-500 outline-none transition"
           >
             <option value="">Select species</option>
             <option value="goat">Goat</option>
           </select>
         </div>
+
       </div>
 
-      {/* Second Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+      {/* SECOND ROW */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+
+        {/* BREED */}
         <div>
-          <label className="block text-sm font-medium">
+          <label className="text-xs text-slate-500 mb-1 block">
             Breed
           </label>
+
           <input
             name="breed"
             value={formData.breed}
             onChange={handleChange}
-            className="w-full p-2 border rounded mt-1"
             placeholder="Boer"
+            className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-emerald-500 outline-none transition"
           />
         </div>
 
+        {/* AGE */}
         <div>
-          <label className="block text-sm font-medium">
+          <label className="text-xs text-slate-500 mb-1 block">
             Age (months)
           </label>
+
           <input
             name="age"
             type="number"
             value={formData.age}
             onChange={handleChange}
-            className="w-full p-2 border rounded mt-1"
             min="0"
+            className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-emerald-500 outline-none transition"
           />
         </div>
 
+        {/* GENDER */}
         <div>
-          <label className="block text-sm font-medium">
+          <label className="text-xs text-slate-500 mb-1 block">
             Gender *
           </label>
+
           <select
             name="gender"
             value={formData.gender}
             required
             onChange={handleChange}
-            className="w-full p-2 border rounded mt-1"
+            className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-emerald-500 outline-none transition"
           >
             <option value="">Select gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
+
         </div>
+
       </div>
 
-      {/* Weight */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium">
+      {/* WEIGHT */}
+      <div className="mb-5">
+        <label className="text-xs text-slate-500 mb-1 block">
           Weight (kg)
         </label>
+
         <input
           name="weight"
           type="number"
           value={formData.weight}
           onChange={handleChange}
-          className="w-full p-2 border rounded mt-1"
           min="0"
           step="0.1"
+          className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-emerald-500 outline-none transition"
         />
       </div>
 
-      {/* Notes */}
+      {/* NOTES */}
       <div className="mb-6">
-        <label className="block text-sm font-medium">
+        <label className="text-xs text-slate-500 mb-1 block">
           Notes
         </label>
+
         <textarea
           name="notes"
           value={formData.notes}
           onChange={handleChange}
-          className="w-full p-2 border rounded mt-1 h-24"
           placeholder="Additional information about the animal..."
+          className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white h-28 focus:ring-2 focus:ring-emerald-500 outline-none transition resize-none"
         />
       </div>
 
-      <button
-        type="submit"
-        className="px-6 py-2 bg-indigo-700 text-white rounded hover:bg-indigo-800 transition-colors"
-      >
-        Add Animal
-      </button>
+      {/* SUBMIT */}
+      <div className="flex justify-end">
+
+        <button
+          type="submit"
+          className="px-6 py-2.5 rounded-xl bg-emerald-900 text-white font-semibold hover:bg-emerald-800 hover:shadow-md transition"
+        >
+          Add Animal
+        </button>
+
+      </div>
+
     </form>
+
   );
+
 };
 
 export default AnimalManagementForm;

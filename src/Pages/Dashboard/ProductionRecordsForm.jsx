@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import axios from "axios";
 
 const ProductionRecordsForm = () => {
   const [formData, setFormData] = useState({
-    animal: '',
-    productionType: '',
-    quantity: '',
-    unit: '',
-    qualityGrade: '',
-    notes: '',
+    animal: "",
+    productionType: "",
+    quantity: "",
+    unit: "",
+    qualityGrade: "",
+    notes: "",
   });
 
   const handleChange = (e) => {
@@ -22,7 +22,6 @@ const ProductionRecordsForm = () => {
     e.preventDefault();
 
     try {
-
       const response = await axios.post(
         "http://localhost:5000/production-records",
         formData
@@ -33,105 +32,153 @@ const ProductionRecordsForm = () => {
       alert("Production record saved successfully!");
 
       setFormData({
-        animal: '',
-        productionType: '',
-        quantity: '',
-        unit: '',
-        qualityGrade: '',
-        notes: '',
+        animal: "",
+        productionType: "",
+        quantity: "",
+        unit: "",
+        qualityGrade: "",
+        notes: "",
       });
 
     } catch (error) {
-
       console.error(error);
-
       alert("Failed to save production record");
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="p-6 bg-white rounded-lg shadow-sm border border-gray-200"
-    >
-      <h2 className="text-xl font-semibold mb-6">
-        Production Records
-      </h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
-
-        <input
-          name="animal"
-          placeholder="Animal Tag Number"
-          value={formData.animal}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-        />
-
-        <select
-          name="productionType"
-          value={formData.productionType}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-        >
-          <option value="">Production Type</option>
-          <option value="milk">Milk</option>
-          <option value="eggs">Eggs</option>
-          <option value="meat">Meat</option>
-          <option value="wool">Wool</option>
-        </select>
-
-        <input
-          type="number"
-          name="quantity"
-          placeholder="Quantity"
-          value={formData.quantity}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-        />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-
-        <input
-          name="unit"
-          placeholder="Unit"
-          value={formData.unit}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-        />
-
-        <select
-          name="qualityGrade"
-          value={formData.qualityGrade}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-        >
-          <option value="">Quality Grade</option>
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-        </select>
-      </div>
-
-      <textarea
-        name="notes"
-        value={formData.notes}
-        onChange={handleChange}
-        className="w-full p-2 border rounded h-24 mb-6"
-        placeholder="Notes"
-      />
-
-      <button
-        type="submit"
-        className="px-6 py-2 bg-indigo-700 text-white rounded hover:bg-indigo-800"
+    <div className="max-w-6xl mx-auto">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white rounded-3xl shadow-lg border border-slate-200 p-8 md:p-10"
       >
-        Add Production Record
-      </button>
-    </form>
+        <div className="mb-8 border-b border-slate-200 pb-5">
+          <h2 className="text-3xl font-bold text-slate-800">
+            Production Records
+          </h2>
+
+          <p className="text-slate-500 mt-2">
+            Record livestock production data for monitoring and reporting.
+          </p>
+        </div>
+
+        {/* Row 1 */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">
+              Animal Tag Number *
+            </label>
+
+            <input
+              name="animal"
+              value={formData.animal}
+              onChange={handleChange}
+              placeholder="GTQ-001"
+              required
+              className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none transition"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">
+              Production Type *
+            </label>
+
+            <select
+              name="productionType"
+              value={formData.productionType}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none transition"
+            >
+              <option value="">Select Type</option>
+              <option value="milk">Milk</option>
+              <option value="eggs">Eggs</option>
+              <option value="meat">Meat</option>
+              <option value="wool">Wool</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">
+              Quantity *
+            </label>
+
+            <input
+              type="number"
+              name="quantity"
+              value={formData.quantity}
+              onChange={handleChange}
+              placeholder="25"
+              required
+              className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none transition"
+            />
+          </div>
+
+        </div>
+
+        {/* Row 2 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">
+              Unit
+            </label>
+
+            <input
+              name="unit"
+              value={formData.unit}
+              onChange={handleChange}
+              placeholder="Litres / Kg"
+              className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none transition"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">
+              Quality Grade
+            </label>
+
+            <select
+              name="qualityGrade"
+              value={formData.qualityGrade}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none transition"
+            >
+              <option value="">Select Grade</option>
+              <option value="A">Grade A</option>
+              <option value="B">Grade B</option>
+              <option value="C">Grade C</option>
+            </select>
+          </div>
+
+        </div>
+
+        {/* Notes */}
+        <div className="mb-8">
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
+            Notes
+          </label>
+
+          <textarea
+            name="notes"
+            value={formData.notes}
+            onChange={handleChange}
+            rows={5}
+            placeholder="Additional production information..."
+            className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none transition resize-none"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="px-8 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-300"
+        >
+          Save Production Record
+        </button>
+      </form>
+    </div>
   );
 };
 

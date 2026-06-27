@@ -1,101 +1,266 @@
-import React from 'react';
+import React from "react";
 
 export default function Products() {
-  // Inventory items derived explicitly from Screenshot 2026-06-16 154539.png
-  const catalog = [
-    {
-      id: 'prod-1',
-      name: 'Breeding Goats',
-      price: 'KSh 22,000 - 29,000',
-      unit: 'per animal',
-      badge: 'Premium Stock',
-      status: 'Available',
-      description: 'Healthy local and crossbred varieties chosen for climate flexibility and robust dairy/meat potential.',
-      emoji: '🐐'
-    },
-    {
-      id: 'prod-2',
-      name: 'Goat Kids',
-      price: 'KSh 11,000 - 17,000',
-      unit: 'per animal',
-      badge: 'Young Livestock',
-      status: 'Available',
-      description: 'Young goat kits under careful veterinary surveillance. Highly active, vaccinated, and feed-ready.',
-      emoji: '🐑'
-    },
-    {
-      id: 'prod-3',
-      name: 'Goat Meat',
-      price: 'KSh 700',
-      unit: 'per kg (Bulk)',
-      badge: 'Organic Wholesale',
-      status: 'Available',
-      description: 'Ethically handled premium organic meat supply matching strict safety and health compliance indices.',
-      emoji: '🥩'
-    }
-  ];
+return ( <div className="bg-[#f4f7f5]">
 
-  const handleQuoteRequest = (productName) => {
-    alert(`Thank you for your interest in our ${productName}! A Gotiqa Farm sales coordinator will be contacted for custom regional logistics.`);
-  };
 
-  return (
-    <div className="space-y-12 py-8 animate-fadeIn">
-      {/* Header text */}
-      <div className="text-center space-y-2">
-        <h2 className="text-3xl font-black text-[#1e3f20]">Available Goats & Livestock</h2>
-        <p className="text-sm text-gray-500 max-w-xl mx-auto">
-          Direct purchase stock from Gotiqa Farm. All animals feature transparent electronic profiles.
+  {/* HERO SECTION */}
+  <section className="max-w-6xl mx-auto px-4 py-20">
+
+    <div className="grid md:grid-cols-2 gap-12 items-center">
+
+      <div>
+
+        <p className="uppercase tracking-[0.3em] text-[#2d6a4f] font-semibold mb-4">
+          Our Products
         </p>
-      </div>
 
-      {/* Grid Layout Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {catalog.map((item) => (
-          <div key={item.id} className="bg-white rounded-2xl border border-gray-100 shadow-xs hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group">
-            {/* Top decorative theme color bar */}
-            <div className="h-2 bg-[#2d6a4f] w-full" />
-            
-            <div className="p-6 space-y-4 flex-grow">
-              <div className="flex justify-between items-start">
-                <span className="text-4xl">{item.emoji}</span>
-                <span className="bg-[#d8f3dc] text-[#1e3f20] text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
-                  {item.badge}
-                </span>
-              </div>
+        <h1 className="text-4xl md:text-5xl font-extrabold text-slate-800 mb-6">
+          Premium Goat Meat & Healthy Livestock
+        </h1>
 
-              <div>
-                <h3 className="text-xl font-bold text-slate-800 group-hover:text-[#2d6a4f] transition-colors">{item.name}</h3>
-                <div className="flex items-baseline gap-1 mt-1">
-                  <span className="text-2xl font-black text-[#1e3f20]">{item.price}</span>
-                  <span className="text-xs text-gray-400 font-medium">/ {item.unit}</span>
-                </div>
-              </div>
+        <p className="text-slate-600 text-lg leading-relaxed mb-8">
+          At Gotiqa Farm, we provide quality goat meat and carefully managed
+          livestock raised through sustainable farming practices and modern
+          farm management systems.
+        </p>
 
-              <p className="text-xs text-gray-600 leading-relaxed pt-1">
-                {item.description}
-              </p>
-            </div>
+        <div className="flex flex-wrap gap-4">
 
-            {/* Sticky Action Footer Card */}
-            <div className="p-6 pt-0 bg-slate-50 border-t border-gray-50">
-              <div className="flex items-center justify-between text-xs font-semibold pb-3">
-                <span className="text-gray-400">Market Status</span>
-                <span className="text-emerald-700 flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                  {item.status}
-                </span>
-              </div>
-              <button 
-                onClick={() => handleQuoteRequest(item.name)}
-                className="w-full bg-[#ca6702] hover:bg-[#b55d02] text-white text-xs font-bold py-2.5 px-4 rounded-xl shadow-xs transition-colors"
-              >
-                📞 Request Quote
-              </button>
-            </div>
+          <div className="bg-white px-4 py-2 rounded-full shadow-sm">
+            🐐 Healthy Livestock
           </div>
-        ))}
+
+          <div className="bg-white px-4 py-2 rounded-full shadow-sm">
+            🩺 Veterinary Managed
+          </div>
+
+          <div className="bg-white px-4 py-2 rounded-full shadow-sm">
+            🌱 Sustainable Farming
+          </div>
+
+        </div>
+
       </div>
+
+      <div className="h-[350px] bg-gray-300 rounded-3xl flex items-center justify-center">
+        <span className="text-gray-600 font-medium">
+          Future Product Image
+        </span>
+      </div>
+
     </div>
-  );
+
+  </section>
+
+  {/* FEATURED PRODUCT */}
+
+  <section className="max-w-6xl mx-auto px-4 py-12">
+
+    <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
+
+      <div className="grid md:grid-cols-2">
+
+        <div className="h-[350px] bg-gray-300 flex items-center justify-center">
+          <span className="text-gray-600 font-medium">
+            Premium Goat Meat Image
+          </span>
+        </div>
+
+        <div className="p-10 flex flex-col justify-center">
+
+          <span className="text-sm font-bold text-[#2d6a4f] uppercase tracking-wider">
+            Featured Product
+          </span>
+
+          <h2 className="text-4xl font-extrabold mt-3 mb-4">
+            🥩 Premium Goat Meat
+          </h2>
+
+          <p className="text-3xl font-black text-[#1b4332] mb-6">
+            KSh 850 / kg
+          </p>
+
+          <ul className="space-y-3 text-slate-600">
+
+            <li>✓ Fresh Supply</li>
+            <li>✓ Hygienically Processed</li>
+            <li>✓ Bulk Orders Available</li>
+            <li>✓ Restaurant Supply</li>
+            <li>✓ Consistent Quality</li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  {/* LIVESTOCK SECTION */}
+
+  <section className="max-w-6xl mx-auto px-4 py-20">
+
+    <div className="text-center mb-12">
+
+      <h2 className="text-3xl font-bold text-slate-800">
+        Available Livestock
+      </h2>
+
+      <p className="text-slate-600 mt-3">
+        Carefully raised and professionally managed livestock.
+      </p>
+
+    </div>
+
+    <div className="grid md:grid-cols-3 gap-8">
+
+      {/* Breeding Goats */}
+
+      <div className="bg-white rounded-3xl overflow-hidden shadow-md">
+
+        <div className="h-[220px] bg-gray-300 flex items-center justify-center">
+          Future Goat Image
+        </div>
+
+        <div className="p-6">
+
+          <h3 className="text-2xl font-bold mb-2">
+            🐐 Breeding Goats
+          </h3>
+
+          <p className="text-[#1b4332] text-xl font-bold mb-4">
+            KSh 18,000 - 35,000
+          </p>
+
+          <p className="text-slate-600">
+            Quality breeding stock selected for productivity,
+            health, and strong genetics.
+          </p>
+
+        </div>
+
+      </div>
+
+      {/* Mature Goats */}
+
+      <div className="bg-white rounded-3xl overflow-hidden shadow-md">
+
+        <div className="h-[220px] bg-gray-300 flex items-center justify-center">
+          Future Goat Image
+        </div>
+
+        <div className="p-6">
+
+          <h3 className="text-2xl font-bold mb-2">
+            🐐 Mature Goats
+          </h3>
+
+          <p className="text-[#1b4332] text-xl font-bold mb-4">
+            KSh 12,000 - 18,000
+          </p>
+
+          <p className="text-slate-600">
+            Healthy mature livestock suitable for farming,
+            breeding, or meat production.
+          </p>
+
+        </div>
+
+      </div>
+
+      {/* Goat Kids */}
+
+      <div className="bg-white rounded-3xl overflow-hidden shadow-md">
+
+        <div className="h-[220px] bg-gray-300 flex items-center justify-center">
+          Future Goat Image
+        </div>
+
+        <div className="p-6">
+
+          <h3 className="text-2xl font-bold mb-2">
+            🐐 Goat Kids
+          </h3>
+
+          <p className="text-[#1b4332] text-xl font-bold mb-4">
+            KSh 8,000 - 12,000
+          </p>
+
+          <p className="text-slate-600">
+            Young healthy stock raised under professional
+            care and feeding programs.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  {/* WHY CHOOSE US */}
+
+  <section className="bg-white py-20">
+
+    <div className="max-w-6xl mx-auto px-4">
+
+      <h2 className="text-3xl font-bold text-center mb-12">
+        Why Buy From Gotiqa?
+      </h2>
+
+      <div className="grid md:grid-cols-5 gap-6 text-center">
+
+        <div>🐐<p className="mt-3 font-semibold">Healthy Stock</p></div>
+
+        <div>🩺<p className="mt-3 font-semibold">Veterinary Managed</p></div>
+
+        <div>🌱<p className="mt-3 font-semibold">Sustainable Farming</p></div>
+
+        <div>📊<p className="mt-3 font-semibold">Transparent Records</p></div>
+
+        <div>🚀<p className="mt-3 font-semibold">Smart Farm Technology</p></div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  {/* CTA */}
+
+  <section className="max-w-5xl mx-auto px-4 py-20">
+
+    <div className="bg-[#1b4332] rounded-3xl p-10 text-center text-white">
+
+      <h2 className="text-4xl font-bold mb-6">
+        Ready to Order?
+      </h2>
+
+      <p className="mb-8 text-gray-200">
+        Contact us today for livestock purchases,
+        meat orders, or partnership opportunities.
+      </p>
+
+      <div className="space-y-2">
+
+        <p>📞 0111771886</p>
+
+        <p>💬 WhatsApp: 0111771886</p>
+
+        <p>📧 kirorei04@gmail.com</p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+);
 }

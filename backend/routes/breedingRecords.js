@@ -90,4 +90,18 @@ router.post("/", (req, res) => {
   });
 });
 
+
+router.delete("/:id", (req, res) => {
+  db.query(
+    "DELETE FROM breeding_records WHERE id = ?",
+    [req.params.id],
+    (err) => {
+      if (err) {
+        return res.status(500).json({ error: "Failed to delete breeding record" });
+      }
+
+      res.json({ success: true });
+    }
+  );
+});
 module.exports = router;

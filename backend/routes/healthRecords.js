@@ -82,4 +82,22 @@ router.post("/", (req, res) => {
   });
 });
 
+
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+
+  const sql = "DELETE FROM health_records WHERE id = ?";
+
+  db.query(sql, [id], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Failed to delete health record" });
+    }
+
+    res.json({
+      success: true,
+      message: "Health record deleted"
+    });
+  });
+});
 module.exports = router;

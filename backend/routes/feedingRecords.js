@@ -120,4 +120,20 @@ router.post("/", (req, res) => {
   }
 });
 
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+
+  db.query(
+    "DELETE FROM feeding_records WHERE id = ?",
+    [id],
+    (err) => {
+      if (err) {
+        return res.status(500).json({ error: "Failed to delete feeding record" });
+      }
+
+      res.json({ success: true, message: "Feeding record deleted" });
+    }
+  );
+});
+
 module.exports = router;

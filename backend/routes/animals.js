@@ -56,4 +56,18 @@ router.post("/", (req, res) => {
   );
 });
 
+
+router.delete("/:id", (req, res) => {
+  db.query(
+    "DELETE FROM animals WHERE id = ?",
+    [req.params.id],
+    (err) => {
+      if (err) {
+        return res.status(500).json({ error: "Failed to delete animal" });
+      }
+
+      res.json({ success: true, message: "Animal deleted" });
+    }
+  );
+});
 module.exports = router;

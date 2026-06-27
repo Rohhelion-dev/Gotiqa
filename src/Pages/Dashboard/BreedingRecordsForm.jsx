@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const BreedingRecordsForm = () => {
+
   const [formData, setFormData] = useState({
     animalTag: "",
     breedingDate: "",
@@ -51,102 +52,176 @@ const BreedingRecordsForm = () => {
   };
 
   return (
+
     <form
       onSubmit={handleSubmit}
-      className="p-6 bg-white rounded-lg shadow-sm border border-gray-200"
+      className="bg-white/80 backdrop-blur-xl rounded-2xl border border-slate-200 shadow-sm p-6"
     >
-      <h2 className="text-xl font-semibold mb-6">
-        Breeding Records
-      </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+      {/* HEADER */}
+      <div className="mb-6">
+        <h2 className="text-lg font-semibold text-slate-900">
+          Breeding Records
+        </h2>
+        <p className="text-sm text-slate-500 mt-1">
+          Track reproduction cycles and livestock breeding data
+        </p>
+      </div>
 
-        <input
-          name="animalTag"
-          placeholder="Animal Tag Number"
-          value={formData.animalTag}
+      {/* ROW 1 */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+
+        {/* ANIMAL TAG */}
+        <div>
+          <label className="text-xs text-slate-500 mb-1 block">
+            Animal Tag
+          </label>
+
+          <input
+            name="animalTag"
+            placeholder="Animal Tag Number"
+            value={formData.animalTag}
+            onChange={handleChange}
+            required
+            className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-emerald-500 outline-none transition"
+          />
+        </div>
+
+        {/* BREEDING DATE */}
+        <div>
+          <label className="text-xs text-slate-500 mb-1 block">
+            Breeding Date
+          </label>
+
+          <input
+            type="date"
+            name="breedingDate"
+            value={formData.breedingDate}
+            onChange={handleChange}
+            required
+            className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-emerald-500 outline-none transition"
+          />
+        </div>
+
+        {/* MATING TYPE */}
+        <div>
+          <label className="text-xs text-slate-500 mb-1 block">
+            Mating Type
+          </label>
+
+          <select
+            name="matingType"
+            value={formData.matingType}
+            onChange={handleChange}
+            className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-emerald-500 outline-none transition"
+          >
+            <option value="">Select type</option>
+            <option value="Natural">Natural</option>
+            <option value="Artificial Insemination">
+              Artificial Insemination
+            </option>
+          </select>
+        </div>
+
+      </div>
+
+      {/* ROW 2 */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+
+        {/* SIRE TAG */}
+        <div>
+          <label className="text-xs text-slate-500 mb-1 block">
+            Sire Tag
+          </label>
+
+          <input
+            name="sireTag"
+            placeholder="Sire Tag"
+            value={formData.sireTag}
+            onChange={handleChange}
+            className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-emerald-500 outline-none transition"
+          />
+        </div>
+
+        {/* EXPECTED DATE */}
+        <div>
+          <label className="text-xs text-slate-500 mb-1 block">
+            Expected Kidding Date
+          </label>
+
+          <input
+            type="date"
+            name="expectedKiddingDate"
+            value={formData.expectedKiddingDate}
+            onChange={handleChange}
+            className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-emerald-500 outline-none transition"
+          />
+        </div>
+
+        {/* OFFSPRING COUNT */}
+        <div>
+          <label className="text-xs text-slate-500 mb-1 block">
+            Offspring Count
+          </label>
+
+          <input
+            type="number"
+            name="offspringCount"
+            placeholder="Expected Count"
+            value={formData.offspringCount}
+            onChange={handleChange}
+            className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-emerald-500 outline-none transition"
+          />
+        </div>
+
+      </div>
+
+      {/* HEALTH */}
+      <div className="mb-5">
+        <label className="text-xs text-slate-500 mb-1 block">
+          Offspring Health
+        </label>
+
+        <textarea
+          name="offspringHealth"
+          placeholder="Health status..."
+          value={formData.offspringHealth}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
+          className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white h-24 focus:ring-2 focus:ring-emerald-500 outline-none transition resize-none"
         />
+      </div>
 
-        <input
-          type="date"
-          name="breedingDate"
-          value={formData.breedingDate}
+      {/* NOTES */}
+      <div className="mb-6">
+        <label className="text-xs text-slate-500 mb-1 block">
+          Notes
+        </label>
+
+        <textarea
+          name="notes"
+          placeholder="Additional notes..."
+          value={formData.notes}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
+          className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white h-24 focus:ring-2 focus:ring-emerald-500 outline-none transition resize-none"
         />
+      </div>
 
-        <select
-          name="matingType"
-          value={formData.matingType}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
+      {/* SUBMIT */}
+      <div className="flex justify-end">
+
+        <button
+          type="submit"
+          className="px-6 py-2.5 rounded-xl bg-emerald-900 text-white font-semibold hover:bg-emerald-800 hover:shadow-md transition"
         >
-          <option value="">Mating Type</option>
-          <option value="Natural">Natural</option>
-          <option value="Artificial Insemination">
-            Artificial Insemination
-          </option>
-        </select>
+          Add Breeding Record
+        </button>
 
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
-
-        <input
-          name="sireTag"
-          placeholder="Sire Tag"
-          value={formData.sireTag}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-        />
-
-        <input
-          type="date"
-          name="expectedKiddingDate"
-          value={formData.expectedKiddingDate}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-        />
-
-        <input
-          type="number"
-          name="offspringCount"
-          placeholder="Expected Offspring Count"
-          value={formData.offspringCount}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-        />
-
-      </div>
-
-      <textarea
-        name="offspringHealth"
-        placeholder="Offspring Health"
-        value={formData.offspringHealth}
-        onChange={handleChange}
-        className="w-full p-2 border rounded h-24 mb-4"
-      />
-
-      <textarea
-        name="notes"
-        placeholder="Notes"
-        value={formData.notes}
-        onChange={handleChange}
-        className="w-full p-2 border rounded h-24 mb-6"
-      />
-
-      <button
-        type="submit"
-        className="px-6 py-2 bg-indigo-700 text-white rounded hover:bg-indigo-800"
-      >
-        Add Breeding Record
-      </button>
     </form>
+
   );
+
 };
 
 export default BreedingRecordsForm;

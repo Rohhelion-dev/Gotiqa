@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-
 import Home from './pages/Website/Home';
 import About from './pages/Website/About';
 import Products from './pages/Website/Products';
 import Contact from './pages/Website/Contact';
-
 import AuthContainer from './pages/Auth/AuthContainer';
 
 import Operations from './pages/Dashboard/Operations';
@@ -21,190 +20,226 @@ import BreedingRecordsForm from './pages/Dashboard/BreedingRecordsForm';
 import ProductionRecordsForm from './pages/Dashboard/ProductionRecordsForm';
 import ActivityLogsForm from './pages/Dashboard/ActivityLogsForm';
 
+import WhatsAppButton from "./components/WhatsAppButton";
+
 export default function App() {
 
-const [currentView, setCurrentView] = useState('home');
-const [user, setUser] = useState(null);
+  const [currentView, setCurrentView] = useState('home');
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+  const [dashboardTab, setDashboardTab] = useState('overview');
+  const [refreshAlerts] = useState(0);
 
-const [dashboardTab, setDashboardTab] =
-useState('overview');
+  const container = "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
+  const card = "bg-white/80 backdrop-blur rounded-2xl border border-slate-200 shadow-sm";
 
-return (
+  // ================= RESTORE SESSION =================
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    const savedToken = localStorage.getItem("token");
 
+    if (savedUser) {
+      try {
+        setUser(JSON.parse(savedUser));
+      } catch (err) {
+        console.error("Failed to parse user");
+        localStorage.removeItem("user");
+      }
+    }
 
-<div className="min-h-screen bg-[#f4f7f5] text-slate-800 flex flex-col font-sans">
+    if (savedToken) {
+      setToken(savedToken);
+    }
+  }, []);
 
-  <Navbar
-    currentView={currentView}
-    setCurrentView={setCurrentView}
-  />
+  // ================= SET AUTH HEADER =================
+  useEffect(() => {
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
+  }, [token]);
 
-  <main className="flex-grow container mx-auto px-4 py-8 max-w-6xl">
+  return (
 
-    {currentView === 'home' && (
-      <Home setCurrentView={setCurrentView} />
-    )}
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100 text-slate-800 flex flex-col font-sans">
 
-    {currentView === 'about' && (
-      <About />
-    )}
+      <Navbar currentView={currentView} setCurrentView={setCurrentView} />
 
-    {currentView === 'products' && (
-      <Products />
-    )}
+      <main className="flex-grow">
 
-    {currentView === 'contact' && (
-      <Contact />
-    )}
+        {/* ================= WEBSITE ================= */}
+        {currentView !== 'dashboard' && (
 
-    {currentView === 'auth' && (
-      <AuthContainer
-        setUser={setUser}
-        onSuccess={() => setCurrentView('dashboard')}
-      />
-    )}
+          <div className={`${container} py-10 space-y-10`}>
 
-    {currentView === 'dashboard' && user ? (
+            {currentView === 'home' && <Home setCurrentView={setCurrentView} />}
 
-      <div className="space-y-8">
+            {currentView === 'about' && (
+              <div className={`${card} p-8`}>
+                <About />
+              </div>
+            )}
 
-        <Operations />
+            {currentView === 'products' && (
+              <div className={`${card} p-8`}>
+                <Products />
+              </div>
+            )}
 
-        <HealthAlerts />
+            {currentView === 'contact' && (
+              <div className={`${card} p-8`}>
+                <Contact />
+              </div>
+            )}
 
-        {user.role === 'admin' && (
+            {currentView === 'auth' && (
+              <div className={`${card} p-8 max-w-2xl mx-auto`}>
+                <AuthContainer
+                  setUser={setUser}
+                  setToken={setToken}
+                  onSuccess={() => setCurrentView('dashboard')}
+                />
+              </div>
+            )}
 
-          <>
+          </div>
+        )}
 
-            <div className="bg-white rounded-xl shadow-sm border p-4">
+        {/* ================= DASHBOARD ================= */}
+        {currentView === 'dashboard' && user && (
 
-              <h2 className="text-2xl font-bold mb-4">
-                Gotiqa Admin Control Center
-              </h2>
+          <div className="min-h-screen flex bg-slate-50">
 
-              <div className="flex flex-wrap gap-3">
+            {/* SIDEBAR */}
+            <aside className="w-64 bg-white/90 backdrop-blur border-r hidden md:flex flex-col">
+
+              <div className="p-6 border-b">
+                <h1 className="text-xl font-bold text-emerald-900">
+                  Gotiqa Admin
+                </h1>
+                <p className="text-xs text-slate-500 mt-1">
+                  Smart Farm System
+                </p>
+              </div>
+
+              <nav className="flex flex-col gap-1 p-4 text-sm">
+
+                {[
+                  'overview',
+                  'animals',
+                  'health',
+                  'feeding',
+                  'breeding',
+                  'production',
+                  'activity'
+                ].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setDashboardTab(tab)}
+                    className={`text-left px-3 py-2 rounded-xl transition capitalize ${
+                      dashboardTab === tab
+                        ? "bg-emerald-900 text-white shadow-sm"
+                        : "hover:bg-slate-100 text-slate-700"
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
 
                 <button
-                  onClick={() => setDashboardTab('overview')}
-                  className="px-4 py-2 rounded-lg bg-green-700 text-white"
+                  onClick={() => setCurrentView('home')}
+                  className="mt-6 text-left px-3 py-2 rounded-xl text-red-600 hover:bg-red-50"
                 >
-                  Overview
+                  Exit Dashboard
                 </button>
 
-                <button
-                  onClick={() => setDashboardTab('animals')}
-                  className="px-4 py-2 rounded-lg bg-slate-200"
-                >
-                  Animals
-                </button>
+              </nav>
+            </aside>
 
-                <button
-                  onClick={() => setDashboardTab('health')}
-                  className="px-4 py-2 rounded-lg bg-slate-200"
-                >
-                  Health
-                </button>
+            {/* MAIN DASHBOARD */}
+            <main className="flex-1 p-6 md:p-8 space-y-6 overflow-y-auto">
 
-                <button
-                  onClick={() => setDashboardTab('feeding')}
-                  className="px-4 py-2 rounded-lg bg-slate-200"
-                >
-                  Feeding
-                </button>
+              <div className={`${card} p-8`}>
+                <h2 className="text-3xl font-bold text-slate-900">
+                  Farm Control Center
+                </h2>
+                <p className="text-slate-500 mt-1">
+                  Manage livestock operations in real time
+                </p>
+              </div>
 
-                <button
-                  onClick={() => setDashboardTab('breeding')}
-                  className="px-4 py-2 rounded-lg bg-slate-200"
-                >
-                  Breeding
-                </button>
+              {/* FIXED LAYOUT: balanced grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-                <button
-                  onClick={() => setDashboardTab('production')}
-                  className="px-4 py-2 rounded-lg bg-slate-200"
-                >
-                  Production
-                </button>
+                <div className={`${card} p-6`}>
+                  <Operations />
+                </div>
 
-                <button
-                  onClick={() => setDashboardTab('activity')}
-                  className="px-4 py-2 rounded-lg bg-slate-200"
-                >
-                  Activity
-                </button>
+                <div className={`${card} p-6`}>
+                  <HealthAlerts refresh={refreshAlerts} />
+                </div>
 
               </div>
 
-            </div>
+              {user.role === 'admin' && (
 
-            {dashboardTab === 'overview' && (
-              <DashboardHome />
-            )}
+                <div className="space-y-6">
 
-            {dashboardTab === 'animals' && (
-              <AnimalManagementForm />
-            )}
+                  <div className={`${card} p-6`}>
+                    <h3 className="text-lg font-semibold capitalize text-slate-900">
+                      {dashboardTab}
+                    </h3>
+                  </div>
 
-            {dashboardTab === 'health' && (
-              <HealthRecordsForm />
-            )}
+                  <div className="space-y-6">
 
-            {dashboardTab === 'feeding' && (
-              <FeedingRecordsForm />
-            )}
+                    {dashboardTab === 'overview' && <DashboardHome />}
+                    {dashboardTab === 'animals' && <AnimalManagementForm />}
+                    {dashboardTab === 'health' && <HealthRecordsForm />}
+                    {dashboardTab === 'feeding' && <FeedingRecordsForm />}
+                    {dashboardTab === 'breeding' && <BreedingRecordsForm />}
+                    {dashboardTab === 'production' && <ProductionRecordsForm />}
+                    {dashboardTab === 'activity' && <ActivityLogsForm />}
 
-            {dashboardTab === 'breeding' && (
-              <BreedingRecordsForm />
-            )}
+                  </div>
 
-            {dashboardTab === 'production' && (
-              <ProductionRecordsForm />
-            )}
+                </div>
 
-            {dashboardTab === 'activity' && (
-              <ActivityLogsForm />
-            )}
+              )}
 
-          </>
+            </main>
+
+          </div>
 
         )}
 
-      </div>
+        {/* ACCESS DENIED */}
+        {currentView === 'dashboard' && !user && (
+          <div className={`${card} text-center py-16 max-w-xl mx-auto mt-16 p-8`}>
 
-    ) : (
+            <h2 className="text-2xl font-bold mb-4">
+              Access Restricted
+            </h2>
 
-      currentView === 'dashboard' && (
+            <p className="text-slate-600 mb-6">
+              Please log in to continue.
+            </p>
 
-        <div className="text-center py-20">
+            <button
+              onClick={() => setCurrentView('auth')}
+              className="bg-emerald-900 text-white px-6 py-2 rounded-xl font-semibold hover:bg-emerald-800 transition"
+            >
+              Go to Login
+            </button>
 
-          <h2 className="text-2xl font-bold mb-4">
-            Access Restricted
-          </h2>
+          </div>
+        )}
 
-          <p className="text-slate-600 mb-6">
-            Please log in to continue.
-          </p>
+      </main>
 
-          <button
-            onClick={() => setCurrentView('auth')}
-            className="bg-[#1b4332] text-white px-6 py-2 rounded-lg font-bold hover:bg-[#153426] transition"
-          >
-            Go to Login
-          </button>
+      <WhatsAppButton />
+      <Footer />
 
-        </div>
-
-      )
-
-    )}
-
-  </main>
-
-  <Footer />
-
-</div>
-
-
-);
-
+    </div>
+  );
 }

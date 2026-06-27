@@ -1,42 +1,148 @@
-import React from 'react';
+import React from "react";
 
 export default function About() {
-  return (
-    <div className="max-w-4xl mx-auto py-8 md:py-16 space-y-12 animate-fadeIn">
-      {/* Intro Header */}
-      <div className="text-center space-y-3">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-[#1e3f20]">Our Sustainable Vision</h2>
-        <div className="w-16 h-1 bg-[#74c69d] mx-auto rounded-full" />
-        <p className="text-gray-500 max-w-xl mx-auto text-sm">Building an environmentally adaptive agricultural model for modern smart farm operators.</p>
+return ( <div className="bg-[#f4f7f5]">
+
+
+  {/* HERO */}
+  <section className="max-w-6xl mx-auto px-4 py-20 text-center">
+
+    <p className="uppercase tracking-[0.3em] text-[#2d6a4f] font-semibold mb-4">
+      About Gotiqa
+    </p>
+
+    <h1 className="text-4xl md:text-5xl font-extrabold text-slate-800 mb-6">
+      Building a Smarter Future for Livestock Farming
+    </h1>
+
+    <p className="max-w-3xl mx-auto text-slate-600 text-lg leading-relaxed">
+      Gotiqa was founded with a simple vision:
+      to combine modern technology with responsible livestock farming
+      in order to create healthier animals, more efficient operations,
+      and sustainable agricultural growth.
+    </p>
+
+  </section>
+
+  {/* STORY SECTION */}
+  <section className="max-w-6xl mx-auto px-4 py-16">
+
+    <div className="grid md:grid-cols-2 gap-12 items-center">
+
+      <div className="h-[400px] rounded-3xl bg-gray-300 flex items-center justify-center">
+        <span className="text-gray-600 font-medium">
+          Future Farm Image
+        </span>
       </div>
 
-      {/* Grid Content Blocks */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
-        <div className="bg-white p-8 rounded-2xl border border-gray-100 space-y-3 shadow-xs">
-          <h3 className="text-xl font-bold text-[#2d6a4f] flex items-center gap-2">
-            <span>🌿</span> Ecological Stewardship
-          </h3>
-          <p className="text-gray-600 text-sm leading-relaxed">
-            At GotiqaSmartFarm, we think goat husbandry should enrich the land, not deplete it. Our digital management platform helps minimize overgrazing cycles by providing accurate feeding reports and optimizing resources based on ambient local climates.
-          </p>
-        </div>
+      <div>
 
-        <div className="bg-white p-8 rounded-2xl border border-gray-100 space-y-3 shadow-xs">
-          <h3 className="text-xl font-bold text-[#2d6a4f] flex items-center gap-2">
-            <span>📊</span> The Tech-Agritech Intersection
-          </h3>
-          <p className="text-gray-600 text-sm leading-relaxed">
-            By keeping accurate data files, updating livestock metrics, logging immediate medical care schedules, and managing transparent market prices, we create an accessible data grid for farming staff and retail buyers alike.
-          </p>
-        </div>
-      </div>
+        <h2 className="text-3xl font-bold text-slate-800 mb-6">
+          Our Journey
+        </h2>
 
-      {/* Quick Summary Banner */}
-      <div className="bg-gradient-to-br from-[#2d6a4f] to-[#1e3f20] text-white p-8 rounded-2xl text-center shadow-xs">
-        <p className="text-lg font-medium max-w-2xl mx-auto italic opacity-95">
-          "Our system gives smallholders and industrial ecological farms the real-time insights required to run optimized, high-yield operations while respecting natural resources."
+        <p className="text-slate-600 leading-relaxed mb-5">
+          What began as an idea to improve livestock management has grown
+          into a platform dedicated to supporting modern farming practices.
+          Gotiqa focuses on accurate record keeping, animal health,
+          breeding management, feeding programs, and sustainable farm growth.
         </p>
+
+        <p className="text-slate-600 leading-relaxed">
+          We believe technology should help farmers make better decisions,
+          improve productivity, and create long-term value without losing
+          sight of animal welfare and environmental responsibility.
+        </p>
+
       </div>
+
     </div>
-  );
+
+  </section>
+
+  {/* VALUES */}
+  <section className="bg-white py-20">
+
+    <div className="max-w-6xl mx-auto px-4">
+
+      <div className="text-center mb-14">
+
+        <h2 className="text-3xl font-bold text-slate-800">
+          What Drives Us
+        </h2>
+
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-8">
+
+        <div className="bg-[#f8faf8] p-8 rounded-2xl">
+          <div className="text-4xl mb-4">🐐</div>
+
+          <h3 className="font-bold text-xl mb-3">
+            Animal Welfare
+          </h3>
+
+          <p className="text-slate-600">
+            Healthy animals are the foundation of every successful farm.
+          </p>
+        </div>
+
+        <div className="bg-[#f8faf8] p-8 rounded-2xl">
+          <div className="text-4xl mb-4">🌱</div>
+
+          <h3 className="font-bold text-xl mb-3">
+            Sustainability
+          </h3>
+
+          <p className="text-slate-600">
+            Farming practices that support productivity while protecting future generations.
+          </p>
+        </div>
+
+        <div className="bg-[#f8faf8] p-8 rounded-2xl">
+          <div className="text-4xl mb-4">📈</div>
+
+          <h3 className="font-bold text-xl mb-3">
+            Innovation
+          </h3>
+
+          <p className="text-slate-600">
+            Using technology to improve decision-making and farm performance.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  {/* FOUNDER MESSAGE */}
+  <section className="max-w-5xl mx-auto px-4 py-20">
+
+    <div className="bg-[#1b4332] rounded-3xl p-10 text-white text-center">
+
+      <h2 className="text-3xl font-bold mb-6">
+        A Message From The Founder
+      </h2>
+
+      <p className="max-w-3xl mx-auto leading-relaxed text-gray-200">
+        Gotiqa was created with the belief that modern farming can be both
+        profitable and sustainable. Our mission is to help livestock
+        farmers embrace better management practices while building stronger,
+        healthier, and more productive farms.
+      </p>
+
+      <p className="mt-6 font-semibold">
+        Brian, Founder of Gotiqa
+      </p>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+);
 }

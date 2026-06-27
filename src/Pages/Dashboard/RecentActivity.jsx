@@ -3,75 +3,88 @@ import axios from "axios";
 
 export default function RecentActivity() {
 
-const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useState([]);
 
-useEffect(() => {
+  useEffect(() => {
 
+    axios
+      .get("http://localhost:5000/dashboard/recent-activity")
+      .then((response) => {
+        setActivities(response.data);
+      })
+      .catch((error) => {
+        console.error("Failed to load activity feed", error);
+      });
 
-axios
-  .get("http://localhost:5000/dashboard/recent-activity")
-  .then((response) => {
-    setActivities(response.data);
-  })
-  .catch((error) => {
-    console.error(
-      "Failed to load activity feed",
-      error
-    );
-  });
+  }, []);
 
+  return (
 
-}, []);
+    <div className="bg-white/80 backdrop-blur-xl rounded-2xl border border-slate-200 shadow-sm p-6">
 
-return (
+      {/* HEADER */}
+      <div className="flex items-center justify-between mb-6">
 
+        <h2 className="text-lg font-semibold text-slate-900">
+          Recent Activity Feed
+        </h2>
 
-<div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <span className="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded-full">
+          Live
+        </span>
 
-  <h2 className="text-xl font-bold mb-4">
-    Recent Activity Feed
-  </h2>
+      </div>
 
-  {activities.length === 0 ? (
+      {/* EMPTY STATE */}
+      {activities.length === 0 ? (
 
-    <p className="text-gray-500">
-      No activities found.
-    </p>
+        <div className="text-center py-10">
 
-  ) : (
-
-    <div className="space-y-4">
-
-      {activities.map((activity) => (
-
-        <div
-          key={activity.id}
-          className="border-l-4 border-green-600 pl-4 py-2"
-        >
-
-          <h3 className="font-semibold text-slate-800">
-            {activity.activity_type}
-          </h3>
-
-          <p className="text-sm text-gray-600">
-            {activity.description}
-          </p>
-
-          <p className="text-xs text-gray-400 mt-1">
-            {activity.activity_date}
+          <p className="text-slate-500 text-sm">
+            No activities found.
           </p>
 
         </div>
 
-      ))}
+      ) : (
+
+        <div className="space-y-5">
+
+          {activities.map((activity) => (
+
+            <div
+              key={activity.id}
+              className="group relative pl-5 py-3 border-l-2 border-emerald-200 hover:border-emerald-500 transition"
+            >
+
+              {/* subtle glow dot */}
+              <div className="absolute -left-[6px] top-5 w-3 h-3 rounded-full bg-emerald-500 shadow-sm group-hover:scale-110 transition" />
+
+              {/* TITLE */}
+              <h3 className="font-semibold text-slate-800 group-hover:text-emerald-900 transition">
+                {activity.activity_type}
+              </h3>
+
+              {/* DESCRIPTION */}
+              <p className="text-sm text-slate-600 mt-1 leading-relaxed">
+                {activity.description}
+              </p>
+
+              {/* DATE */}
+              <p className="text-xs text-slate-400 mt-2">
+                {activity.activity_date}
+              </p>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      )}
 
     </div>
 
-  )}
-
-</div>
-
-
-);
+  );
 
 }

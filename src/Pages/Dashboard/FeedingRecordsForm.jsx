@@ -47,17 +47,25 @@ const FeedingRecordsForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-6 bg-white rounded-lg shadow-sm border border-gray-200"
+      className="bg-white/80 backdrop-blur-xl border border-slate-200 rounded-3xl shadow-sm p-8"
     >
-      <h2 className="text-xl font-semibold mb-6">
-        Feeding Records
-      </h2>
+
+      {/* Header */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold text-slate-900">
+          Feeding Records
+        </h2>
+
+        <p className="text-slate-500 mt-1">
+          Record livestock feeding schedules and nutrition details.
+        </p>
+      </div>
 
       {/* Row 1 */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
 
         <div>
-          <label className="block text-sm font-medium">
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
             Animal Tag Number *
           </label>
 
@@ -67,13 +75,13 @@ const FeedingRecordsForm = () => {
             required
             value={formData.animal}
             onChange={handleChange}
-            className="w-full p-2 border rounded mt-1"
-            placeholder="e.g An 34"
+            placeholder="e.g. AN-034"
+            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 transition"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium">
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
             Feed Type *
           </label>
 
@@ -83,13 +91,13 @@ const FeedingRecordsForm = () => {
             required
             value={formData.feedType}
             onChange={handleChange}
-            className="w-full p-2 border rounded mt-1"
-            placeholder="e.g Hay"
+            placeholder="e.g. Hay"
+            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 transition"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium">
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
             Quantity (kg) *
           </label>
 
@@ -100,17 +108,18 @@ const FeedingRecordsForm = () => {
             required
             value={formData.quantity}
             onChange={handleChange}
-            className="w-full p-2 border rounded mt-1"
-            placeholder="e.g 2.50"
+            placeholder="e.g. 2.50"
+            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 transition"
           />
         </div>
 
       </div>
 
       {/* Row 2 */}
-      <div className="mb-4">
 
-        <label className="block text-sm font-medium">
+      <div className="mb-6">
+
+        <label className="block text-sm font-semibold text-slate-700 mb-2">
           Feeding Date & Time *
         </label>
 
@@ -120,15 +129,16 @@ const FeedingRecordsForm = () => {
           required
           value={formData.feedingDate}
           onChange={handleChange}
-          className="w-full p-2 border rounded mt-1"
+          className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 transition"
         />
 
       </div>
 
       {/* Notes */}
-      <div className="mb-6">
 
-        <label className="block text-sm font-medium">
+      <div className="mb-8">
+
+        <label className="block text-sm font-semibold text-slate-700 mb-2">
           Notes
         </label>
 
@@ -136,18 +146,26 @@ const FeedingRecordsForm = () => {
           name="notes"
           value={formData.notes}
           onChange={handleChange}
-          className="w-full p-2 border rounded mt-1 h-24"
           placeholder="Additional feeding notes..."
+          rows="5"
+          className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 transition"
         />
 
       </div>
 
-      <button
-        type="submit"
-        className="px-6 py-2 bg-indigo-700 text-white rounded hover:bg-indigo-800 transition-colors"
-      >
-        Add Feeding Record
-      </button>
+      {/* Footer */}
+
+      <div className="flex justify-end">
+
+        <button
+          type="submit"
+          className="inline-flex items-center rounded-xl bg-emerald-900 px-8 py-3 font-semibold text-white shadow-sm hover:bg-emerald-800 hover:shadow-md transition-all duration-200"
+        >
+          Save Feeding Record
+        </button>
+
+      </div>
+
     </form>
   );
 };
