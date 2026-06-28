@@ -14,11 +14,19 @@ export default function Home({ setCurrentView }) {
       {/* HERO */}
       <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
 
-        {/* Premium layered background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-950 via-emerald-900 to-slate-900" />
-        <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14),transparent_60%)]" />
-        <div className="absolute inset-0 backdrop-blur-[2px]" />
+      {/* Hero Background Image */}
+<div
+  className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+  style={{
+    backgroundImage: "url('/images/branding/hero.jpg')",
+  }}
+/>
 
+{/* Dark Overlay */}
+<div className="absolute inset-0 bg-black/60" />
+
+{/* Premium Glow */}
+<div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_60%)]" />
         <motion.div
           initial={{ opacity: 0, y: 35 }}
           animate={{ opacity: 1, y: 0 }}
