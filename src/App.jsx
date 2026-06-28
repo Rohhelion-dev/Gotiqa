@@ -23,7 +23,6 @@ import ActivityLogsForm from './pages/Dashboard/ActivityLogsForm';
 import WhatsAppButton from "./components/WhatsAppButton";
 
 export default function App() {
-
   const [currentView, setCurrentView] = useState('home');
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
@@ -33,7 +32,6 @@ export default function App() {
   const container = "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
   const card = "bg-white/80 backdrop-blur rounded-2xl border border-slate-200 shadow-sm";
 
-  // ================= RESTORE SESSION =================
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
     const savedToken = localStorage.getItem("token");
@@ -41,8 +39,7 @@ export default function App() {
     if (savedUser) {
       try {
         setUser(JSON.parse(savedUser));
-      } catch (err) {
-        console.error("Failed to parse user");
+      } catch {
         localStorage.removeItem("user");
       }
     }
@@ -52,52 +49,59 @@ export default function App() {
     }
   }, []);
 
-  // ================= SET AUTH HEADER =================
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
   }, [token]);
 
-  return (
+  const logout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
 
+    setUser(null);
+    setToken(null);
+    setCurrentView("home");
+  };
+
+  return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100 text-slate-800 flex flex-col font-sans">
 
       <Navbar currentView={currentView} setCurrentView={setCurrentView} />
 
       <main className="flex-grow">
 
-        {/* ================= WEBSITE ================= */}
-        {currentView !== 'dashboard' && (
-
+        {currentView !== "dashboard" && (
           <div className={`${container} py-10 space-y-10`}>
 
-            {currentView === 'home' && <Home setCurrentView={setCurrentView} />}
+            {currentView === "home" && (
+              <Home setCurrentView={setCurrentView} />
+            )}
 
-            {currentView === 'about' && (
+            {currentView === "about" && (
               <div className={`${card} p-8`}>
                 <About />
               </div>
             )}
 
-            {currentView === 'products' && (
+            {currentView === "products" && (
               <div className={`${card} p-8`}>
                 <Products />
               </div>
             )}
 
-            {currentView === 'contact' && (
+            {currentView === "contact" && (
               <div className={`${card} p-8`}>
                 <Contact />
               </div>
             )}
 
-            {currentView === 'auth' && (
+            {currentView === "auth" && (
               <div className={`${card} p-8 max-w-2xl mx-auto`}>
                 <AuthContainer
                   setUser={setUser}
                   setToken={setToken}
-                  onSuccess={() => setCurrentView('dashboard')}
+                  onSuccess={() => setCurrentView("dashboard")}
                 />
               </div>
             )}
@@ -105,18 +109,17 @@ export default function App() {
           </div>
         )}
 
-        {/* ================= DASHBOARD ================= */}
-        {currentView === 'dashboard' && user && (
+        {currentView === "dashboard" && user && (
 
           <div className="min-h-screen flex bg-slate-50">
 
-            {/* SIDEBAR */}
             <aside className="w-64 bg-white/90 backdrop-blur border-r hidden md:flex flex-col">
 
               <div className="p-6 border-b">
                 <h1 className="text-xl font-bold text-emerald-900">
                   Gotiqa Admin
                 </h1>
+
                 <p className="text-xs text-slate-500 mt-1">
                   Smart Farm System
                 </p>
@@ -125,21 +128,21 @@ export default function App() {
               <nav className="flex flex-col gap-1 p-4 text-sm">
 
                 {[
-                  'overview',
-                  'animals',
-                  'health',
-                  'feeding',
-                  'breeding',
-                  'production',
-                  'activity'
+                  "overview",
+                  "animals",
+                  "health",
+                  "feeding",
+                  "breeding",
+                  "production",
+                  "activity",
                 ].map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setDashboardTab(tab)}
                     className={`text-left px-3 py-2 rounded-xl transition capitalize ${
                       dashboardTab === tab
-                        ? "bg-emerald-900 text-white shadow-sm"
-                        : "hover:bg-slate-100 text-slate-700"
+                        ? "bg-emerald-900 text-white"
+                        : "hover:bg-slate-100"
                     }`}
                   >
                     {tab}
@@ -147,28 +150,28 @@ export default function App() {
                 ))}
 
                 <button
-                  onClick={() => setCurrentView('home')}
+                  onClick={logout}
                   className="mt-6 text-left px-3 py-2 rounded-xl text-red-600 hover:bg-red-50"
                 >
-                  Exit Dashboard
+                  Logout
                 </button>
 
               </nav>
+
             </aside>
 
-            {/* MAIN DASHBOARD */}
             <main className="flex-1 p-6 md:p-8 space-y-6 overflow-y-auto">
 
               <div className={`${card} p-8`}>
                 <h2 className="text-3xl font-bold text-slate-900">
                   Farm Control Center
                 </h2>
+
                 <p className="text-slate-500 mt-1">
                   Manage livestock operations in real time
                 </p>
               </div>
 
-              {/* FIXED LAYOUT: balanced grid */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
                 <div className={`${card} p-6`}>
@@ -181,42 +184,70 @@ export default function App() {
 
               </div>
 
-              {user.role === 'admin' && (
+              <div className={`${card} p-6`}>
+                <h3 className="text-lg font-semibold capitalize">
+                  {dashboardTab}
+                </h3>
 
-                <div className="space-y-6">
+                <p className="text-sm text-slate-500 mt-1">
+                  Logged in as: {user.role}
+                </p>
+              </div>
 
-                  <div className={`${card} p-6`}>
-                    <h3 className="text-lg font-semibold capitalize text-slate-900">
-                      {dashboardTab}
-                    </h3>
+              {dashboardTab === "overview" && <DashboardHome />}
+
+              {user.role === "admin" && (
+                <>
+                  {dashboardTab === "animals" && <AnimalManagementForm />}
+                  {dashboardTab === "health" && <HealthRecordsForm />}
+                  {dashboardTab === "feeding" && <FeedingRecordsForm />}
+                  {dashboardTab === "breeding" && <BreedingRecordsForm />}
+                  {dashboardTab === "production" && <ProductionRecordsForm />}
+                  {dashboardTab === "activity" && <ActivityLogsForm />}
+                </>
+              )}
+
+              {user.role === "farmer" && (
+                <div className={`${card} p-8`}>
+                  <h2 className="text-2xl font-bold text-emerald-900 mb-3">
+                    Welcome Farmer 👨‍🌾
+                  </h2>
+
+                  <p className="text-slate-600 mb-6">
+                    Your account has been successfully created and you are now logged in.
+                  </p>
+
+                  <div className="grid md:grid-cols-3 gap-4">
+
+                    <div className="bg-emerald-50 border border-emerald-100 p-5 rounded-xl">
+                      <h3 className="font-semibold text-emerald-900">
+                        Herd Records
+                      </h3>
+                    </div>
+
+                    <div className="bg-blue-50 border border-blue-100 p-5 rounded-xl">
+                      <h3 className="font-semibold text-blue-900">
+                        Health Reports
+                      </h3>
+                    </div>
+
+                    <div className="bg-amber-50 border border-amber-100 p-5 rounded-xl">
+                      <h3 className="font-semibold text-amber-900">
+                        Production Records
+                      </h3>
+                    </div>
+
                   </div>
-
-                  <div className="space-y-6">
-
-                    {dashboardTab === 'overview' && <DashboardHome />}
-                    {dashboardTab === 'animals' && <AnimalManagementForm />}
-                    {dashboardTab === 'health' && <HealthRecordsForm />}
-                    {dashboardTab === 'feeding' && <FeedingRecordsForm />}
-                    {dashboardTab === 'breeding' && <BreedingRecordsForm />}
-                    {dashboardTab === 'production' && <ProductionRecordsForm />}
-                    {dashboardTab === 'activity' && <ActivityLogsForm />}
-
-                  </div>
-
                 </div>
-
               )}
 
             </main>
 
           </div>
-
         )}
 
-        {/* ACCESS DENIED */}
-        {currentView === 'dashboard' && !user && (
+        {currentView === "dashboard" && !user && (
           <div className={`${card} text-center py-16 max-w-xl mx-auto mt-16 p-8`}>
-
             <h2 className="text-2xl font-bold mb-4">
               Access Restricted
             </h2>
@@ -226,12 +257,11 @@ export default function App() {
             </p>
 
             <button
-              onClick={() => setCurrentView('auth')}
-              className="bg-emerald-900 text-white px-6 py-2 rounded-xl font-semibold hover:bg-emerald-800 transition"
+              onClick={() => setCurrentView("auth")}
+              className="bg-emerald-900 text-white px-6 py-2 rounded-xl"
             >
               Go to Login
             </button>
-
           </div>
         )}
 
