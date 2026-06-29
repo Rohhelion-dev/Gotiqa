@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db");
+const { authenticateToken, requireRole } = require("../middleware/authMiddleware");
 
-router.post("/", (req, res) => {
-
+router.post("/", authenticateToken, requireRole("admin"), (req, res) => {
   const {
     animal,
     productionType,
@@ -15,7 +15,6 @@ router.post("/", (req, res) => {
     "SELECT id FROM animals WHERE TRIM(tag_number) = TRIM(?)";
 
   db.query(findAnimalSql, [animal], (err, animalResult) => {
-
     if (err) {
       return res.status(500).json(err);
     }
@@ -49,7 +48,6 @@ router.post("/", (req, res) => {
         notes
       ],
       (err, result) => {
-
         if (err) {
           return res.status(500).json(err);
         }
@@ -63,8 +61,7 @@ router.post("/", (req, res) => {
   });
 });
 
-
-router.delete("/:id", (req, res) => {
+router.delete("/:id", authenticateToken, requireRole("admin"), (req, res) => {
   db.query(
     "DELETE FROM production_records WHERE id = ?",
     [req.params.id],
@@ -77,4 +74,5 @@ router.delete("/:id", (req, res) => {
     }
   );
 });
+
 module.exports = router;

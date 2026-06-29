@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db");
+const { authenticateToken, requireRole } = require("../middleware/authMiddleware");
 
-router.post("/", (req, res) => {
-
+router.post("/", authenticateToken, requireRole("admin"), (req, res) => {
   const {
     action,
     type,
@@ -27,7 +27,6 @@ router.post("/", (req, res) => {
       `${action} - ${details}`
     ],
     (err, result) => {
-
       if (err) {
         return res.status(500).json(err);
       }

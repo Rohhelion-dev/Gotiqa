@@ -1,1 +1,210 @@
 @import "tailwindcss";
+
+/* ===================================
+   GOTIQA AGRICULTURAL DESIGN SYSTEM
+=================================== */
+
+:root {
+  --farm-soil: #3b2f25;
+  --farm-earth: #6b4f34;
+  --farm-green: #2d6a4f;
+  --farm-green-dark: #1b4332;
+  --farm-green-soft: #d8f3dc;
+  --farm-leaf: #74c69d;
+  --farm-gold: #d9a441;
+  --farm-cream: #fffaf0;
+  --farm-mist: #f4f7f2;
+  --farm-slate: #334155;
+}
+
+/* ===================================
+   GLOBAL BASE
+=================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(116, 198, 157, 0.18), transparent 32rem),
+    linear-gradient(180deg, #f7faf5 0%, #fffaf0 48%, #f4f7f2 100%);
+  color: var(--farm-slate);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image:
+    linear-gradient(45deg, #1b4332 25%, transparent 25%),
+    linear-gradient(-45deg, #1b4332 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #1b4332 75%),
+    linear-gradient(-45deg, transparent 75%, #1b4332 75%);
+  background-size: 24px 24px;
+  background-position: 0 0, 0 12px, 12px -12px, -12px 0;
+  z-index: -1;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ===================================
+   TYPOGRAPHY
+=================================== */
+
+h1,
+h2,
+h3 {
+  color: #163527;
+  letter-spacing: 0;
+}
+
+p {
+  color: #475569;
+}
+
+::selection {
+  background: var(--farm-leaf);
+  color: #0f241b;
+}
+
+/* ===================================
+   SHARED UI FEEL
+=================================== */
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font-family: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(45, 106, 79, 0.28);
+  outline-offset: 3px;
+}
+
+/* Better default card feel */
+.card,
+.farm-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 250, 240, 0.88));
+  border: 1px solid rgba(45, 106, 79, 0.14);
+  border-radius: 1rem;
+  box-shadow:
+    0 1px 2px rgba(27, 67, 50, 0.06),
+    0 16px 36px rgba(59, 47, 37, 0.08);
+}
+
+/* Agricultural section background */
+.farm-section {
+  background:
+    linear-gradient(135deg, rgba(216, 243, 220, 0.55), rgba(255, 250, 240, 0.9)),
+    radial-gradient(circle at bottom right, rgba(217, 164, 65, 0.16), transparent 24rem);
+}
+
+/* Primary button utility */
+.farm-button-primary {
+  background: linear-gradient(135deg, #1b4332, #2d6a4f);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 22px rgba(27, 67, 50, 0.22);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.farm-button-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(27, 67, 50, 0.26);
+}
+
+/* Secondary button utility */
+.farm-button-secondary {
+  background: rgba(255, 250, 240, 0.82);
+  color: #1b4332;
+  border: 1px solid rgba(45, 106, 79, 0.22);
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.farm-button-secondary:hover {
+  background: #d8f3dc;
+  transform: translateY(-1px);
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  background-color: rgba(255, 255, 255, 0.92);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--farm-green);
+}
+
+/* ===================================
+   MOBILE REFINEMENT
+=================================== */
+
+@media (max-width: 640px) {
+  body {
+    background:
+      linear-gradient(180deg, #f7faf5 0%, #fffaf0 56%, #f4f7f2 100%);
+  }
+
+  h1 {
+    font-size: 2rem;
+    line-height: 1.15;
+  }
+
+  h2 {
+    font-size: 1.55rem;
+    line-height: 1.25;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+}

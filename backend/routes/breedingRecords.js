@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db");
+const { authenticateToken, requireRole } = require("../middleware/authMiddleware");
 
-router.post("/", (req, res) => {
+router.post("/", authenticateToken, requireRole("admin"), (req, res) => {
   console.log("BREEDING ROUTE HIT");
   console.log("BODY RECEIVED:", req.body);
 
@@ -91,7 +92,7 @@ router.post("/", (req, res) => {
 });
 
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", authenticateToken, requireRole("admin"), (req, res) => {
   db.query(
     "DELETE FROM breeding_records WHERE id = ?",
     [req.params.id],

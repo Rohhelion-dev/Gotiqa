@@ -1,29 +1,228 @@
 /* src/App.css */
+
+/* ===================================
+   GOTIQA AGRICULTURAL THEME
+=================================== */
+
 :root {
-  --bg-dark: #f4f7f5; /* Your specific background color */
-  --accent-primary: #2d6a4f; /* Your specific brand green */
+  --farm-soil: #3b2f25;
+  --farm-earth: #6b4f34;
+  --farm-green: #2d6a4f;
+  --farm-green-dark: #1b4332;
+  --farm-green-deep: #123326;
+  --farm-green-soft: #d8f3dc;
+  --farm-leaf: #74c69d;
+  --farm-gold: #d9a441;
+  --farm-cream: #fffaf0;
+  --farm-mist: #f4f7f2;
+  --farm-slate: #334155;
+  --farm-border: rgba(45, 106, 79, 0.16);
+  --farm-shadow: 0 16px 36px rgba(59, 47, 37, 0.08);
 }
+
+/* ===================================
+   GLOBAL RESPONSIVE IMPROVEMENTS
+=================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(116, 198, 157, 0.2), transparent 32rem),
+    radial-gradient(circle at bottom right, rgba(217, 164, 65, 0.14), transparent 28rem),
+    linear-gradient(180deg, #f7faf5 0%, #fffaf0 48%, #f4f7f2 100%);
+  color: var(--farm-slate);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image:
+    linear-gradient(45deg, #1b4332 25%, transparent 25%),
+    linear-gradient(-45deg, #1b4332 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #1b4332 75%),
+    linear-gradient(-45deg, transparent 75%, #1b4332 75%);
+  background-size: 24px 24px;
+  background-position:
+    0 0,
+    0 12px,
+    12px -12px,
+    -12px 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+section {
+  width: 100%;
+}
+
+::selection {
+  background: var(--farm-leaf);
+  color: var(--farm-green-deep);
+}
+
+/* ===================================
+   ACCESSIBILITY
+=================================== */
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font-family: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(45, 106, 79, 0.28);
+  outline-offset: 3px;
+}
+
+/* ===================================
+   TYPOGRAPHY
+=================================== */
+
+h1,
+h2,
+h3 {
+  color: var(--farm-green-deep);
+  letter-spacing: 0;
+}
+
+p {
+  color: #475569;
+}
+
+/* ===================================
+   CARD SYSTEM
+=================================== */
+
+.card,
+.farm-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 250, 240, 0.88));
+  border: 1px solid var(--farm-border);
+  border-radius: 1rem;
+  box-shadow:
+    0 1px 2px rgba(27, 67, 50, 0.06),
+    var(--farm-shadow);
+}
+
+.farm-card-muted {
+  background:
+    linear-gradient(180deg, rgba(244, 247, 242, 0.94), rgba(255, 250, 240, 0.86));
+  border: 1px solid rgba(107, 79, 52, 0.16);
+  border-radius: 1rem;
+  box-shadow: 0 10px 24px rgba(59, 47, 37, 0.06);
+}
+
+.farm-section {
+  background:
+    linear-gradient(135deg, rgba(216, 243, 220, 0.58), rgba(255, 250, 240, 0.92)),
+    radial-gradient(circle at bottom right, rgba(217, 164, 65, 0.16), transparent 24rem);
+}
+
+/* ===================================
+   BUTTON SYSTEM
+=================================== */
+
+.farm-button-primary {
+  background: linear-gradient(135deg, var(--farm-green-dark), var(--farm-green));
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 22px rgba(27, 67, 50, 0.22);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.farm-button-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(27, 67, 50, 0.26);
+}
+
+.farm-button-primary:active {
+  transform: translateY(0);
+}
+
+.farm-button-secondary {
+  background: rgba(255, 250, 240, 0.86);
+  color: var(--farm-green-dark);
+  border: 1px solid rgba(45, 106, 79, 0.22);
+  transition:
+    background 180ms ease,
+    transform 180ms ease,
+    border-color 180ms ease;
+}
+
+.farm-button-secondary:hover {
+  background: var(--farm-green-soft);
+  border-color: rgba(45, 106, 79, 0.34);
+  transform: translateY(-1px);
+}
+
+.farm-button-secondary:active {
+  transform: translateY(0);
+}
+
+/* Existing counter support */
 .counter {
-  @apply text-[16px] p-[5px_10px] rounded-[5px] text-[#2d6a4f] bg-[#d8f3dc] border-2 border-transparent transition-all duration-300 mb-[24px];
+  color: var(--farm-green);
+  background: var(--farm-green-soft);
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+  padding: 5px 10px;
+  margin-bottom: 24px;
+  font-size: 16px;
+  transition: all 300ms ease;
 }
 
 .counter:hover {
-  @apply border-[#74c69d];
+  border-color: var(--farm-leaf);
 }
 
 .counter:focus-visible {
-  @apply outline-2 outline-[#2d6a4f] outline-offset-2;
+  outline: 2px solid var(--farm-green);
+  outline-offset: 2px;
 }
 
-/* --- Base Navbar Mobile Styles (Default for Phones) --- */
+/* ===================================
+   NAVBAR
+=================================== */
+
 .nav-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 250, 240, 0.86));
+  border-bottom: 1px solid var(--farm-border);
+  backdrop-filter: blur(14px);
 }
 
 .nav-links {
@@ -37,13 +236,18 @@
 .nav-link {
   padding: 0.5rem 1rem;
   color: #334155;
-  font-weight: 500;
-  transition: color 0.2s;
+  font-weight: 600;
+  border-radius: 999px;
   cursor: pointer;
+  transition:
+    color 180ms ease,
+    background 180ms ease;
 }
 
-.nav-link:hover, .nav-link.active {
-  color: #1b4332;
+.nav-link:hover,
+.nav-link.active {
+  color: var(--farm-green-dark);
+  background: rgba(216, 243, 220, 0.7);
 }
 
 .nav-action-btn {
@@ -51,7 +255,147 @@
   text-align: center;
 }
 
-/* --- Navbar Tablet & Desktop Breakpoint (768px and up) --- */
+/* ===================================
+   HERO
+=================================== */
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.hero-btn {
+  width: 100%;
+  padding: 0.8rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 800;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.hero-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* ===================================
+   GRIDS
+=================================== */
+
+.responsive-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ===================================
+   PRODUCT / CONTENT CARDS
+=================================== */
+
+.product-card {
+  border: 1px solid var(--farm-border);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 250, 240, 0.9));
+  transition:
+    transform 240ms ease,
+    box-shadow 240ms ease,
+    border-color 240ms ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(45, 106, 79, 0.28);
+  box-shadow:
+    0 18px 36px rgba(27, 67, 50, 0.12),
+    0 4px 12px rgba(59, 47, 37, 0.08);
+}
+
+/* ===================================
+   IMAGE PLACEHOLDER
+=================================== */
+
+.image-placeholder {
+  width: 100%;
+  height: 280px;
+  background:
+    linear-gradient(135deg, rgba(216, 243, 220, 0.95), rgba(183, 228, 199, 0.95)),
+    radial-gradient(circle at bottom right, rgba(217, 164, 65, 0.18), transparent 14rem);
+  border: 1px solid rgba(45, 106, 79, 0.16);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--farm-green);
+  font-weight: 800;
+}
+
+/* ===================================
+   FORMS
+=================================== */
+
+input,
+textarea,
+select {
+  background-color: rgba(255, 255, 255, 0.94);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--farm-green);
+}
+
+/* ===================================
+   DASHBOARD
+=================================== */
+
+.dashboard-shell {
+  background:
+    linear-gradient(180deg, #f7faf5 0%, #f4f7f2 100%);
+}
+
+.dashboard-sidebar {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 250, 240, 0.9));
+  border-right: 1px solid var(--farm-border);
+}
+
+.dashboard-tab-active {
+  background: linear-gradient(135deg, var(--farm-green-dark), var(--farm-green));
+  color: #ffffff;
+}
+
+/* ===================================
+   RESPONSIVE BREAKPOINTS
+=================================== */
+
 @media (min-width: 768px) {
   .nav-container {
     flex-direction: row;
@@ -68,37 +412,7 @@
   .nav-action-btn {
     width: auto;
   }
-}
-/* --- Base Mobile Styles (Default for Phone Screens) --- */
-.responsive-grid {
-  display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: 1.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
 
-.hero-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.hero-btn {
-  width: 100%;
-  padding: 0.75rem 2rem;
-  border-radius: 0.5rem;
-  font-weight: 700;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-  text-align: center;
-}
-
-/* --- Tablet Breakpoint (768px and up) --- */
-@media (min-width: 768px) {
   .responsive-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     padding-left: 0;
@@ -116,186 +430,128 @@
   }
 }
 
-/* --- Laptop & Desktop Breakpoint (1024px and up) --- */
 @media (min-width: 1024px) {
   .responsive-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-/* ===================================
-   GLOBAL RESPONSIVE IMPROVEMENTS
-=================================== */
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body,
-#root {
-  width: 100%;
-  overflow-x: hidden;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-section {
-  width: 100%;
-}
-
-/* ===================================
-   MOBILE TYPOGRAPHY
-=================================== */
-
 @media (max-width: 640px) {
+  body {
+    background:
+      linear-gradient(180deg, #f7faf5 0%, #fffaf0 56%, #f4f7f2 100%);
+  }
 
   h1 {
-    font-size: 2rem !important;
-    line-height: 1.2;
+    font-size: 2rem;
+    line-height: 1.15;
   }
 
   h2 {
-    font-size: 1.6rem !important;
-    line-height: 1.3;
+    font-size: 1.55rem;
+    line-height: 1.25;
   }
 
   h3 {
-    font-size: 1.2rem !important;
+    font-size: 1.15rem;
   }
 
   p {
     font-size: 0.95rem;
   }
-
 }
-
-/* ===================================
-   CARD SYSTEM
-=================================== */
-
-.card {
-  background: white;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow:
-    0 1px 3px rgba(0,0,0,0.05),
-    0 8px 20px rgba(0,0,0,0.04);
-}
-
-/* ===================================
-   IMAGE PLACEHOLDER
-=================================== */
-
-.image-placeholder {
-  width: 100%;
-  height: 280px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #d8f3dc,
-      #b7e4c7
-    );
-
-  border-radius: 1rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: #2d6a4f;
-  font-weight: 700;
-}
-
-/* ===================================
-   PRODUCTS
-=================================== */
-
-.products-grid {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(auto-fit, minmax(280px, 1fr));
-
-  gap: 1.5rem;
-
-}
-
-.product-card {
-
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-
-}
-
-.product-card:hover {
-
-  transform: translateY(-6px);
-
-}
-
-/* ===================================
-   FOOTER
-=================================== */
-
-.footer-grid {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(auto-fit, minmax(220px, 1fr));
-
-  gap: 2rem;
-
-}
-
-/* ===================================
-   DASHBOARD
-=================================== */
-
-.dashboard-grid {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(auto-fit, minmax(250px, 1fr));
-
-  gap: 1.5rem;
-
-}
-
-/* ===================================
-   PHONE OPTIMIZATION
-=================================== */
 
 @media (max-width: 480px) {
-
   .container,
   .max-w-7xl,
   .max-w-6xl,
   .max-w-5xl {
-
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
-  .hero-actions {
-
-    width: 100%;
-
-  }
-
+  .hero-actions,
   .hero-btn {
-
     width: 100%;
-
   }
 
+  .card,
+  .farm-card {
+    border-radius: 0.875rem;
+  }
+}
+
+/* ===================================
+   HOME IMAGE RESPONSIVENESS
+=================================== */
+
+.home-image,
+.home-gallery-image,
+.farm-image {
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  max-height: 420px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 1rem;
+  transition:
+    transform 500ms ease,
+    filter 500ms ease;
+}
+
+.home-image:hover,
+.home-gallery-image:hover,
+.farm-image:hover {
+  transform: scale(1.03);
+  filter: saturate(1.06) contrast(1.03);
+}
+
+.home-image-frame,
+.home-gallery-frame,
+.farm-image-frame {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: #d8f3dc;
+  aspect-ratio: 4 / 3;
+}
+
+.home-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (min-width: 768px) {
+  .home-image-frame,
+  .home-gallery-frame,
+  .farm-image-frame {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-image-frame,
+  .home-gallery-frame,
+  .farm-image-frame {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-image,
+  .home-gallery-image,
+  .farm-image {
+    min-height: 220px;
+    max-height: 320px;
+  }
+
+  .home-image-frame,
+  .home-gallery-frame,
+  .farm-image-frame {
+    aspect-ratio: 1 / 1;
+  }
 }

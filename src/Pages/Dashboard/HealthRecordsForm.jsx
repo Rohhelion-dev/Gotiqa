@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const HealthRecordsForm = () => {
+const HealthRecordsForm = ({ user }) => {
+  if (user?.role !== "admin") {
+    return null;
+  }
   const [formData, setFormData] = useState({
     animal: '',
     healthStatus: '',

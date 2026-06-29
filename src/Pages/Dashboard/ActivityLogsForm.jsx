@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from "axios";
 
-const ActivityLogsForm = () => {
+const ActivityLogsForm = ({ user }) => {
+  if (user?.role !== "admin") {
+    return null;
+  }
 
   const [formData, setFormData] = useState({
     action: '',

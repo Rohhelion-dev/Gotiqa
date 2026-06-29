@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
-const AnimalManagementForm = () => {
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+export default function AnimalManagementForm({ user }) {
+  if (user?.role !== "admin") {
+    return null;
+  }
 
   const [formData, setFormData] = useState({
-    tagNumber: '',
-    name: '',
-    species: '',
-    breed: '',
-    age: '',
-    gender: '',
-    weight: '',
-    notes: '',
+    tagNumber: "",
+    name: "",
+    species: "",
+    breed: "",
+    age: "",
+    gender: "",
+    weight: "",
+    notes: "",
   });
 
   const handleChange = (e) => {
@@ -25,40 +30,33 @@ const AnimalManagementForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        'http://localhost:5000/animals',
-        formData
-      );
+      const response = await axios.post(`${API_URL}/animals`, formData);
 
-      console.log('Server Response:', response.data);
+      console.log("Server Response:", response.data);
 
-      alert('Animal added successfully!');
+      alert("Animal added successfully!");
 
       setFormData({
-        tagNumber: '',
-        name: '',
-        species: '',
-        breed: '',
-        age: '',
-        gender: '',
-        weight: '',
-        notes: '',
+        tagNumber: "",
+        name: "",
+        species: "",
+        breed: "",
+        age: "",
+        gender: "",
+        weight: "",
+        notes: "",
       });
-
     } catch (error) {
-      console.error('Error saving animal:', error);
-      alert('Failed to save animal record.');
+      console.error("Error saving animal:", error);
+      alert("Failed to save animal record.");
     }
   };
 
   return (
-
     <form
       onSubmit={handleSubmit}
       className="bg-white/80 backdrop-blur-xl rounded-2xl border border-slate-200 shadow-sm p-6"
     >
-
-      {/* HEADER */}
       <div className="mb-6">
         <h2 className="text-lg font-semibold text-slate-900">
           Animal Management
@@ -68,15 +66,11 @@ const AnimalManagementForm = () => {
         </p>
       </div>
 
-      {/* FIRST ROW */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
-
-        {/* TAG NUMBER */}
         <div>
           <label className="text-xs text-slate-500 mb-1 block">
             Tag Number *
           </label>
-
           <input
             name="tagNumber"
             value={formData.tagNumber}
@@ -87,12 +81,8 @@ const AnimalManagementForm = () => {
           />
         </div>
 
-        {/* NAME */}
         <div>
-          <label className="text-xs text-slate-500 mb-1 block">
-            Name
-          </label>
-
+          <label className="text-xs text-slate-500 mb-1 block">Name</label>
           <input
             name="name"
             value={formData.name}
@@ -102,12 +92,10 @@ const AnimalManagementForm = () => {
           />
         </div>
 
-        {/* SPECIES */}
         <div>
           <label className="text-xs text-slate-500 mb-1 block">
             Species *
           </label>
-
           <select
             name="species"
             value={formData.species}
@@ -119,18 +107,11 @@ const AnimalManagementForm = () => {
             <option value="goat">Goat</option>
           </select>
         </div>
-
       </div>
 
-      {/* SECOND ROW */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
-
-        {/* BREED */}
         <div>
-          <label className="text-xs text-slate-500 mb-1 block">
-            Breed
-          </label>
-
+          <label className="text-xs text-slate-500 mb-1 block">Breed</label>
           <input
             name="breed"
             value={formData.breed}
@@ -140,12 +121,10 @@ const AnimalManagementForm = () => {
           />
         </div>
 
-        {/* AGE */}
         <div>
           <label className="text-xs text-slate-500 mb-1 block">
             Age (months)
           </label>
-
           <input
             name="age"
             type="number"
@@ -156,12 +135,10 @@ const AnimalManagementForm = () => {
           />
         </div>
 
-        {/* GENDER */}
         <div>
           <label className="text-xs text-slate-500 mb-1 block">
             Gender *
           </label>
-
           <select
             name="gender"
             value={formData.gender}
@@ -173,17 +150,13 @@ const AnimalManagementForm = () => {
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
-
         </div>
-
       </div>
 
-      {/* WEIGHT */}
       <div className="mb-5">
         <label className="text-xs text-slate-500 mb-1 block">
           Weight (kg)
         </label>
-
         <input
           name="weight"
           type="number"
@@ -195,12 +168,8 @@ const AnimalManagementForm = () => {
         />
       </div>
 
-      {/* NOTES */}
       <div className="mb-6">
-        <label className="text-xs text-slate-500 mb-1 block">
-          Notes
-        </label>
-
+        <label className="text-xs text-slate-500 mb-1 block">Notes</label>
         <textarea
           name="notes"
           value={formData.notes}
@@ -210,22 +179,14 @@ const AnimalManagementForm = () => {
         />
       </div>
 
-      {/* SUBMIT */}
       <div className="flex justify-end">
-
         <button
           type="submit"
           className="px-6 py-2.5 rounded-xl bg-emerald-900 text-white font-semibold hover:bg-emerald-800 hover:shadow-md transition"
         >
           Add Animal
         </button>
-
       </div>
-
     </form>
-
   );
-
-};
-
-export default AnimalManagementForm;
+}

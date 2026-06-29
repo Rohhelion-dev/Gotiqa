@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const FeedingRecordsForm = () => {
+const FeedingRecordsForm = ({ user }) => {
+  if (user?.role !== "admin") {
+    return null;
+  }
   const [formData, setFormData] = useState({
     animal: '',
     feedType: '',

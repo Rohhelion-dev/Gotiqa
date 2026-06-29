@@ -1,11 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db");
+const { authenticateToken, requireRole } = require("../middleware/authMiddleware");
 
-router.post("/", (req, res) => {
-
-  console.log("REQUEST BODY:", req.body);
-
+router.post("/", authenticateToken, requireRole("admin"), (req, res) => {
   const {
     animal,
     healthStatus,
@@ -16,17 +14,13 @@ router.post("/", (req, res) => {
     vetNotes
   } = req.body;
 
-  const findAnimalSql =
-    "SELECT id FROM animals WHERE tag_number = ?";
+  const findAnimalSql = "SELECT id FROM animals WHERE tag_number = ?";
 
   db.query(findAnimalSql, [animal], (err, animalResult) => {
-
     if (err) {
       console.error("FIND ANIMAL ERROR:", err);
-      return res.status(500).json(err);
+      return res.status(500).json({ error: "Failed to find animal" });
     }
-
-    console.log("ANIMAL RESULT:", animalResult);
 
     if (animalResult.length === 0) {
       return res.status(404).json({
@@ -67,10 +61,9 @@ router.post("/", (req, res) => {
         vetNotes
       ],
       (err, result) => {
-
         if (err) {
           console.error("INSERT ERROR:", err);
-          return res.status(500).json(err);
+          return res.status(500).json({ error: "Failed to create health record" });
         }
 
         res.json({
@@ -82,13 +75,12 @@ router.post("/", (req, res) => {
   });
 });
 
-
-router.delete("/:id", (req, res) => {
+router.delete("/:id", authenticateToken, requireRole("admin"), (req, res) => {
   const { id } = req.params;
 
   const sql = "DELETE FROM health_records WHERE id = ?";
 
-  db.query(sql, [id], (err, result) => {
+  db.query(sql, [id], (err) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ error: "Failed to delete health record" });
@@ -100,4 +92,5 @@ router.delete("/:id", (req, res) => {
     });
   });
 });
+
 module.exports = router;

@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db");
+const { authenticateToken, requireRole } = require("../middleware/authMiddleware");
 
-router.post("/", (req, res) => {
+
+router.post("/", authenticateToken, requireRole("admin"), (req, res) => {
   try {
     console.log("FEEDING ROUTE HIT");
     console.log("BODY RECEIVED:", req.body);
@@ -120,7 +122,7 @@ router.post("/", (req, res) => {
   }
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", authenticateToken, requireRole("admin"), (req, res) => {
   const { id } = req.params;
 
   db.query(
