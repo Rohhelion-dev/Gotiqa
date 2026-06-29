@@ -55,68 +55,55 @@ router.post("/register", async (req, res) => {
       });
     }
 
-    const checkSql = "SELECT id FROM users WHERE email = ? LIMIT 1";
+    const existingUser = await db.query(
+      "SELECT id FROM users WHERE email = $1 LIMIT 1",
+      [email]
+    );
 
-    db.query(checkSql, [email], async (err, result) => {
-      if (err) {
-        console.error("REGISTER CHECK ERROR:", err);
-        return res.status(500).json({
-          success: false,
-          error: "Database error during user check",
-        });
-      }
-
-      if (result.length > 0) {
-        return res.status(409).json({
-          success: false,
-          error: "An account with this email already exists",
-        });
-      }
-
-      const hashedPassword = await bcrypt.hash(password, 12);
-
-      const sql = `
-        INSERT INTO users (name, email, password_hash, role)
-        VALUES (?, ?, ?, ?)
-      `;
-
-      db.query(sql, [name, email, hashedPassword, "farmer"], (err, result) => {
-        if (err) {
-          console.error("REGISTER INSERT ERROR:", err);
-          return res.status(500).json({
-            success: false,
-            error: "Failed to create user",
-          });
-        }
-
-        const user = {
-          id: result.insertId,
-          name,
-          email,
-          role: "farmer",
-        };
-
-        const token = signToken(user);
-
-        return res.status(201).json({
-          success: true,
-          message: "Account created successfully",
-          token,
-          user,
-        });
+    if (existingUser.rows.length > 0) {
+      return res.status(409).json({
+        success: false,
+        error: "An account with this email already exists",
       });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    const result = await db.query(
+      `
+      INSERT INTO users (name, email, password_hash, role)
+      VALUES ($1, $2, $3, $4)
+      RETURNING id
+      `,
+      [name, email, hashedPassword, "farmer"]
+    );
+
+    const user = {
+      id: result.rows[0].id,
+      name,
+      email,
+      role: "farmer",
+    };
+
+    const token = signToken(user);
+
+    return res.status(201).json({
+      success: true,
+      message: "Account created successfully",
+      token,
+      user,
     });
   } catch (error) {
     console.error("REGISTER ERROR:", error);
-    res.status(500).json({
+
+    return res.status(500).json({
       success: false,
       error: "Registration failed",
     });
   }
 });
-
 /* ================= LOGIN ================= */
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     let { email, password } = req.body;
 
@@ -129,86 +116,88 @@ router.post("/login", (req, res) => {
       });
     }
 
-    const sql = "SELECT * FROM users WHERE email = ? LIMIT 1";
+    const result = await db.query(
+      "SELECT * FROM users WHERE email = $1 LIMIT 1",
+      [email]
+    );
 
-    db.query(sql, [email], async (err, result) => {
-      if (err) {
-        console.error("LOGIN ERROR:", err);
-        return res.status(500).json({
-          success: false,
-          error: "Database error",
-        });
-      }
-
-      if (result.length === 0) {
-        return res.status(401).json({
-          success: false,
-          error: "Invalid email or password",
-        });
-      }
-
-      const user = result[0];
-      const isMatch = await bcrypt.compare(password, user.password_hash);
-
-      if (!isMatch) {
-        return res.status(401).json({
-          success: false,
-          error: "Invalid email or password",
-        });
-      }
-
-      const safeUser = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      };
-
-      const token = signToken(safeUser);
-
-      return res.json({
-        success: true,
-        message: "Login successful",
-        token,
-        user: safeUser,
+    if (result.rows.length === 0) {
+      return res.status(401).json({
+        success: false,
+        error: "Invalid email or password",
       });
+    }
+
+    const user = result.rows[0];
+
+    const isMatch = await bcrypt.compare(
+      password,
+      user.password_hash
+    );
+
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        error: "Invalid email or password",
+      });
+    }
+
+    const safeUser = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    };
+
+    const token = signToken(safeUser);
+
+    return res.json({
+      success: true,
+      message: "Login successful",
+      token,
+      user: safeUser,
     });
   } catch (error) {
     console.error("LOGIN ERROR:", error);
-    res.status(500).json({
+
+    return res.status(500).json({
       success: false,
       error: "Login failed",
     });
   }
 });
-
 /* ================= CURRENT USER ================= */
-router.get("/me", authenticateToken, (req, res) => {
-  const sql = "SELECT id, name, email, role, created_at FROM users WHERE id = ? LIMIT 1";
+router.get("/me", authenticateToken, async (req, res) => {
+  try {
+    const result = await db.query(
+      `
+      SELECT id, name, email, role, created_at
+      FROM users
+      WHERE id = $1
+      LIMIT 1
+      `,
+      [req.user.id]
+    );
 
-  db.query(sql, [req.user.id], (err, result) => {
-    if (err) {
-      console.error("ME ERROR:", err);
-      return res.status(500).json({
-        success: false,
-        error: "Database error",
-      });
-    }
-
-    if (result.length === 0) {
+    if (result.rows.length === 0) {
       return res.status(404).json({
         success: false,
         error: "User not found",
       });
     }
 
-    res.json({
+    return res.json({
       success: true,
-      user: result[0],
+      user: result.rows[0],
     });
-  });
+  } catch (err) {
+    console.error("ME ERROR:", err);
+    return res.status(500).json({
+      success: false,
+      error: "Database error",
+    });
+  }
 });
-
 /* ================= LOGOUT ================= */
 router.post("/logout", (req, res) => {
   res.json({
