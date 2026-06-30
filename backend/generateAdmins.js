@@ -1,5 +1,21 @@
-const bcrypt = require("bcryptjs");
+require("dotenv").config();
+const db = require("./db");
 
-console.log("Roy:", bcrypt.hashSync("password", 10));
-console.log("Brian:", bcrypt.hashSync("password", 10));
-console.log("Farmer:", bcrypt.hashSync("password", 10));
+async function run() {
+  try {
+    const result = await db.query(`
+      UPDATE users
+      SET role = 'admin'
+      WHERE email = 'roy@gotiqa.com'
+      RETURNING id, email, role
+    `);
+
+    console.log(result.rows);
+  } catch (err) {
+    console.error(err);
+  }
+
+  process.exit();
+}
+
+run();
