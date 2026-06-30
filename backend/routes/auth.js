@@ -108,9 +108,19 @@ router.post("/login", async (req, res) => {
   console.log("📦 REQUEST BODY:", req.body);
 
   try {
+    // Prevent crash when body is missing
+    if (!req.body) {
+      console.log("❌ No request body received");
+
+      return res.status(400).json({
+        success: false,
+        error: "No request body received",
+      });
+    }
+
     let { email, password } = req.body;
 
-    email = email?.trim().toLowerCase();
+    email = email?.trim()?.toLowerCase();
 
     console.log("📧 EMAIL:", email);
 
@@ -148,6 +158,16 @@ router.post("/login", async (req, res) => {
       email: user.email,
       role: user.role,
     });
+
+    // Verify required database fields exist
+    if (!user.password_hash) {
+      console.log("❌ password_hash missing from database record");
+
+      return res.status(500).json({
+        success: false,
+        error: "User record is invalid",
+      });
+    }
 
     console.log("🔐 Comparing passwords...");
 
