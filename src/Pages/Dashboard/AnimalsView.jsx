@@ -19,7 +19,7 @@ export default function AnimalsView() {
       setLoadingAnimals(true);
       setError("");
 
-          const response = await axios.get(`${API_URL}/animals`, {
+          const response = await api.get(`${API_URL}/animals`, {
   params: searchValue ? { search: searchValue } : {},
 });
 
@@ -44,7 +44,7 @@ if (searchValue && foundAnimals.length === 1) {
       setLoadingDetails(true);
       setError("");
 
-      const response = await axios.get(`${API_URL}/animals/${animal.id}/details`);
+      const response = await api.get(`${API_URL}/animals/${animal.id}/details`);
 
       setAnimalDetails(response.data.data);
     } catch (err) {

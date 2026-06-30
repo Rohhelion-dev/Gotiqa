@@ -11,7 +11,7 @@ export default function HealthAlerts() {
   useEffect(() => {
     const fetchAlerts = async () => {
       try {
-        const res = await axios.get(
+        const res = await api.get(
           "http://localhost:5000/dashboard/health-alerts"
         );
 

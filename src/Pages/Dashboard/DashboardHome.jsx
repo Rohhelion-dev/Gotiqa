@@ -1,3 +1,4 @@
+import api from "../../api/api";
 import React from "react";
 
 import StatsCards from "./StatsCards";

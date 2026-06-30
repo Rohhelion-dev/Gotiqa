@@ -32,7 +32,7 @@ export default function AnimalManagementForm({ user }) {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${API_URL}/animals`, formData);
+      const response = await api.post(`${API_URL}/animals`, formData);
 
       console.log("Server Response:", response.data);
 

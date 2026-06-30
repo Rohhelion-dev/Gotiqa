@@ -26,7 +26,7 @@ const FeedingRecordsForm = ({ user }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
+      const response = await api.post(
         'http://localhost:5000/feeding-records',
         formData
       );
