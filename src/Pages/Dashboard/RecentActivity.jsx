@@ -8,8 +8,8 @@ export default function RecentActivity() {
 
   useEffect(() => {
 
-    axios
-      .get("http://localhost:5000/dashboard/recent-activity")
+    api
+      .get("/dashboard/recent-activity")
       .then((response) => {
         setActivities(response.data);
       })

@@ -8,8 +8,8 @@ export default function RecentAnimals() {
 
   useEffect(() => {
 
-    axios
-      .get("http://localhost:5000/dashboard/recent-animals")
+    api
+      .get("/dashboard/recent-animals")
       .then((response) => {
         setAnimals(response.data);
       })

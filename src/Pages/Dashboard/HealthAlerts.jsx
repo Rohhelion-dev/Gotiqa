@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import api from "../../api/api";
 
@@ -12,7 +11,7 @@ export default function HealthAlerts() {
     const fetchAlerts = async () => {
       try {
         const res = await api.get(
-          "http://localhost:5000/dashboard/health-alerts"
+          "/dashboard/health-alerts"
         );
 
         setAlerts(res.data);

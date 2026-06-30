@@ -14,8 +14,8 @@ export default function StatsCards() {
 
   useEffect(() => {
 
-    axios
-      .get("http://localhost:5000/dashboard/stats")
+    api
+      .get("/dashboard/stats")
       .then((response) => {
         setStats(response.data);
       })

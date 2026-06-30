@@ -8,8 +8,8 @@ export default function RecentHealthRecords() {
 
   useEffect(() => {
 
-    axios
-      .get("http://localhost:5000/dashboard/recent-health")
+    api
+      .get("/dashboard/recent-health")
       .then((response) => {
         setRecords(response.data);
       })

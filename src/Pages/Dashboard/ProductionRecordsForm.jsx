@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 import api from "../../api/api";
 
@@ -28,7 +27,7 @@ const ProductionRecordsForm = ({ user }) => {
 
     try {
       const response = await api.post(
-        "http://localhost:5000/production-records",
+        "/production-records",
         formData
       );
 
