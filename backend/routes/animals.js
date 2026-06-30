@@ -51,7 +51,7 @@ router.get("/", authenticateToken, async (req, res) => {
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Failed to fetch animals" });
+    console.error("ANIMALS GET ERROR:", err); res.status(500).json({ error: err.message });
   }
 });
 
@@ -91,7 +91,7 @@ router.post("/", authenticateToken, requireRole("admin"), async (req, res) => {
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Failed to create animal" });
+    console.error("ANIMAL CREATE ERROR:", err); res.status(500).json({ error: err.message });
   }
 });
 
