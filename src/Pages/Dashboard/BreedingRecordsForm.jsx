@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import api from "../../api/api";
 
-api.post("/auth/login")
 
 const BreedingRecordsForm = ({ user }) => {
   if (user?.role !== "admin") {

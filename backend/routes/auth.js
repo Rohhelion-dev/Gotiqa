@@ -70,7 +70,6 @@ router.post("/register", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const result = await db.query(
-    console.log("ROWS FOUND:", result.rows.length);
       `
       INSERT INTO users (name, email, password_hash, role)
       VALUES ($1, $2, $3, $4)
@@ -103,16 +102,15 @@ router.post("/register", async (req, res) => {
     });
   }
 });
+
+
 /* ================= LOGIN ================= */
 router.post("/login", async (req, res) => {
   console.log("🔑 LOGIN ATTEMPT RECEIVED");
   console.log("📦 REQUEST BODY:", req.body);
 
   try {
-    // Prevent crash when body is missing
     if (!req.body) {
-      console.log("❌ No request body received");
-
       return res.status(400).json({
         success: false,
         error: "No request body received",
@@ -123,11 +121,7 @@ router.post("/login", async (req, res) => {
 
     email = email?.trim()?.toLowerCase();
 
-    console.log("📧 EMAIL:", email);
-
     if (!email || !password) {
-      console.log("❌ Missing email or password");
-
       return res.status(400).json({
         success: false,
         error: "Email and password are required",
@@ -137,7 +131,6 @@ router.post("/login", async (req, res) => {
     console.log("🔍 Searching for user...");
 
     const result = await db.query(
-    console.log("ROWS FOUND:", result.rows.length);
       "SELECT * FROM users WHERE email = $1 LIMIT 1",
       [email]
     );
@@ -145,8 +138,6 @@ router.post("/login", async (req, res) => {
     console.log("👤 USERS FOUND:", result.rows.length);
 
     if (result.rows.length === 0) {
-      console.log("❌ User not found");
-
       return res.status(401).json({
         success: false,
         error: "Invalid email or password",
@@ -155,26 +146,14 @@ router.post("/login", async (req, res) => {
 
     const user = result.rows[0];
 
-    console.log("✅ User found:", {
-      id: user.id,
-      email: user.email,
-      role: user.role,
-    });
-
-    // Verify required database fields exist
     if (!user.password_hash) {
-      console.log("❌ password_hash missing from database record");
-
       return res.status(500).json({
         success: false,
         error: "User record is invalid",
       });
     }
 
-    console.log("🔐 Comparing passwords...");
-
     const isMatch = await bcrypt.compare(
-    console.log("PASSWORD MATCH:", isMatch);
       password,
       user.password_hash
     );
@@ -182,15 +161,11 @@ router.post("/login", async (req, res) => {
     console.log("🔐 PASSWORD MATCH:", isMatch);
 
     if (!isMatch) {
-      console.log("❌ Password mismatch");
-
       return res.status(401).json({
         success: false,
         error: "Invalid email or password",
       });
     }
-
-    console.log("🎟️ Generating JWT token...");
 
     const safeUser = {
       id: user.id,
@@ -201,18 +176,15 @@ router.post("/login", async (req, res) => {
 
     const token = signToken(safeUser);
 
-    console.log("✅ Login successful");
-
     return res.json({
       success: true,
       message: "Login successful",
       token,
       user: safeUser,
     });
+
   } catch (error) {
-    console.error("🚨 LOGIN ERROR:");
-    console.error(error);
-    console.error(error.stack);
+    console.error("🚨 LOGIN ERROR:", error);
 
     return res.status(500).json({
       success: false,
@@ -220,11 +192,12 @@ router.post("/login", async (req, res) => {
     });
   }
 });
+
+
 /* ================= CURRENT USER ================= */
 router.get("/me", authenticateToken, async (req, res) => {
   try {
     const result = await db.query(
-    console.log("ROWS FOUND:", result.rows.length);
       `
       SELECT id, name, email, role, created_at
       FROM users
@@ -245,20 +218,25 @@ router.get("/me", authenticateToken, async (req, res) => {
       success: true,
       user: result.rows[0],
     });
+
   } catch (err) {
     console.error("ME ERROR:", err);
+
     return res.status(500).json({
       success: false,
       error: "Database error",
     });
   }
 });
+
+
 /* ================= LOGOUT ================= */
 router.post("/logout", (req, res) => {
-  res.json({
+  return res.json({
     success: true,
     message: "Logged out successfully",
   });
 });
+
 
 module.exports = router;

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../api/api";
 
-api.post("/auth/login")
 
 const API_URL = import.meta.env.VITE_API_URL ;
 
