@@ -55,7 +55,7 @@ export default function App() {
       const parsedUser = JSON.parse(savedUser);
       setUser(parsedUser);
       setToken(savedToken);
-      axios.defaults.headers.common.Authorization = `Bearer ${savedToken}`;
+      api.defaults.headers.common.Authorization = `Bearer ${savedToken}`;
     } catch {
       localStorage.removeItem("user");
       localStorage.removeItem("token");
@@ -66,11 +66,11 @@ export default function App() {
 
   useEffect(() => {
     if (token) {
-      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
       return;
     }
 
-    delete axios.defaults.headers.common.Authorization;
+    delete api.defaults.headers.common.Authorization;
   }, [token]);
 
   const goToAuth = (mode = "login") => {
@@ -85,14 +85,14 @@ export default function App() {
 
   const logout = async () => {
     try {
-      await axios.post(`${API_URL}/auth/logout`);
+      await api.post(`${API_URL}/auth/logout`);
     } catch {
       // Logout should still clear local state even if the server is unavailable.
     }
 
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    delete axios.defaults.headers.common.Authorization;
+    delete api.defaults.headers.common.Authorization;
 
     setUser(null);
     setToken(null);
