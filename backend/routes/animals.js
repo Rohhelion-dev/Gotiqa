@@ -116,3 +116,5 @@ router.delete("/:id", authenticateToken, requireRole("admin"), async (req, res) 
 });
 
 module.exports = router;
+console.log("auth:", authenticateToken);
+console.log("role:", requireRole);

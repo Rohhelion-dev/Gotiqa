@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
 const db = require("../db");
 
-async function authenticateToken(req, res, next) {
+/* ================= AUTHENTICATE USER ================= */
+function authenticateToken(req, res, next) {
   const authHeader = req.headers.authorization;
 
   const token = authHeader?.startsWith("Bearer ")
@@ -18,20 +19,28 @@ async function authenticateToken(req, res, next) {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    const result = await db.query(
+    db.query(
       "SELECT id, name, email, role FROM users WHERE id = $1 LIMIT 1",
       [decoded.id]
-    );
+    )
+      .then((result) => {
+        if (result.rows.length === 0) {
+          return res.status(401).json({
+            success: false,
+            error: "User not found",
+          });
+        }
 
-    if (result.rows.length === 0) {
-      return res.status(401).json({
-        success: false,
-        error: "User not found",
+        req.user = result.rows[0];
+        next();
+      })
+      .catch((error) => {
+        console.error("DB ERROR IN AUTH:", error);
+        return res.status(500).json({
+          success: false,
+          error: "Authentication database error",
+        });
       });
-    }
-
-    req.user = result.rows[0];
-    next();
 
   } catch (error) {
     console.error("AUTH ERROR:", error);
@@ -43,8 +52,9 @@ async function authenticateToken(req, res, next) {
   }
 }
 
-async function requireRole(...allowedRoles) {
-  return async (req, res, next) => {
+/* ================= ROLE CHECK ================= */
+function requireRole(...allowedRoles) {
+  return (req, res, next) => {
     if (!req.user || !allowedRoles.includes(req.user.role)) {
       return res.status(403).json({
         success: false,
@@ -56,6 +66,7 @@ async function requireRole(...allowedRoles) {
   };
 }
 
+/* ================= EXPORTS ================= */
 module.exports = {
   authenticateToken,
   requireRole,
