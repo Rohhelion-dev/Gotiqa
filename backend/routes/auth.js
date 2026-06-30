@@ -104,24 +104,37 @@ router.post("/register", async (req, res) => {
 });
 /* ================= LOGIN ================= */
 router.post("/login", async (req, res) => {
+  console.log("🔑 LOGIN ATTEMPT RECEIVED");
+  console.log("📦 REQUEST BODY:", req.body);
+
   try {
     let { email, password } = req.body;
 
     email = email?.trim().toLowerCase();
 
+    console.log("📧 EMAIL:", email);
+
     if (!email || !password) {
+      console.log("❌ Missing email or password");
+
       return res.status(400).json({
         success: false,
         error: "Email and password are required",
       });
     }
 
+    console.log("🔍 Searching for user...");
+
     const result = await db.query(
       "SELECT * FROM users WHERE email = $1 LIMIT 1",
       [email]
     );
 
+    console.log("👤 USERS FOUND:", result.rows.length);
+
     if (result.rows.length === 0) {
+      console.log("❌ User not found");
+
       return res.status(401).json({
         success: false,
         error: "Invalid email or password",
@@ -130,17 +143,31 @@ router.post("/login", async (req, res) => {
 
     const user = result.rows[0];
 
+    console.log("✅ User found:", {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    });
+
+    console.log("🔐 Comparing passwords...");
+
     const isMatch = await bcrypt.compare(
       password,
       user.password_hash
     );
 
+    console.log("🔐 PASSWORD MATCH:", isMatch);
+
     if (!isMatch) {
+      console.log("❌ Password mismatch");
+
       return res.status(401).json({
         success: false,
         error: "Invalid email or password",
       });
     }
+
+    console.log("🎟️ Generating JWT token...");
 
     const safeUser = {
       id: user.id,
@@ -151,6 +178,8 @@ router.post("/login", async (req, res) => {
 
     const token = signToken(safeUser);
 
+    console.log("✅ Login successful");
+
     return res.json({
       success: true,
       message: "Login successful",
@@ -158,11 +187,13 @@ router.post("/login", async (req, res) => {
       user: safeUser,
     });
   } catch (error) {
-    console.error("LOGIN ERROR:", error);
+    console.error("🚨 LOGIN ERROR:");
+    console.error(error);
+    console.error(error.stack);
 
     return res.status(500).json({
       success: false,
-      error: "Login failed",
+      error: error.message || "Login failed",
     });
   }
 });
