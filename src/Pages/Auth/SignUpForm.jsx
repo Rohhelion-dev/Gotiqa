@@ -73,7 +73,7 @@ export default function SignUpForm({ setUser, setToken, onSuccess, onShowLogin }
     setMessage("");
 
     try {
-      const { data } = await api.post(`${API_URL}/auth/register`, {
+      const { data } = await api.post(`/auth/register`, {
         name: formData.name.trim(),
         email: formData.email.trim().toLowerCase(),
         password: formData.password,

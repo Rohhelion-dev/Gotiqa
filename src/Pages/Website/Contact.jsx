@@ -35,7 +35,7 @@ export default function Contact() {
     setStatus({ type: "", message: "" });
 
     try {
-      const response = await fetch(`${API_URL}/contact`, {
+      const response = await fetch(`/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

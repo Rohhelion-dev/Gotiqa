@@ -85,7 +85,7 @@ export default function App() {
 
   const logout = async () => {
     try {
-      await api.post(`${API_URL}/auth/logout`);
+      await api.post(`/auth/logout`);
     } catch {
       // Logout should still clear local state even if the server is unavailable.
     }
