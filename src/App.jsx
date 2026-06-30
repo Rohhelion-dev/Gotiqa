@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from "react";
-import api from "../api/api";
+import api from "./api/api";
 
-api.post("/auth/login")
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Home from "./pages/Website/Home";
-import About from "./pages/Website/About";
-import Products from "./pages/Website/Products";
-import Contact from "./pages/Website/Contact";
-import AuthContainer from "./pages/Auth/AuthContainer";
-import SignUpForm from "./pages/Auth/SignUpForm";
+import Home from "./Pages/Website/Home";
+import About from "./Pages/Website/About";
+import Products from "./Pages/Website/Products";
+import Contact from "./Pages/Website/Contact";
+import AuthContainer from "./Pages/Auth/AuthContainer";
+import SignUpForm from "./Pages/Auth/SignUpForm";
 
-import Operations from "./pages/Dashboard/Operations";
-import HealthAlerts from "./pages/Dashboard/HealthAlerts";
-import DashboardHome from "./pages/Dashboard/DashboardHome";
+import Operations from "./Pages/Dashboard/Operations";
+import HealthAlerts from "./Pages/Dashboard/HealthAlerts";
+import DashboardHome from "./Pages/Dashboard/DashboardHome";
 
-import AnimalManagementForm from "./pages/Dashboard/AnimalManagementForm";
-import HealthRecordsForm from "./pages/Dashboard/HealthRecordsForm";
-import FeedingRecordsForm from "./pages/Dashboard/FeedingRecordsForm";
-import BreedingRecordsForm from "./pages/Dashboard/BreedingRecordsForm";
-import ProductionRecordsForm from "./pages/Dashboard/ProductionRecordsForm";
-import ActivityLogsForm from "./pages/Dashboard/ActivityLogsForm";
-import AnimalsView from "./pages/Dashboard/AnimalsView";
+import AnimalManagementForm from "./Pages/Dashboard/AnimalManagementForm";
+import HealthRecordsForm from "./Pages/Dashboard/HealthRecordsForm";
+import FeedingRecordsForm from "./Pages/Dashboard/FeedingRecordsForm";
+import BreedingRecordsForm from "./Pages/Dashboard/BreedingRecordsForm";
+import ProductionRecordsForm from "./Pages/Dashboard/ProductionRecordsForm";
+import ActivityLogsForm from "./Pages/Dashboard/ActivityLogsForm";
+import AnimalsView from "./Pages/Dashboard/AnimalsView";
 
 import WhatsAppButton from "./components/WhatsAppButton";
 
