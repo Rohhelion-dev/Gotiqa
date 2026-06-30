@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import api from "../../api/api";
 
-api.post("/auth/login")
-
-const API_URL = import.meta.env.VITE_API_URL ;
-
 export default function SignUpForm({ setUser, setToken, onSuccess, onShowLogin }) {
   const [formData, setFormData] = useState({
     name: "",
@@ -77,7 +73,7 @@ export default function SignUpForm({ setUser, setToken, onSuccess, onShowLogin }
     setMessage("");
 
     try {
-      const { data } = await axios.post(`${API_URL}/auth/register`, {
+      const { data } = await api.post(`${API_URL}/auth/register`, {
         name: formData.name.trim(),
         email: formData.email.trim().toLowerCase(),
         password: formData.password,

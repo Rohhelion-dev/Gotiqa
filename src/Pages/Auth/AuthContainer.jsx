@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import api from "../../api/api";
 
-api.post("/auth/login")
-
-const API_URL = import.meta.env.VITE_API_URL ;
-
 export default function AuthContainer({ setUser, setToken, onSuccess, onShowSignUp }) {
   const [formData, setFormData] = useState({
     email: "",
@@ -60,7 +56,7 @@ export default function AuthContainer({ setUser, setToken, onSuccess, onShowSign
     setLoading(true);
 
     try {
-      const { data } = await axios.post(`${API_URL}/auth/login`, {
+      const { data } = await api.post("/auth/login", {
         email: formData.email.trim().toLowerCase(),
         password: formData.password,
       });
