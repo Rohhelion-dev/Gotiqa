@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api/api";
+
+api.post("/auth/login")
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -24,7 +26,7 @@ import AnimalsView from "./pages/Dashboard/AnimalsView";
 
 import WhatsAppButton from "./components/WhatsAppButton";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL ;
 
 export default function App() {
   const [currentView, setCurrentView] = useState("home");

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api/api";
+
+api.post("/auth/login")
 
 export default function RecentHealthRecords() {
 

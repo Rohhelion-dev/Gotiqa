@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../api/api";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+api.post("/auth/login")
+
+const API_URL = import.meta.env.VITE_API_URL ;
 
 export default function AuthContainer({ setUser, setToken, onSuccess, onShowSignUp }) {
   const [formData, setFormData] = useState({

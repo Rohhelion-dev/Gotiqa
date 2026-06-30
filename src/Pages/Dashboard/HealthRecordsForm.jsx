@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from "../api/api";
+
+api.post("/auth/login")
 
 const HealthRecordsForm = ({ user }) => {
   if (user?.role !== "admin") {
