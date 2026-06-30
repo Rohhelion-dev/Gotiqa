@@ -70,6 +70,7 @@ router.post("/register", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const result = await db.query(
+    console.log("ROWS FOUND:", result.rows.length);
       `
       INSERT INTO users (name, email, password_hash, role)
       VALUES ($1, $2, $3, $4)
@@ -136,6 +137,7 @@ router.post("/login", async (req, res) => {
     console.log("🔍 Searching for user...");
 
     const result = await db.query(
+    console.log("ROWS FOUND:", result.rows.length);
       "SELECT * FROM users WHERE email = $1 LIMIT 1",
       [email]
     );
@@ -172,6 +174,7 @@ router.post("/login", async (req, res) => {
     console.log("🔐 Comparing passwords...");
 
     const isMatch = await bcrypt.compare(
+    console.log("PASSWORD MATCH:", isMatch);
       password,
       user.password_hash
     );
@@ -221,6 +224,7 @@ router.post("/login", async (req, res) => {
 router.get("/me", authenticateToken, async (req, res) => {
   try {
     const result = await db.query(
+    console.log("ROWS FOUND:", result.rows.length);
       `
       SELECT id, name, email, role, created_at
       FROM users
