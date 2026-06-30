@@ -3,40 +3,38 @@ const router = express.Router();
 const db = require("../db");
 const { authenticateToken, requireRole } = require("../middleware/authMiddleware");
 
-router.post("/", authenticateToken, requireRole("admin"), (req, res) => {
-  const {
-    action,
-    type,
-    details
-  } = req.body;
+router.post("/", authenticateToken, requireRole("admin"), async (req, res) => {
+  try {
+    const { action, type, details } = req.body;
 
-  const insertSql = `
-    INSERT INTO activity_logs
-    (
-      activity_type,
-      description,
-      activity_date
-    )
-    VALUES (?, ?, NOW())
-  `;
+    const result = await db.query(
+      `
+      INSERT INTO activity_logs
+      (
+        action,
+        details,
+        activity_date
+      )
+      VALUES ($1, $2, NOW())
+      RETURNING id
+      `,
+      [
+        type,
+        `${action} - ${details}`
+      ]
+    );
 
-  db.query(
-    insertSql,
-    [
-      type,
-      `${action} - ${details}`
-    ],
-    (err, result) => {
-      if (err) {
-        return res.status(500).json(err);
-      }
+    res.json({
+      success: true,
+      id: result.rows[0].id
+    });
+  } catch (err) {
+    console.error("ACTIVITY LOG ERROR:", err);
 
-      res.json({
-        success: true,
-        id: result.insertId
-      });
-    }
-  );
+    res.status(500).json({
+      error: "Failed to create activity log"
+    });
+  }
 });
 
 module.exports = router;

@@ -3,76 +3,85 @@ const router = express.Router();
 const db = require("../db");
 const { authenticateToken, requireRole } = require("../middleware/authMiddleware");
 
-router.post("/", authenticateToken, requireRole("admin"), (req, res) => {
-  const {
-    animal,
-    productionType,
-    quantity,
-    notes
-  } = req.body;
+router.post("/", authenticateToken, requireRole("admin"), async (req, res) => {
+  try {
+    const {
+      animal,
+      productionType,
+      quantity,
+      notes
+    } = req.body;
 
-  const findAnimalSql =
-    "SELECT id FROM animals WHERE TRIM(tag_number) = TRIM(?)";
+    const animalResult = await db.query(
+      "SELECT id FROM animals WHERE TRIM(tag_number) = TRIM($1)",
+      [animal]
+    );
 
-  db.query(findAnimalSql, [animal], (err, animalResult) => {
-    if (err) {
-      return res.status(500).json(err);
-    }
-
-    if (animalResult.length === 0) {
+    if (animalResult.rows.length === 0) {
       return res.status(404).json({
         error: "Animal not found"
       });
     }
 
-    const animalId = animalResult[0].id;
+    const animalId = animalResult.rows[0].id;
 
-    const insertSql = `
+    const result = await db.query(
+      `
       INSERT INTO production_records
       (
         animal_id,
         production_type,
         quantity,
-        production_date,
+        record_date,
         notes
       )
-      VALUES (?, ?, ?, CURDATE(), ?)
-    `;
-
-    db.query(
-      insertSql,
+      VALUES ($1, $2, $3, CURRENT_DATE, $4)
+      RETURNING id
+      `,
       [
         animalId,
         productionType,
         quantity,
-        notes
-      ],
-      (err, result) => {
-        if (err) {
-          return res.status(500).json(err);
-        }
-
-        res.json({
-          success: true,
-          id: result.insertId
-        });
-      }
+        notes || null
+      ]
     );
-  });
+
+    res.json({
+      success: true,
+      id: result.rows[0].id
+    });
+  } catch (err) {
+    console.error("PRODUCTION INSERT ERROR:", err);
+
+    res.status(500).json({
+      error: "Failed to save production record"
+    });
+  }
 });
 
-router.delete("/:id", authenticateToken, requireRole("admin"), (req, res) => {
-  db.query(
-    "DELETE FROM production_records WHERE id = ?",
-    [req.params.id],
-    (err) => {
-      if (err) {
-        return res.status(500).json({ error: "Failed to delete production record" });
-      }
+router.delete("/:id", authenticateToken, requireRole("admin"), async (req, res) => {
+  try {
+    const result = await db.query(
+      "DELETE FROM production_records WHERE id = $1 RETURNING id",
+      [req.params.id]
+    );
 
-      res.json({ success: true });
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        error: "Production record not found"
+      });
     }
-  );
+
+    res.json({
+      success: true
+    });
+  } catch (err) {
+    console.error("PRODUCTION DELETE ERROR:", err);
+
+    res.status(500).json({
+      error: "Failed to delete production record"
+    });
+  }
 });
 
 module.exports = router;

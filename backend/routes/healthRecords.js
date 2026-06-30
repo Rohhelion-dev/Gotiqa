@@ -46,7 +46,7 @@ router.post("/", authenticateToken, requireRole("admin"), async (req, res) => {
         veterinarian,
         record_date,
         notes,
-        health_status,
+        condition,
         temperature,
         weight,
         vet_notes

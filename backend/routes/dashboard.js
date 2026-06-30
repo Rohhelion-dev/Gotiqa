@@ -3,137 +3,119 @@ const router = express.Router();
 const db = require("../db");
 
 /* ================= DASHBOARD STATS ================= */
-router.get("/stats", (req, res) => {
-  const stats = {};
+router.get("/stats", async (req, res) => {
+  try {
+    const queries = [
+      "animals",
+      "health_records",
+      "breeding_records",
+      "feeding_records",
+      "production_records",
+      "users",
+    ];
 
-  db.query("SELECT COUNT(*) AS total FROM animals", (err, animals) => {
-    if (err) return res.status(500).json({ error: err.message });
+    const results = await Promise.all(
+      queries.map((table) =>
+        db.query(`SELECT COUNT(*) FROM ${table}`)
+      )
+    );
 
-    stats.animals = animals[0].total;
+    const stats = {
+      animals: parseInt(results[0].rows[0].count),
+      healthRecords: parseInt(results[1].rows[0].count),
+      breedingRecords: parseInt(results[2].rows[0].count),
+      feedingRecords: parseInt(results[3].rows[0].count),
+      productionRecords: parseInt(results[4].rows[0].count),
+      users: parseInt(results[5].rows[0].count),
+    };
 
-    db.query("SELECT COUNT(*) AS total FROM health_records", (err, health) => {
-      if (err) return res.status(500).json({ error: err.message });
-
-      stats.healthRecords = health[0].total;
-
-      db.query("SELECT COUNT(*) AS total FROM breeding_records", (err, breeding) => {
-        if (err) return res.status(500).json({ error: err.message });
-
-        stats.breedingRecords = breeding[0].total;
-
-        db.query("SELECT COUNT(*) AS total FROM feeding_records", (err, feeding) => {
-          if (err) return res.status(500).json({ error: err.message });
-
-          stats.feedingRecords = feeding[0].total;
-
-          db.query("SELECT COUNT(*) AS total FROM production_records", (err, production) => {
-            if (err) return res.status(500).json({ error: err.message });
-
-            stats.productionRecords = production[0].total;
-
-            db.query("SELECT COUNT(*) AS total FROM users", (err, users) => {
-              if (err) return res.status(500).json({ error: err.message });
-
-              stats.users = users[0].total;
-
-              res.json(stats);
-            });
-          });
-        });
-      });
-    });
-  });
+    res.json(stats);
+  } catch (err) {
+    console.error("DASHBOARD STATS ERROR:", err);
+    res.status(500).json({ error: "Failed to load dashboard stats" });
+  }
 });
 
 /* ================= RECENT ANIMALS ================= */
-router.get("/recent-animals", (req, res) => {
-  const sql = `
-    SELECT *
-    FROM animals
-    ORDER BY created_at DESC
-    LIMIT 5
-  `;
+router.get("/recent-animals", async (req, res) => {
+  try {
+    const result = await db.query(`
+      SELECT *
+      FROM animals
+      ORDER BY created_at DESC
+      LIMIT 5
+    `);
 
-  db.query(sql, (err, results) => {
-    if (err) {
-      console.error("RECENT ANIMALS ERROR:", err);
-      return res.status(500).json({ error: err.message });
-    }
-
-    res.json(results);
-  });
+    res.json(result.rows);
+  } catch (err) {
+    console.error("RECENT ANIMALS ERROR:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 /* ================= RECENT HEALTH ================= */
-router.get("/recent-health", (req, res) => {
-  const sql = `
-    SELECT *
-    FROM health_records
-    ORDER BY record_date DESC
-    LIMIT 5
-  `;
+router.get("/recent-health", async (req, res) => {
+  try {
+    const result = await db.query(`
+      SELECT *
+      FROM health_records
+      ORDER BY record_date DESC
+      LIMIT 5
+    `);
 
-  db.query(sql, (err, results) => {
-    if (err) {
-      console.error("RECENT HEALTH ERROR:", err);
-      return res.status(500).json({ error: err.message });
-    }
-
-    res.json(results);
-  });
+    res.json(result.rows);
+  } catch (err) {
+    console.error("RECENT HEALTH ERROR:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 /* ================= RECENT ACTIVITY ================= */
-router.get("/recent-activity", (req, res) => {
-  const sql = `
-    SELECT *
-    FROM activity_logs
-    ORDER BY activity_date DESC
-    LIMIT 10
-  `;
+router.get("/recent-activity", async (req, res) => {
+  try {
+    const result = await db.query(`
+      SELECT *
+      FROM activity_logs
+      ORDER BY created_at DESC
+      LIMIT 10
+    `);
 
-  db.query(sql, (err, results) => {
-    if (err) {
-      console.error("RECENT ACTIVITY ERROR:", err);
-      return res.status(500).json({ error: err.message });
-    }
-
-    res.json(results);
-  });
+    res.json(result.rows);
+  } catch (err) {
+    console.error("RECENT ACTIVITY ERROR:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 /* ================= HEALTH ALERTS ================= */
-router.get("/health-alerts", (req, res) => {
-  const sql = `
-    SELECT
-      h.id,
-      a.tag_number AS animal,
-      h.diagnosis,
-      h.health_status,
-      h.record_date
-    FROM health_records h
-    JOIN animals a ON h.animal_id = a.id
-    WHERE LOWER(h.health_status) = 'vaccinated'
-    ORDER BY h.record_date DESC
-  `;
+router.get("/health-alerts", async (req, res) => {
+  try {
+    const result = await db.query(`
+      SELECT
+        h.id,
+        a.tag_number AS animal,
+        h.condition,
+        h.treatment,
+        h.record_date
+      FROM health_records h
+      JOIN animals a ON h.animal_id = a.id
+      WHERE LOWER(h.condition) = 'vaccinated'
+      ORDER BY h.record_date DESC
+    `);
 
-  db.query(sql, (err, results) => {
-    if (err) {
-      console.error("HEALTH ALERT ERROR:", err);
-      return res.status(500).json({ error: err.message });
-    }
-
-    const formatted = results.map((record) => ({
+    const formatted = result.rows.map((record) => ({
       animal: record.animal,
       task: "Vaccination",
-      status: record.health_status,
+      status: record.condition,
       date: record.record_date,
-      diagnosis: record.diagnosis,
+      condition: record.condition,
     }));
 
     res.json(formatted);
-  });
+  } catch (err) {
+    console.error("HEALTH ALERT ERROR:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
-/* ================= EXPORT ROUTER ================= */
 module.exports = router;
