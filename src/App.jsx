@@ -73,6 +73,14 @@ export default function App() {
     delete api.defaults.headers.common.Authorization;
   }, [token]);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, [currentView]);
+
   const goToAuth = (mode = "login") => {
     setAuthMode(mode);
     setCurrentView("auth");
@@ -337,7 +345,7 @@ return (
     </main>
 
     {currentView !== "dashboard" && <WhatsAppButton />}
-    {currentView !== "dashboard" && <Footer />}
+    {currentView !== "dashboard" && <Footer setCurrentView={setCurrentView} />}
   </div>
 );
 }

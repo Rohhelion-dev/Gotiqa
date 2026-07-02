@@ -13,14 +13,14 @@ export default function Home({ setCurrentView }) {
   return (
     <div className="overflow-x-hidden bg-[#f7faf5] text-slate-800">
       {/* HERO */}
-      <section className="relative min-h-[84vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[84vh] mx-4 mt-4 flex items-center justify-center overflow-hidden rounded-3xl">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroImage})` }}
         />
 
         <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/50 to-emerald-950/80" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(216,243,220,0.22),transparent_55%)]" />
+        
 
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -28,17 +28,17 @@ export default function Home({ setCurrentView }) {
           transition={{ duration: 0.75 }}
           className="relative z-10 mx-auto max-w-4xl px-6 text-center"
         >
-          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.28em] text-emerald-200">
+          <p style={{ color: "#ffffff" }} className="mb-5 text-xs font-semibold uppercase tracking-[0.28em] text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.85)]">
             Gotiqa SmartFarm Intelligence
           </p>
 
-          <h1 className="mb-6 text-4xl font-bold leading-tight text-white md:text-6xl">
+          <h1 style={{ color: "#ffffff" }} className="mb-6 text-white [text-shadow:0_4px_20px_rgba(0,0,0,0.85)] md:text-6xl">
             Smart Livestock
             <br />
             Powered by Intelligence
           </h1>
 
-          <p className="mx-auto mb-9 max-w-2xl text-base leading-relaxed text-slate-100 md:text-xl">
+          <p style={{ color: "#ffffff" }} className="mx-auto mb-9 max-w-2xl text-base leading-relaxed text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.85)] md:text-xl">
             Monitor herd health, feeding, breeding, and farm performance with
             practical tools built for modern livestock operations.
           </p>
@@ -78,7 +78,7 @@ export default function Home({ setCurrentView }) {
             Farm Operations
           </p>
 
-          <h2 className="text-3xl font-bold text-emerald-950 md:text-4xl">
+          <h2 className="text-3xl font-bold text-white md:text-4xl">
             Everything you need to run a smart farm
           </h2>
 
@@ -105,7 +105,7 @@ export default function Home({ setCurrentView }) {
               Intelligence Preview
             </p>
 
-            <h3 className="text-2xl font-bold text-emerald-950">
+            <h3 className="text-2xl font-bold text-white">
               AI Farm Insights
             </h3>
 
@@ -163,7 +163,7 @@ export default function Home({ setCurrentView }) {
             Farm Performance
           </p>
 
-          <h2 className="text-3xl font-bold text-emerald-950 md:text-4xl">
+          <h2 className="text-3xl font-bold text-white md:text-4xl">
             Live Farm Performance
           </h2>
 
@@ -176,15 +176,15 @@ export default function Home({ setCurrentView }) {
       </motion.section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-emerald-950 via-[#1b4332] to-[#3b2f25] py-16 md:py-20">
+      <section className="relative mx-4 my-8 overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-950 via-[#1b4332] to-[#3b2f25] py-16 md:py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(216,243,220,0.16),transparent_55%)]" />
 
         <div className="relative mx-auto max-w-4xl px-6 text-center">
-          <h2 className="mb-5 text-3xl font-bold text-white md:text-4xl">
-            Ready to modernize your farm operations?
-          </h2>
+           <p style={{ color: "#ffffff" }} className="...">
+  Gotiqa SmartFarm Intelligence
+</p>
 
-          <p className="mx-auto mb-8 max-w-2xl text-slate-200">
+          <p style={{color:"white"}} className="mx-auto mb-8 max-w-2xl">
             Start using data-driven livestock intelligence to manage your herd
             with more confidence.
           </p>

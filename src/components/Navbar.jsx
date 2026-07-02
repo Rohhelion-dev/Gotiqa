@@ -33,14 +33,14 @@ export default function Navbar({ currentView, setCurrentView }) {
           : "bg-white/60 border-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
 
         {/* LOGO */}
         <div
           onClick={() => handleNavClick("home")}
           className="flex items-center gap-3 cursor-pointer group"
         >
-          <div className="w-9 h-9 flex items-center justify-center transition-transform group-hover:scale-105">
+          <div className="w-11 h-11 flex items-center justify-center transition-transform group-hover:scale-105">
             <img
               src={`${import.meta.env.BASE_URL}images/branding/Logo.png`}
               alt="Gotiqa Logo"
@@ -49,7 +49,7 @@ export default function Navbar({ currentView, setCurrentView }) {
           </div>
 
           <div className="leading-tight">
-            <h1 className="font-semibold text-[15px] text-emerald-900">
+            <h1 className="font-semibold text-lg text-emerald-900">
               Gotiqa SmartFarm
             </h1>
             <p className="text-[11px] text-slate-500 hidden sm:block">
@@ -59,7 +59,7 @@ export default function Navbar({ currentView, setCurrentView }) {
         </div>
 
         {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-10">
           {navItems.map(({ key, label }) => {
             const active = currentView === key;
 
@@ -67,7 +67,7 @@ export default function Navbar({ currentView, setCurrentView }) {
               <button
                 key={key}
                 onClick={() => handleNavClick(key)}
-                className={`relative text-sm font-medium transition-colors duration-200 ${
+                className={`relative text-base font-medium transition-colors duration-200 ${
                   active
                     ? "text-emerald-900"
                     : "text-slate-600 hover:text-emerald-800"
@@ -92,7 +92,7 @@ export default function Navbar({ currentView, setCurrentView }) {
           {/* LOGIN CTA */}
           <button
             onClick={() => handleNavClick("auth")}
-            className="bg-emerald-900 hover:bg-emerald-800 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-sm transition"
+            className="bg-emerald-900 hover:bg-emerald-800 text-white px-5 py-2.5 rounded-xl text-base font-semibold shadow-sm transition"
           >
             Login
           </button>
