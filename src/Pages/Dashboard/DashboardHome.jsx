@@ -13,7 +13,7 @@ export default function DashboardHome({ user }) {
     <div className="min-h-screen bg-slate-50 px-6 py-8 space-y-10">
       {/* HEADER SECTION */}
       <div className="relative overflow-hidden rounded-2xl bg-[#0b2a1f] p-8 shadow-lg">
-        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-black/20" />
 
         <div className="relative z-10">
           <h1 className="text-3xl md:text-4xl font-bold text-white drop-shadow-md">
